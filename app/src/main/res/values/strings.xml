@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Brain Train</string>
+    <string name="app_name">ProjectApp</string>
+    <string name="DangKy">Đăng ký</string>
+    <string name="mat_khau">Mật Khẩu</string>
+    <string name="ngay_sinh">Ngày Sinh</string>
+    <string name="nu">Nữ</string>
+    <string name="thoat">Thoát</string>
+    <string name="cmnd">Chứng Minh Nhân Dân</string>
+    <string name="dang_nhap">Tên Đăng Nhập</string>
+    <string name="dang_ky">Đăng Ký</string>
+    <string name="nam">Nam</string>
+    <string name="mat">Mật Khẩu</string>
+    <string name="ten_dang_nhap">Tên đăng nhâo</string>
 </resources>
