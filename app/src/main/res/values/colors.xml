@@ -10,4 +10,7 @@
     <color name="Gray">#cccc</color>
     <color name="ButtonColor">#CE4F1E</color>
     <color name="BGColor">#11CFC5</color>
+
+    <color name="app_color_default">#3a378e</color>
+    <color name="background_color">#f3f6ff</color>
 </resources>

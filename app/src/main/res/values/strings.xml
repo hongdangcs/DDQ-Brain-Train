@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">ProjectApp</string>
+    <string name="app_name">DDQ Brain Train</string>
     <string name="DangKy">Đăng ký</string>
-    <string name="mat_khau">Mật Khẩu</string>
+    <string name="mat_khau">Mật khẩu</string>
     <string name="ngay_sinh">Ngày Sinh</string>
     <string name="nu">Nữ</string>
     <string name="thoat">Thoát</string>
@@ -9,6 +9,8 @@
     <string name="dang_nhap">Đăng Nhập</string>
     <string name="dang_ky">Đăng Ký</string>
     <string name="nam">Nam</string>
-    <string name="mat">Mật Khẩu</string>
-    <string name="ten_dang_nhap">Tên đăng nhâo</string>
+    <string name="mat">Mật khẩu</string>
+    <string name="ten_dang_nhap">Tên đăng nhập</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

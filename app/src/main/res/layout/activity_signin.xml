@@ -31,9 +31,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_10dp"
+            android:gravity="center"
             android:padding="@dimen/size_10dp"
             android:text="@string/dang_nhap"
             android:textColor="@color/black"
+            android:fontFamily="@font/robotoregular"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -67,26 +69,26 @@
             android:textColorHint="@color/Gray" />
 
 
-
         <Button
+            android:id="@+id/signInBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_10dp"
-            android:padding="@dimen/size_10dp"
-            android:backgroundTint="@color/ButtonColor"
             android:layout_weight="1"
+            android:backgroundTint="@color/ButtonColor"
+            android:padding="@dimen/size_10dp"
             android:text="Đăng Nhập" />
 
         <Button
+            android:id="@+id/signUpBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/size_10dp"
-            android:text="@string/dang_ky"
-            android:layout_weight="1"
             android:layout_marginLeft="@dimen/size_10dp"
             android:layout_marginRight="@dimen/size_10dp"
+            android:layout_weight="1"
             android:onClick="SignUp"
-            />
+            android:padding="@dimen/size_10dp"
+            android:text="@string/dang_ky" />
 
 
 
