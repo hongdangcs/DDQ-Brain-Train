@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new HomeFragment());
                     break;
                 case R.id.profile:
-                    replaceFragment(new ProfileFragment());
+                    replaceFragment(new SignInRequestFragment());
 
                     break;
                 case R.id.setting:

@@ -1,7 +1,9 @@
 package com.ddq.braintrain;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -23,6 +25,8 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private static CardView attentionCardView, memoryCardView, mathCardView, languageCardView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -53,12 +57,47 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        memoryCardView = (CardView) view.findViewById(R.id.memoryCardView);
+        attentionCardView = (CardView) view.findViewById(R.id.attentionCardView);
+        mathCardView = (CardView) view.findViewById(R.id.mathCardView);
+        languageCardView = (CardView) view.findViewById(R.id.languageCardView);
+
+        memoryCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MemoryActivity.class);
+                startActivity(intent);
+            }
+        });
+        attentionCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AttentionActivity.class);
+                startActivity(intent);
+            }
+        });
+        mathCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MathActivity.class);
+                startActivity(intent);
+            }
+        });
+        languageCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LanguageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;
     }
 }
