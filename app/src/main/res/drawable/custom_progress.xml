@@ -5,7 +5,7 @@
 
         <shape android:shape="rectangle" >
             <corners android:radius="6dp"/>
-            <solid android:color="#ACA9FF"/>
+            <solid android:color="#A16F9B68"/>
         </shape>
 
     </item>
@@ -16,7 +16,7 @@
         <scale android:scaleWidth="100%">
             <shape android:shape="rectangle">
                 <corners android:radius="6dp"/>
-                <solid android:color="@color/app_color_default"/>
+                <solid android:color="@color/grass_green_color"/>
             </shape>
         </scale>
 

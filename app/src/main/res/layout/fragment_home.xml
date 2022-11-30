@@ -8,20 +8,97 @@
     android:orientation="vertical"
     android:visibility="visible"
     tools:context=".HomeFragment">
+
     <LinearLayout
         android:id="@+id/container"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:paddingTop="14dp"
-        android:text="Loại trò chơi"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:paddingTop="14dp"
+            android:text="Loại trò chơi"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/memoryCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            app:cardCornerRadius="20dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/app_color_default"
+                    app:cardCornerRadius="20dp">
+
+                    <ImageView
+                        android:id="@+id/imageViewMemory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/app_color_default"
+                        android:padding="24dp"
+                        android:src="@drawable/memory" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/memory_name"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/memory_des" />
+
+                    <ProgressBar
+                        android:id="@+id/memoryProgress"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:progress="55"
+                        android:progressDrawable="@drawable/custom_progress" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imageViewMemoryComplete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_vertical"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="90dp"
+                    android:maxHeight="90dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/completedlogo"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/attentionCardView"
@@ -64,7 +141,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Tập trung"
+                        android:text="@string/attention_name"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
@@ -72,7 +149,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Tăng khả năng tập trung" />
+                        android:text="@string/attention_des" />
 
                     <ProgressBar
                         android:id="@+id/attentionProgress"
@@ -94,82 +171,7 @@
                     android:maxHeight="90dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/completedlogo"
-                    android:visibility="visible" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/memoryCardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@color/white"
-            app:cardCornerRadius="20dp">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/app_color_default"
-                    app:cardCornerRadius="20dp">
-
-                    <ImageView
-                        android:id="@+id/imageMemory"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/app_color_default"
-                        android:padding="24dp"
-                        android:src="@drawable/memory" />
-                </androidx.cardview.widget.CardView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Trí nhớ"
-                        android:textSize="25sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Kiểm tra trí nhớ" />
-
-                    <ProgressBar
-                        android:id="@+id/memoryProgress"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:progress="55"
-                        android:progressDrawable="@drawable/custom_progress" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imageViewMemoryComplete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|center_vertical"
-                    android:adjustViewBounds="true"
-                    android:maxWidth="90dp"
-                    android:maxHeight="90dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/completedlogo"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -214,7 +216,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Ngôn ngữ"
+                        android:text="@string/language_name"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
@@ -222,7 +224,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Kiểm tra khả năng ngôn ngữ" />
+                        android:text="@string/language_des" />
 
                     <ProgressBar
                         android:id="@+id/languageProgress"
@@ -244,7 +246,7 @@
                     android:maxHeight="90dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/completedlogo"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -269,7 +271,7 @@
                     app:cardCornerRadius="20dp">
 
                     <ImageView
-                        android:id="@+id/imageView2"
+                        android:id="@+id/imageViewMath"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/app_color_default"
@@ -289,7 +291,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Tính toán"
+                        android:text="@string/math_name"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
@@ -297,7 +299,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Các phép tính đơn giản" />
+                        android:text="@string/math_des" />
 
                     <ProgressBar
                         android:id="@+id/mathProgress"
@@ -319,7 +321,7 @@
                     android:maxHeight="90dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/completedlogo"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>

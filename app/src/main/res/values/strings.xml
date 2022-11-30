@@ -13,4 +13,12 @@
     <string name="ten_dang_nhap">Tên đăng nhập</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="attention_des">Tăng khả năng tập trung</string>
+    <string name="attention_name">Tập trung</string>
+    <string name="memory_name">Trí nhớ</string>
+    <string name="memory_des">Kiểm tra trí nhớ</string>
+    <string name="language_name">Ngôn ngữ</string>
+    <string name="language_des">Kiểm tra khả năng ngôn ngữ</string>
+    <string name="math_name">Tính toán</string>
+    <string name="math_des">Các phép tính đơn giản</string>
 </resources>

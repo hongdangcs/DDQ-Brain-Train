@@ -3,8 +3,10 @@ package com.ddq.braintrain;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.viewmodel.CreationExtras;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +17,7 @@ import android.view.ViewGroup;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,6 +71,11 @@ public class HomeFragment extends Fragment {
         mathCardView = (CardView) view.findViewById(R.id.mathCardView);
         languageCardView = (CardView) view.findViewById(R.id.languageCardView);
 
+        memoryCardView.setOnClickListener(this);
+        attentionCardView.setOnClickListener(this);
+        mathCardView.setOnClickListener(this);
+        languageCardView.setOnClickListener(this);
+/*
         memoryCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +104,34 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+*/
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+
+            case R.id.memoryCardView:
+                intent = new Intent(getActivity(), MemoryActivity.class);
+                break;
+            case R.id.attentionCardView:
+                intent = new Intent(getActivity(), AttentionActivity.class);
+                break;
+            case R.id.languageCardView:
+                intent = new Intent(getActivity(), LanguageActivity.class);
+                break;
+            default:
+                intent = new Intent(getActivity(), MathActivity.class);
+                break;
+        }
+        startActivity(intent);
+    }
+
+    @NonNull
+    @Override
+    public CreationExtras getDefaultViewModelCreationExtras() {
+        return super.getDefaultViewModelCreationExtras();
     }
 }
