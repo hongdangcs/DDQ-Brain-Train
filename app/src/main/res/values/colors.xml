@@ -24,5 +24,8 @@
     <color name="grass_green_color">#6f9b68</color>
     <color name="golden_yellow_laminate_color">#ffb665</color>
 
+    <color name="pastel_orange_color">#ff9450</color>
+    <color name="very_dark_blue">#171336</color>
+    <color name="orange_background">#FFFAF7</color>
 
 </resources>

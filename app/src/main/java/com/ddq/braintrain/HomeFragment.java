@@ -66,10 +66,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        memoryCardView = (CardView) view.findViewById(R.id.memoryCardView);
-        attentionCardView = (CardView) view.findViewById(R.id.attentionCardView);
-        mathCardView = (CardView) view.findViewById(R.id.mathCardView);
-        languageCardView = (CardView) view.findViewById(R.id.languageCardView);
+        memoryCardView = view.findViewById(R.id.memoryCardView);
+        attentionCardView = view.findViewById(R.id.attentionCardView);
+        mathCardView = view.findViewById(R.id.mathCardView);
+        languageCardView = view.findViewById(R.id.languageCardView);
 
         memoryCardView.setOnClickListener(this);
         attentionCardView.setOnClickListener(this);
