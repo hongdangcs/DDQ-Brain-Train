@@ -106,14 +106,16 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
                 "\t\"score\"\tINTEGER,\n" +
                 "\t\"complete_status\"\tINTEGER\n" +
                 ")");
-        db.execSQL("CREATE TABLE IF NOT EXISTS \"memory_game_three\" (\n" +
+        db.execSQL("CREATE TABLE if not exists \"memory_game_three\" (\n" +
                 "\t\"level\"\tINTEGER,\n" +
                 "\t\"number_of_card\"\tINTEGER,\n" +
                 "\t\"hide_card\"\tINTEGER,\n" +
                 "\t\"score\"\tINTEGER,\n" +
                 "\t\"time\"\tINTEGER,\n" +
-                "\t\"complete_status\"\tINTEGER\n" +
-                ")");
+                "\t\"complete_status_easy\"\tINTEGER,\n" +
+                "\t\"complete_status_medium\"\tINTEGER,\n" +
+                "\t\"complete_status_hard\"\tINTEGER\n" +
+                ");");
         db.execSQL("CREATE TABLE IF NOT EXISTS \"memory_game_two\" (\n" +
                 "\t\"level\"\tINTEGER,\n" +
                 "\t\"number_of_item\"\tINTEGER,\n" +

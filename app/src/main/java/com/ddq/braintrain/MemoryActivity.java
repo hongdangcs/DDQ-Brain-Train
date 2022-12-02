@@ -3,10 +3,13 @@ package com.ddq.braintrain;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.ddq.braintrain.levelmenu.GridsHighlightLevelMenuActivity;
 
 public class MemoryActivity extends AppCompatActivity {
 
@@ -57,6 +60,27 @@ public class MemoryActivity extends AppCompatActivity {
         if(missingObjectModel.isCompletedStatus()){
             missingObjectComplete.setVisibility(View.VISIBLE);
         }
+
+        gridsHighlightCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MemoryActivity.this, GridsHighlightLevelMenuActivity.class));
+            }
+        });
+
+        notInPreviousCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MemoryActivity.this, NotInPreviousLevelMenuActivity.class));
+            }
+        });
+
+        missingObjectCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MemoryActivity.this, MissingObjectLevelMenuActivity.class));
+            }
+        });
 
 
     }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="not_completed_level_button" >
+        <item name="android:layout_width" >50dp</item>
+        <item name="android:layout_height" >50dp</item>
+        <item name="android:layout_margin" >5dp</item>
+        <item name="android:background" >@color/celadon_color</item>
+    </style>
+    <style name="completed_level_button" >
+        <item name="android:layout_width" >50dp</item>
+        <item name="android:layout_height" >50dp</item>
+        <item name="android:layout_margin" >5dp</item>
+        <item name="android:background" >@color/light_yellow_color</item>
+    </style>
+
+</resources>
