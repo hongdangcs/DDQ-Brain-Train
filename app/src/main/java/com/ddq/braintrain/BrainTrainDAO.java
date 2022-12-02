@@ -112,4 +112,103 @@ public class BrainTrainDAO {
         return returnList;
     }
 
+    public List<CompareModel> compareModels(BrainTrainDatabase db){
+        List<CompareModel> returnList = new ArrayList<>();
+
+        int level;
+        int score;
+        int completeStatus;
+
+        SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
+        String query = "select * from math_game_one";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                level = cursor.getInt(0);
+                score = cursor.getInt(1);
+                completeStatus = cursor.getInt(2);
+
+                returnList.add(new CompareModel(level, score, completeStatus));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return returnList;
+    }
+
+    public List<FindOperatorModel> findOperatorOfTenModels(BrainTrainDatabase db){
+        List<FindOperatorModel> returnList = new ArrayList<>();
+
+        int level, option, time, point, completeStatus;
+
+        SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
+        String query = "select * from math_game_two_multiple_of_ten";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                level = cursor.getInt(0);
+                option = cursor.getInt(1);
+                time = cursor.getInt(2);
+                point = cursor.getInt(3);
+                completeStatus = cursor.getInt(4);
+
+                returnList.add(new FindOperatorModel(level,option,time,point, completeStatus));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return returnList;
+    }
+
+    public List<FindOperatorModel> findOperatorOfHundredModels(BrainTrainDatabase db){
+        List<FindOperatorModel> returnList = new ArrayList<>();
+
+        int level, option, time, point, completeStatus;
+
+        SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
+        String query = "select * from math_game_two_multiple_of_hundred";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                level = cursor.getInt(0);
+                option = cursor.getInt(1);
+                time = cursor.getInt(2);
+                point = cursor.getInt(3);
+                completeStatus = cursor.getInt(4);
+
+                returnList.add(new FindOperatorModel(level,option,time,point, completeStatus));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return returnList;
+    }
+    public List<FindOperatorModel> findOperatorOfThousandModels(BrainTrainDatabase db){
+        List<FindOperatorModel> returnList = new ArrayList<>();
+
+        int level, option, time, point, completeStatus;
+
+        SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
+        String query = "select * from math_game_two_multiple_of_thousand";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                level = cursor.getInt(0);
+                option = cursor.getInt(1);
+                time = cursor.getInt(2);
+                point = cursor.getInt(3);
+                completeStatus = cursor.getInt(4);
+
+                returnList.add(new FindOperatorModel(level,option,time,point, completeStatus));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return returnList;
+    }
+
 }

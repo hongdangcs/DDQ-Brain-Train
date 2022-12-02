@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FindOperatorLevelMenuActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/orange_background"
+        android:text="Chọn Mức Chơi"
+        android:textColor="@color/very_dark_blue"
+        android:textSize="40dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tìm hai số có tổng bằng 10"
+        android:textSize="24dp"
+        android:layout_gravity="center"/>
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/multipleOfTenLevelLayout"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        app:columnCount="5"
+        ></androidx.gridlayout.widget.GridLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tìm hai số có tổng bằng 100"
+        android:textSize="24dp"
+        android:layout_gravity="center"/>
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/multipleOfHundredLevelLayout"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        app:columnCount="5"
+        ></androidx.gridlayout.widget.GridLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tìm hai số có tổng bằng 1000"
+        android:textSize="24dp"
+        android:layout_gravity="center"/>
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/multipleOfThousandLevelLayout"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        app:columnCount="5"
+        ></androidx.gridlayout.widget.GridLayout>
+
+</LinearLayout>

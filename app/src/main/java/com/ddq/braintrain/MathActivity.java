@@ -3,6 +3,7 @@ package com.ddq.braintrain;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -45,5 +46,20 @@ public class MathActivity extends AppCompatActivity {
         if(compareModel.isCompletedStatus()){
             compareCompleted.setVisibility(View.VISIBLE);
         }
+
+        compareCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MathActivity.this, CompareLevelMenuActivity.class);
+                startActivity(intent);
+            }
+        });
+        findOperatorCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MathActivity.this, FindOperatorLevelMenuActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

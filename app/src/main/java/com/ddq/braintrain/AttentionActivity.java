@@ -3,12 +3,13 @@ package com.ddq.braintrain;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class AttentionActivity extends AppCompatActivity {
+public class AttentionActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView sharkBoatScore, sharkBoatProgress, flashCardScore, flashCardProgress, differentScore, differentProgress;
     CardView differentCardView, flashCardCardView, sharkBoatCardView;
@@ -37,24 +38,47 @@ public class AttentionActivity extends AppCompatActivity {
 
         brainTrainDatabase = new BrainTrainDatabase(AttentionActivity.this);
         differentModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 21);
-        differentScore.setText("Điểm của bạn: "+ differentModel.getUserScore());
-        differentProgress.setText("Đã hoàn thành: "+ ((float)differentModel.getUserScore()/(float)differentModel.getMaxScore())+"%");
-        if(differentModel.isCompletedStatus()){
+        differentScore.setText("Điểm của bạn: " + differentModel.getUserScore());
+        differentProgress.setText("Đã hoàn thành: " + ((float) differentModel.getUserScore() / (float) differentModel.getMaxScore()) + "%");
+        if (differentModel.isCompletedStatus()) {
             differentCompleted.setVisibility(View.VISIBLE);
         }
 
         flashCardModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 22);
-        flashCardScore.setText("Điểm của bạn: "+ flashCardModel.getUserScore());
-        flashCardProgress.setText("Đã hoàn thành: "+ ((float)flashCardModel.getUserScore()/(float)flashCardModel.getMaxScore())+"%");
-        if(flashCardModel.isCompletedStatus()){
+        flashCardScore.setText("Điểm của bạn: " + flashCardModel.getUserScore());
+        flashCardProgress.setText("Đã hoàn thành: " + ((float) flashCardModel.getUserScore() / (float) flashCardModel.getMaxScore()) + "%");
+        if (flashCardModel.isCompletedStatus()) {
             flashCardCompleted.setVisibility(View.VISIBLE);
         }
 
         sharkBoatModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 23);
-        sharkBoatScore.setText("Điểm của bạn: "+ sharkBoatModel.getUserScore());
-        sharkBoatProgress.setText("Đã hoàn thành: "+ ((float)sharkBoatModel.getUserScore()/(float)sharkBoatModel.getMaxScore())+"%");
-        if(sharkBoatModel.isCompletedStatus()){
+        sharkBoatScore.setText("Điểm của bạn: " + sharkBoatModel.getUserScore());
+        sharkBoatProgress.setText("Đã hoàn thành: " + ((float) sharkBoatModel.getUserScore() / (float) sharkBoatModel.getMaxScore()) + "%");
+        if (sharkBoatModel.isCompletedStatus()) {
             sharkBoatCompleted.setVisibility(View.VISIBLE);
         }
+
+        differentCardView.setOnClickListener(AttentionActivity.this);
+        flashCardCardView.setOnClickListener(AttentionActivity.this);
+        sharkBoatCardView.setOnClickListener(AttentionActivity.this);
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.differentCardView:
+                intent = new Intent(AttentionActivity.this, DifferentLevelMenuActivity.class);
+                break;
+            case R.id.flashCardCardView:
+                intent = new Intent(AttentionActivity.this, FlashCardLevelMenuActivity.class);
+                break;
+            default:
+                intent = new Intent(AttentionActivity.this, SharkBoatLevelMenuActivity.class);
+                break;
+        }
+        startActivity(intent);
     }
 }
