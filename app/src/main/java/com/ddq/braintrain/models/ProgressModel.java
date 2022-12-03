@@ -1,4 +1,4 @@
-package com.ddq.braintrain;
+package com.ddq.braintrain.models;
 
 public class ProgressModel {
     private int id;

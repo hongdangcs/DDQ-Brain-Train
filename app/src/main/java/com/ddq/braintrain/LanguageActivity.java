@@ -9,6 +9,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ddq.braintrain.gameactivity.CompleteWordGameActivity;
+import com.ddq.braintrain.gameactivity.ConjunctionGameActivity;
+import com.ddq.braintrain.gameactivity.FindWordGameActivity;
+import com.ddq.braintrain.gameactivity.SortingCharGameActivity;
+import com.ddq.braintrain.models.ProgressModel;
+
 public class LanguageActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView completeWordScore, completeWordProgress, findWordScore, findWordProgress, conjunctionScore, conjunctionProgress, sortingCharScore, sortingCharProgress;

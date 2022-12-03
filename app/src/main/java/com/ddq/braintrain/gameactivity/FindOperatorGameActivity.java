@@ -1,6 +1,8 @@
-package com.ddq.braintrain;
+package com.ddq.braintrain.gameactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.gridlayout.widget.GridLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,16 +10,18 @@ import android.widget.TextView;
 
 import com.ddq.braintrain.R;
 
-public class NotInPreviousGameActivity extends AppCompatActivity {
+import java.util.List;
+
+public class FindOperatorGameActivity extends AppCompatActivity {
 
     TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_not_in_previous_game);
+        setContentView(R.layout.activity_find_operator_game);
 
-        textView = findViewById(R.id.textView2);
+        textView = findViewById(R.id.textView9);
         Intent intent = getIntent();
         int level = intent.getIntExtra("level", 0);
         textView.setText("Level: " + level);

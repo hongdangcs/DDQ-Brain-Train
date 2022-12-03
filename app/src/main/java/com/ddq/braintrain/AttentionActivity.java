@@ -9,6 +9,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ddq.braintrain.levelmenu.DifferentLevelMenuActivity;
+import com.ddq.braintrain.levelmenu.FlashCardLevelMenuActivity;
+import com.ddq.braintrain.levelmenu.SharkBoatLevelMenuActivity;
+import com.ddq.braintrain.models.ProgressModel;
+
 public class AttentionActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView sharkBoatScore, sharkBoatProgress, flashCardScore, flashCardProgress, differentScore, differentProgress;

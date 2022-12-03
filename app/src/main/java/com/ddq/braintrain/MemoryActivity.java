@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ddq.braintrain.levelmenu.GridsHighlightLevelMenuActivity;
+import com.ddq.braintrain.levelmenu.MissingObjectLevelMenuActivity;
+import com.ddq.braintrain.levelmenu.NotInPreviousLevelMenuActivity;
+import com.ddq.braintrain.models.ProgressModel;
 
 public class MemoryActivity extends AppCompatActivity {
 

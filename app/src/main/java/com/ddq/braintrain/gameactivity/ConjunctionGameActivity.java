@@ -1,14 +1,16 @@
-package com.ddq.braintrain;
+package com.ddq.braintrain.gameactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class DifferentLevelMenuActivity extends AppCompatActivity {
+import com.ddq.braintrain.R;
+
+public class ConjunctionGameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_different_level_menu);
+        setContentView(R.layout.activity_conjunction_game);
     }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MissingObjectLevelMenuActivity">
+    tools:context=".levelmenu.MissingObjectLevelMenuActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -16,55 +16,61 @@
         android:textSize="40dp" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dễ"
-        android:textSize="24dp"
-        android:layout_gravity="center"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.gridlayout.widget.GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/missingObjectEasyLevelLayout"
-        android:layout_gravity="center"
-        android:padding="5dp"
-        app:columnCount="5"
-        ></androidx.gridlayout.widget.GridLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Trung Bình"
-        android:textSize="24dp"
-        android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Dễ"
+                android:textSize="24dp" />
 
-    <androidx.gridlayout.widget.GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/missingObjectMediumLevelLayout"
-        android:layout_gravity="center"
-        android:padding="5dp"
-        app:columnCount="5"
-        ></androidx.gridlayout.widget.GridLayout>
+            <androidx.gridlayout.widget.GridLayout
+                android:id="@+id/missingObjectEasyLevelLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                app:columnCount="5"></androidx.gridlayout.widget.GridLayout>
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Khó"
-        android:textSize="24dp"
-        android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Trung Bình"
+                android:textSize="24dp" />
 
-    <androidx.gridlayout.widget.GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/missingObjectHardLevelLayout"
-        android:layout_gravity="center"
-        android:padding="5dp"
-        app:columnCount="5"
-        >
+            <androidx.gridlayout.widget.GridLayout
+                android:id="@+id/missingObjectMediumLevelLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                app:columnCount="5"></androidx.gridlayout.widget.GridLayout>
 
-    </androidx.gridlayout.widget.GridLayout>
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Khó"
+                android:textSize="24dp" />
+
+            <androidx.gridlayout.widget.GridLayout
+                android:id="@+id/missingObjectHardLevelLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                app:columnCount="5"></androidx.gridlayout.widget.GridLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

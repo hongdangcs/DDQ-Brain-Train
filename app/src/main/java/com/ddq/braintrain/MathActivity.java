@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ddq.braintrain.levelmenu.CompareLevelMenuActivity;
+import com.ddq.braintrain.levelmenu.FindOperatorLevelMenuActivity;
+import com.ddq.braintrain.models.ProgressModel;
+
 public class MathActivity extends AppCompatActivity {
 
     TextView findOperatorScore, compareScore, findOperatorProgress, compareProgress;

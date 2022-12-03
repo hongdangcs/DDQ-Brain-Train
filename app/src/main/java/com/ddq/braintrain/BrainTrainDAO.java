@@ -3,6 +3,16 @@ package com.ddq.braintrain;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.ddq.braintrain.models.CompareModel;
+import com.ddq.braintrain.models.DifferentModel;
+import com.ddq.braintrain.models.FindOperatorModel;
+import com.ddq.braintrain.models.FlashCardModel;
+import com.ddq.braintrain.models.HighlightGridsModel;
+import com.ddq.braintrain.models.MissingObjectModel;
+import com.ddq.braintrain.models.NotInPreviousModel;
+import com.ddq.braintrain.models.ProgressModel;
+import com.ddq.braintrain.models.SharkBoatModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -203,6 +213,86 @@ public class BrainTrainDAO {
                 completeStatus = cursor.getInt(4);
 
                 returnList.add(new FindOperatorModel(level,option,time,point, completeStatus));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return returnList;
+    }
+
+    public List<DifferentModel> differentModels(BrainTrainDatabase db){
+        List<DifferentModel> returnList = new ArrayList<>();
+
+        int imageID, completeStatus;
+        String imageName, image;
+
+        SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
+        String query = "select * from attention_game_one";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                imageID = cursor.getInt(0);
+                imageName = cursor.getString(1);
+                image = cursor.getString(2);
+                completeStatus = cursor.getInt(3);
+
+                returnList.add(new DifferentModel(imageID,imageName,image, completeStatus));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return returnList;
+    }
+
+    public List<FlashCardModel> flashCardModels(BrainTrainDatabase db){
+        List<FlashCardModel> returnList = new ArrayList<>();
+
+        int level, pair, time, score, completeStatusEasy, completeStatusMedium, completeStatusHard;
+
+        SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
+        String query = "select * from attention_game_two";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                level = cursor.getInt(0);
+                pair = cursor.getInt(1);
+                time = cursor.getInt(2);
+                score = cursor.getInt(3);
+                completeStatusEasy = cursor.getInt(4);
+                completeStatusMedium = cursor.getInt(5);
+                completeStatusHard = cursor.getInt(6);
+
+                returnList.add(new FlashCardModel(level, pair, time, score, completeStatusEasy, completeStatusMedium, completeStatusHard));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return returnList;
+    }
+
+    public List<SharkBoatModel> sharkBoatModels(BrainTrainDatabase db){
+        List<SharkBoatModel> returnList = new ArrayList<>();
+
+        int level, numberOfShark, numberOfBoat, pointPerBoat, levelPassScore, allowableNumberOfBite, score, completeStatus;
+
+        SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
+        String query = "select * from attention_game_three";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                level = cursor.getInt(0);
+                numberOfShark = cursor.getInt(1);
+                numberOfBoat = cursor.getInt(2);
+                pointPerBoat = cursor.getInt(3);
+                levelPassScore = cursor.getInt(4);
+                allowableNumberOfBite = cursor.getInt(5);
+                score = cursor.getInt(6);
+                completeStatus = cursor.getInt(7);
+
+                returnList.add(new SharkBoatModel(level, numberOfShark, numberOfBoat, pointPerBoat, levelPassScore, allowableNumberOfBite, score, completeStatus));
 
             } while (cursor.moveToNext());
         }

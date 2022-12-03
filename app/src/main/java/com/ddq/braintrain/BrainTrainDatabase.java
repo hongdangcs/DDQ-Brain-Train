@@ -35,7 +35,9 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
                 "\t\"pair\"\tINTEGER,\n" +
                 "\t\"time\"\tINTEGER,\n" +
                 "\t\"score\"\tINTEGER,\n" +
-                "\t\"complete_status\"\tINTEGER\n" +
+                "\t\"complete_status_easy\"\tINTEGER,\n" +
+                "\t\"complete_status_medium\"\tINTEGER,\n" +
+                "\t\"complete_status_hard\"\tINTEGER\n" +
                 ")");
         db.execSQL("CREATE TABLE IF NOT EXISTS \"language_game_four\" (\n" +
                 "\t\"id\"\tINTEGER,\n" +

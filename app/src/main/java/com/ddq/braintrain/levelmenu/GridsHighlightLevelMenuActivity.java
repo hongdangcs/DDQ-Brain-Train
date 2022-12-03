@@ -15,7 +15,7 @@ import androidx.gridlayout.widget.GridLayout;
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.gameactivity.GridsHighlightGameActivity;
-import com.ddq.braintrain.HighlightGridsModel;
+import com.ddq.braintrain.models.HighlightGridsModel;
 import com.ddq.braintrain.R;
 
 import java.util.List;
