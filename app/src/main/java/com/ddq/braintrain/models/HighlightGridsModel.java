@@ -18,6 +18,18 @@ public class HighlightGridsModel {
         this.completeStatus = completeStatus;
     }
 
+    @Override
+    public String toString() {
+        return "HighlightGridsModel{" +
+                "level=" + level +
+                ", tiles=" + tiles +
+                ", gridx=" + gridx +
+                ", gridy=" + gridy +
+                ", score=" + score +
+                ", completeStatus=" + completeStatus +
+                '}';
+    }
+
     public HighlightGridsModel() {
     }
 

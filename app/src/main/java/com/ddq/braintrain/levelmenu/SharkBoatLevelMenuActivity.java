@@ -1,20 +1,20 @@
 package com.ddq.braintrain.levelmenu;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.ContextCompat;
-import androidx.gridlayout.widget.GridLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
+import androidx.gridlayout.widget.GridLayout;
+
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.R;
-import com.ddq.braintrain.models.SharkBoatModel;
 import com.ddq.braintrain.gameactivity.SharkBoatGameActivity;
+import com.ddq.braintrain.models.SharkBoatModel;
 
 import java.util.List;
 

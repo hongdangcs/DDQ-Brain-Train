@@ -1,24 +1,24 @@
 package com.ddq.braintrain.levelmenu;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.ContextCompat;
-import androidx.gridlayout.widget.GridLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
+import androidx.gridlayout.widget.GridLayout;
+
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
-import com.ddq.braintrain.models.NotInPreviousModel;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.gameactivity.NotInPreviousGameActivity;
+import com.ddq.braintrain.models.NotInPreviousModel;
 
 import java.util.List;
 
-public class NotInPreviousLevelMenuActivity extends AppCompatActivity implements View.OnClickListener{
+public class NotInPreviousLevelMenuActivity extends AppCompatActivity implements View.OnClickListener {
 
     private BrainTrainDatabase brainTrainDatabase;
     private List<NotInPreviousModel> notInPreviousModels;

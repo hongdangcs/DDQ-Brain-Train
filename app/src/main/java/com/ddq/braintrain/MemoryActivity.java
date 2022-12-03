@@ -1,13 +1,13 @@
 package com.ddq.braintrain;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.ddq.braintrain.levelmenu.GridsHighlightLevelMenuActivity;
 import com.ddq.braintrain.levelmenu.MissingObjectLevelMenuActivity;
@@ -43,24 +43,24 @@ public class MemoryActivity extends AppCompatActivity {
 
         brainTrainDatabase = new BrainTrainDatabase(MemoryActivity.this);
         gridsHighlightModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 11);
-        gridsHighlightScore.setText("Điểm của bạn: "+ gridsHighlightModel.getUserScore());
-        gridsHighlightProgress.setText("Đã hoàn thành: "+ ((float)gridsHighlightModel.getUserScore()/(float)gridsHighlightModel.getMaxScore())+"%");
-        if(gridsHighlightModel.isCompletedStatus()){
+        gridsHighlightScore.setText("Điểm của bạn: " + gridsHighlightModel.getUserScore());
+        gridsHighlightProgress.setText("Đã hoàn thành: " + ((float) gridsHighlightModel.getUserScore() / (float) gridsHighlightModel.getMaxScore()) + "%");
+        if (gridsHighlightModel.isCompletedStatus()) {
             gridsHighlightProgress.setVisibility(View.GONE);
             gridsHighlightComplete.setVisibility(View.VISIBLE);
         }
 
         notInPreviousModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 12);
-        notInPreviousScore.setText("Điểm của bạn: "+ notInPreviousModel.getUserScore());
-        notInPreviousProgress.setText("Đã hoàn thành: "+ ((float)notInPreviousModel.getUserScore()/(float)notInPreviousModel.getMaxScore())+"%");
-        if(notInPreviousModel.isCompletedStatus()){
+        notInPreviousScore.setText("Điểm của bạn: " + notInPreviousModel.getUserScore());
+        notInPreviousProgress.setText("Đã hoàn thành: " + ((float) notInPreviousModel.getUserScore() / (float) notInPreviousModel.getMaxScore()) + "%");
+        if (notInPreviousModel.isCompletedStatus()) {
             notInPreviousComplete.setVisibility(View.VISIBLE);
         }
 
         missingObjectModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 13);
-        missingObjectScore.setText("Điểm của bạn: "+ missingObjectModel.getUserScore());
-        missingObjectProgress.setText("Đã hoàn thành: "+ ((float)missingObjectModel.getUserScore()/(float)missingObjectModel.getMaxScore())+"%");
-        if(missingObjectModel.isCompletedStatus()){
+        missingObjectScore.setText("Điểm của bạn: " + missingObjectModel.getUserScore());
+        missingObjectProgress.setText("Đã hoàn thành: " + ((float) missingObjectModel.getUserScore() / (float) missingObjectModel.getMaxScore()) + "%");
+        if (missingObjectModel.isCompletedStatus()) {
             missingObjectComplete.setVisibility(View.VISIBLE);
         }
 

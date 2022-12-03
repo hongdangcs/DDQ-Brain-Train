@@ -1,12 +1,11 @@
 package com.ddq.braintrain;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.os.Bundle;
-import android.widget.Switch;
 
 import com.ddq.braintrain.databinding.ActivityMainBinding;
 
@@ -48,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
     }
+
     public void copyDatabase() {
         try {
             DatabaseCopyHelper databaseCopyHelper = new DatabaseCopyHelper(MainActivity.this);

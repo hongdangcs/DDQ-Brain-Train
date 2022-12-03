@@ -1,29 +1,32 @@
 package com.ddq.braintrain.levelmenu;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 import androidx.gridlayout.widget.GridLayout;
 
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
+import com.ddq.braintrain.R;
 import com.ddq.braintrain.gameactivity.GridsHighlightGameActivity;
 import com.ddq.braintrain.models.HighlightGridsModel;
-import com.ddq.braintrain.R;
 
 import java.util.List;
 
 public class GridsHighlightLevelMenuActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private BrainTrainDatabase brainTrainDatabase;
-    private List<HighlightGridsModel> highlightGridsModels;
+    private static BrainTrainDatabase brainTrainDatabase;
+    private static List<HighlightGridsModel> highlightGridsModels;
+
+    public static List<HighlightGridsModel> getHighlightGridsModels() {
+        return highlightGridsModels;
+    }
+
     GridLayout gridsHighlightLevelLayout;
     AppCompatButton btn;
 

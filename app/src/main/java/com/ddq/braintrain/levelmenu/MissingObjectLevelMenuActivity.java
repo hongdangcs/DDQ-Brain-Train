@@ -1,20 +1,20 @@
 package com.ddq.braintrain.levelmenu;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.ContextCompat;
-import androidx.gridlayout.widget.GridLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
+import androidx.gridlayout.widget.GridLayout;
+
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
-import com.ddq.braintrain.models.MissingObjectModel;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.gameactivity.MissingObjectGameActivity;
+import com.ddq.braintrain.models.MissingObjectModel;
 
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class MissingObjectLevelMenuActivity extends AppCompatActivity implements
         for (int i = 0; i < missingObjectModels.size(); i++) {
             btn = new AppCompatButton(MissingObjectLevelMenuActivity.this);
             btn.setText("" + missingObjectModels.get(i).getLevel());
-            btn.setId( i + 101);
+            btn.setId(i + 101);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);
             btn.setLayoutParams(params);

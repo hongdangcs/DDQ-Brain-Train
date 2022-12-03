@@ -26,20 +26,20 @@ public class BrainTrainDAO {
             cursor.moveToFirst();
         int maxScore = cursor.getInt(2);
         int userScore = cursor.getInt(3);
-        boolean completeStatus = cursor.getInt(4)==1;
+        boolean completeStatus = cursor.getInt(4) == 1;
         ProgressModel model = new ProgressModel(gameID, maxScore, userScore, completeStatus);
         return model;
     }
 
-    public List<HighlightGridsModel> highlightGridsModels(BrainTrainDatabase db){
+    public List<HighlightGridsModel> highlightGridsModels(BrainTrainDatabase db) {
         List<HighlightGridsModel> returnList = new ArrayList<>();
 
-         int level;
-         int tiles;
-         int gridx;
-         int gridy;
-         int score;
-         int completeStatus;
+        int level;
+        int tiles;
+        int gridx;
+        int gridy;
+        int score;
+        int completeStatus;
 
         SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
         String query = "select * from memory_game_one";
@@ -62,7 +62,7 @@ public class BrainTrainDAO {
         return returnList;
     }
 
-    public List<NotInPreviousModel> notInPreviousModels(BrainTrainDatabase db){
+    public List<NotInPreviousModel> notInPreviousModels(BrainTrainDatabase db) {
         List<NotInPreviousModel> returnList = new ArrayList<>();
 
         int level;
@@ -87,17 +87,17 @@ public class BrainTrainDAO {
         return returnList;
     }
 
-    public List<MissingObjectModel> missingObjectModels(BrainTrainDatabase db){
+    public List<MissingObjectModel> missingObjectModels(BrainTrainDatabase db) {
         List<MissingObjectModel> returnList = new ArrayList<>();
 
-         int level;
-         int numberOfCards;
-         int hideCard;
-         int score;
-         int time;
-         int completeStatusEasy;
-         int completeStatusMedium;
-         int completeStatusHard;
+        int level;
+        int numberOfCards;
+        int hideCard;
+        int score;
+        int time;
+        int completeStatusEasy;
+        int completeStatusMedium;
+        int completeStatusHard;
 
         SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
         String query = "select * from memory_game_three";
@@ -122,7 +122,7 @@ public class BrainTrainDAO {
         return returnList;
     }
 
-    public List<CompareModel> compareModels(BrainTrainDatabase db){
+    public List<CompareModel> compareModels(BrainTrainDatabase db) {
         List<CompareModel> returnList = new ArrayList<>();
 
         int level;
@@ -147,7 +147,7 @@ public class BrainTrainDAO {
         return returnList;
     }
 
-    public List<FindOperatorModel> findOperatorOfTenModels(BrainTrainDatabase db){
+    public List<FindOperatorModel> findOperatorOfTenModels(BrainTrainDatabase db) {
         List<FindOperatorModel> returnList = new ArrayList<>();
 
         int level, option, time, point, completeStatus;
@@ -163,7 +163,7 @@ public class BrainTrainDAO {
                 point = cursor.getInt(3);
                 completeStatus = cursor.getInt(4);
 
-                returnList.add(new FindOperatorModel(level,option,time,point, completeStatus));
+                returnList.add(new FindOperatorModel(level, option, time, point, completeStatus));
 
             } while (cursor.moveToNext());
         }
@@ -172,7 +172,7 @@ public class BrainTrainDAO {
         return returnList;
     }
 
-    public List<FindOperatorModel> findOperatorOfHundredModels(BrainTrainDatabase db){
+    public List<FindOperatorModel> findOperatorOfHundredModels(BrainTrainDatabase db) {
         List<FindOperatorModel> returnList = new ArrayList<>();
 
         int level, option, time, point, completeStatus;
@@ -188,7 +188,7 @@ public class BrainTrainDAO {
                 point = cursor.getInt(3);
                 completeStatus = cursor.getInt(4);
 
-                returnList.add(new FindOperatorModel(level,option,time,point, completeStatus));
+                returnList.add(new FindOperatorModel(level, option, time, point, completeStatus));
 
             } while (cursor.moveToNext());
         }
@@ -196,7 +196,8 @@ public class BrainTrainDAO {
         sqLiteDatabase.close();
         return returnList;
     }
-    public List<FindOperatorModel> findOperatorOfThousandModels(BrainTrainDatabase db){
+
+    public List<FindOperatorModel> findOperatorOfThousandModels(BrainTrainDatabase db) {
         List<FindOperatorModel> returnList = new ArrayList<>();
 
         int level, option, time, point, completeStatus;
@@ -212,7 +213,7 @@ public class BrainTrainDAO {
                 point = cursor.getInt(3);
                 completeStatus = cursor.getInt(4);
 
-                returnList.add(new FindOperatorModel(level,option,time,point, completeStatus));
+                returnList.add(new FindOperatorModel(level, option, time, point, completeStatus));
 
             } while (cursor.moveToNext());
         }
@@ -221,7 +222,7 @@ public class BrainTrainDAO {
         return returnList;
     }
 
-    public List<DifferentModel> differentModels(BrainTrainDatabase db){
+    public List<DifferentModel> differentModels(BrainTrainDatabase db) {
         List<DifferentModel> returnList = new ArrayList<>();
 
         int imageID, completeStatus;
@@ -237,7 +238,7 @@ public class BrainTrainDAO {
                 image = cursor.getString(2);
                 completeStatus = cursor.getInt(3);
 
-                returnList.add(new DifferentModel(imageID,imageName,image, completeStatus));
+                returnList.add(new DifferentModel(imageID, imageName, image, completeStatus));
 
             } while (cursor.moveToNext());
         }
@@ -246,7 +247,7 @@ public class BrainTrainDAO {
         return returnList;
     }
 
-    public List<FlashCardModel> flashCardModels(BrainTrainDatabase db){
+    public List<FlashCardModel> flashCardModels(BrainTrainDatabase db) {
         List<FlashCardModel> returnList = new ArrayList<>();
 
         int level, pair, time, score, completeStatusEasy, completeStatusMedium, completeStatusHard;
@@ -273,7 +274,7 @@ public class BrainTrainDAO {
         return returnList;
     }
 
-    public List<SharkBoatModel> sharkBoatModels(BrainTrainDatabase db){
+    public List<SharkBoatModel> sharkBoatModels(BrainTrainDatabase db) {
         List<SharkBoatModel> returnList = new ArrayList<>();
 
         int level, numberOfShark, numberOfBoat, pointPerBoat, levelPassScore, allowableNumberOfBite, score, completeStatus;

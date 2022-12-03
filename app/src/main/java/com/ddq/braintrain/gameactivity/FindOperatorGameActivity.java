@@ -1,16 +1,12 @@
 package com.ddq.braintrain.gameactivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.gridlayout.widget.GridLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.ddq.braintrain.R;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
+import com.ddq.braintrain.R;
 
 public class FindOperatorGameActivity extends AppCompatActivity {
 

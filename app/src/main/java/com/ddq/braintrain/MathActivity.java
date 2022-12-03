@@ -1,13 +1,13 @@
 package com.ddq.braintrain;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.ddq.braintrain.levelmenu.CompareLevelMenuActivity;
 import com.ddq.braintrain.levelmenu.FindOperatorLevelMenuActivity;
@@ -38,16 +38,16 @@ public class MathActivity extends AppCompatActivity {
 
         brainTrainDatabase = new BrainTrainDatabase(MathActivity.this);
         findOperatorModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 41);
-        findOperatorScore.setText("Điểm của bạn: "+ findOperatorModel.getUserScore());
-        findOperatorProgress.setText("Đã hoàn thành: "+ ((float)findOperatorModel.getUserScore()/(float)findOperatorModel.getMaxScore())+"%");
-        if(findOperatorModel.isCompletedStatus()){
+        findOperatorScore.setText("Điểm của bạn: " + findOperatorModel.getUserScore());
+        findOperatorProgress.setText("Đã hoàn thành: " + ((float) findOperatorModel.getUserScore() / (float) findOperatorModel.getMaxScore()) + "%");
+        if (findOperatorModel.isCompletedStatus()) {
             findOperatorCompleted.setVisibility(View.VISIBLE);
         }
 
         compareModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 42);
-        compareScore.setText("Điểm của bạn: "+ compareModel.getUserScore());
-        compareProgress.setText("Đã hoàn thành: "+ ((float)compareModel.getUserScore()/(float)compareModel.getMaxScore())+"%");
-        if(compareModel.isCompletedStatus()){
+        compareScore.setText("Điểm của bạn: " + compareModel.getUserScore());
+        compareProgress.setText("Đã hoàn thành: " + ((float) compareModel.getUserScore() / (float) compareModel.getMaxScore()) + "%");
+        if (compareModel.isCompletedStatus()) {
             compareCompleted.setVisibility(View.VISIBLE);
         }
 

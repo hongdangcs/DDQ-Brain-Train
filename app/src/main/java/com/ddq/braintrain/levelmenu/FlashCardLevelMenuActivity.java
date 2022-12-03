@@ -1,20 +1,20 @@
 package com.ddq.braintrain.levelmenu;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.ContextCompat;
-import androidx.gridlayout.widget.GridLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
+import androidx.gridlayout.widget.GridLayout;
+
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.FlashCardGameActivity;
-import com.ddq.braintrain.models.FlashCardModel;
 import com.ddq.braintrain.R;
+import com.ddq.braintrain.models.FlashCardModel;
 
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class FlashCardLevelMenuActivity extends AppCompatActivity implements Vie
         for (int i = 0; i < flashCardModels.size(); i++) {
             btn = new AppCompatButton(FlashCardLevelMenuActivity.this);
             btn.setText("" + flashCardModels.get(i).getLevel());
-            btn.setId( i + 101);
+            btn.setId(i + 101);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);
             btn.setLayoutParams(params);
