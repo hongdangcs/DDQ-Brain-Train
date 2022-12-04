@@ -14,6 +14,7 @@ import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.gameactivity.FindOperatorGameActivity;
+import com.ddq.braintrain.models.CompareModel;
 import com.ddq.braintrain.models.FindOperatorModel;
 
 import java.util.List;
@@ -22,7 +23,19 @@ public class FindOperatorLevelMenuActivity extends AppCompatActivity implements 
 
 
     private BrainTrainDatabase brainTrainDatabase;
-    private List<FindOperatorModel> findOperatorModels, findOperatorModels2, findOperatorModels3;
+    private static List<FindOperatorModel> findOperatorModels;
+    private static List<FindOperatorModel> findOperatorModels2;
+    private static List<FindOperatorModel> findOperatorModels3;
+    public static List<FindOperatorModel> getOperatorTenModels() {
+        return findOperatorModels;
+    }
+    public static List<FindOperatorModel> getOperatorHundredModels() {
+        return findOperatorModels2;
+    }
+    public static List<FindOperatorModel> getOperatorThousandModels() {
+        return findOperatorModels3;
+    }
+
     GridLayout multipleOfTenLevelLayout, multipleOfHundredLevelLayout, multipleOfThousandLevelLayout;
     AppCompatButton btn;
 
@@ -42,7 +55,7 @@ public class FindOperatorLevelMenuActivity extends AppCompatActivity implements 
         for (int i = 0; i < findOperatorModels.size(); i++) {
             btn = new AppCompatButton(FindOperatorLevelMenuActivity.this);
             btn.setText("" + findOperatorModels.get(i).getLevel());
-            btn.setId(i + 1);
+            btn.setId(i + 10);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     150,
                     150
@@ -61,7 +74,7 @@ public class FindOperatorLevelMenuActivity extends AppCompatActivity implements 
         for (int i = 0; i < findOperatorModels2.size(); i++) {
             btn = new AppCompatButton(FindOperatorLevelMenuActivity.this);
             btn.setText("" + findOperatorModels2.get(i).getLevel());
-            btn.setId(i + 1);
+            btn.setId(i + 100);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     150,
                     150
@@ -81,7 +94,7 @@ public class FindOperatorLevelMenuActivity extends AppCompatActivity implements 
         for (int i = 0; i < findOperatorModels3.size(); i++) {
             btn = new AppCompatButton(FindOperatorLevelMenuActivity.this);
             btn.setText("" + findOperatorModels3.get(i).getLevel());
-            btn.setId(i + 1);
+            btn.setId(i + 1000);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     150,
                     150
