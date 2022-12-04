@@ -125,6 +125,10 @@ public class BrainTrainDAO {
     public List<CompareModel> compareModels(BrainTrainDatabase db) {
         List<CompareModel> returnList = new ArrayList<>();
 
+        String Expression1;
+        String Expression2;
+        int ExpressionResult1;
+        int ExpressionResult2;
         int level;
         int score;
         int completeStatus;
@@ -136,9 +140,13 @@ public class BrainTrainDAO {
             do {
                 level = cursor.getInt(0);
                 score = cursor.getInt(1);
+                Expression1 = cursor.getString(3);
+                Expression2 = cursor.getString(4);
+                ExpressionResult1 = cursor.getInt(5);
+                ExpressionResult2 = cursor.getInt(6);
                 completeStatus = cursor.getInt(2);
 
-                returnList.add(new CompareModel(level, score, completeStatus));
+                returnList.add(new CompareModel(level, score, Expression1, Expression2, ExpressionResult1, ExpressionResult2,   completeStatus));
 
             } while (cursor.moveToNext());
         }
