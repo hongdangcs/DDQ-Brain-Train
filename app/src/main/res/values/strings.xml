@@ -17,8 +17,12 @@
     <string name="attention_name">Tập trung</string>
     <string name="memory_name">Trí nhớ</string>
     <string name="memory_des">Kiểm tra trí nhớ</string>
+
+    // Language part:
     <string name="language_name">Ngôn ngữ</string>
     <string name="language_des">Kiểm tra khả năng ngôn ngữ</string>
+
+    // Math part:
     <string name="math_name">Tính toán</string>
     <string name="math_des">Các phép tính đơn giản</string>
 </resources>

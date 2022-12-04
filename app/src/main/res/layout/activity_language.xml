@@ -75,7 +75,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:text="@string/memory_des" />
+                            android:text="@string/language_des" />
 
                         <TextView
                             android:id="@+id/completeWordScore"
@@ -159,7 +159,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:text="@string/memory_des" />
+                            android:text="@string/language_des" />
 
                         <TextView
                             android:id="@+id/findWordScore"
@@ -242,7 +242,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:text="@string/memory_des" />
+                            android:text="@string/language_des" />
 
                         <TextView
                             android:id="@+id/conjunctionScore"
@@ -318,7 +318,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
-                            android:text="Chọn vật thể bị ẩn"
+                            android:text="Sắp xếp kí tự"
                             android:textColor="@color/very_dark_blue"
                             android:textSize="25sp"
                             android:textStyle="bold" />
@@ -327,7 +327,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:text="@string/memory_des" />
+                            android:text="@string/language_des" />
 
                         <TextView
                             android:id="@+id/sortingCharScore"
