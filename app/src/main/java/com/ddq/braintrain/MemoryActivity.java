@@ -43,6 +43,7 @@ public class MemoryActivity extends AppCompatActivity {
 
         brainTrainDatabase = new BrainTrainDatabase(MemoryActivity.this);
         gridsHighlightModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 11);
+
         gridsHighlightScore.setText("Điểm của bạn: " + gridsHighlightModel.getUserScore());
         gridsHighlightProgress.setText("Đã hoàn thành: " + ((float) gridsHighlightModel.getUserScore() / (float) gridsHighlightModel.getMaxScore()) + "%");
         if (gridsHighlightModel.isCompletedStatus()) {
@@ -87,4 +88,5 @@ public class MemoryActivity extends AppCompatActivity {
 
 
     }
+
 }
