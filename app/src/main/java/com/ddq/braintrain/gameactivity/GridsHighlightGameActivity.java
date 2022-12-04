@@ -218,13 +218,6 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
         brainTrainDatabase.updateUserScore(11, score);
         brainTrainDatabase.updateCompletedStatus("memory_game_one", level);
 
-
-        //BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(GridsHighlightGameActivity.this);
-        //boolean success = new BrainTrainDAO().updateUserScore(brainTrainDatabase, 11, score);
-        //gridsHighlightCompleteNotiTextView.setText(new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 11).toString());
-
-        //MemoryActivity.gridHighlightScoreUpdate(score);
-        //gridsHighlightCompleteNotiTextView.setText("+" +MemoryActivity.getGridsHighlightModel().getUserScore());
     }
 
     public void enableNextLevelButton() {
