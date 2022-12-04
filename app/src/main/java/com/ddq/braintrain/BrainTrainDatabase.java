@@ -47,6 +47,10 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS \"math_game_one\" (\n" +
                 "\t\"level\"\tINTEGER,\n" +
                 "\t\"score\"\tINTEGER,\n" +
+                "\t\"expression1\"\ttext,\n" +
+                "\t\"expression2\"\ttext,\n" +
+                "\t\"expressionresult1\"\tINTEGER,\n" +
+                "\t\"expressionresult2\"\tINTEGER,\n" +
                 "\t\"complete_status\"\tINTEGER\n" +
                 ")");
         db.execSQL("CREATE TABLE IF NOT EXISTS \"math_game_two_multiple_of_hundred\" (\n" +

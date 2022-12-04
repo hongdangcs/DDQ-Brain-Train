@@ -15,13 +15,17 @@ import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.gameactivity.CompareGameActivity;
 import com.ddq.braintrain.models.CompareModel;
+import com.ddq.braintrain.models.HighlightGridsModel;
 
 import java.util.List;
 
 public class CompareLevelMenuActivity extends AppCompatActivity implements View.OnClickListener {
 
     private BrainTrainDatabase brainTrainDatabase;
-    private List<CompareModel> compareModels;
+    private static List<CompareModel> compareModels;
+    public static List<CompareModel> getCompareModels() {
+        return compareModels;
+    }
     GridLayout compareLevelLayout;
     AppCompatButton btn;
 
