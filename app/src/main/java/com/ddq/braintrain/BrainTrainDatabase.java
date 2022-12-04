@@ -160,4 +160,16 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
         onCreate(db);
 
     }
+
+    public void updateUserScore(int gameID, int score){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE progress SET user_score="+ score+" WHERE game_id = "+gameID);
+
+    }
+
+    public void updateCompletedStatus(String table, int level){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE "+ table +" SET complete_status=1 WHERE level = " + level);
+
+    }
 }

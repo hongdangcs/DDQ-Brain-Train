@@ -1,5 +1,6 @@
 package com.ddq.braintrain;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -29,6 +30,13 @@ public class BrainTrainDAO {
         boolean completeStatus = cursor.getInt(4) == 1;
         ProgressModel model = new ProgressModel(gameID, maxScore, userScore, completeStatus);
         return model;
+    }
+
+    public static boolean updateUserScore(BrainTrainDatabase db, int gameID, int score){
+        SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("GAME_ID", score);
+        return sqLiteDatabase.update("progress", cv, "game_id = "+ gameID, null)>0;
     }
 
     public List<HighlightGridsModel> highlightGridsModels(BrainTrainDatabase db) {
