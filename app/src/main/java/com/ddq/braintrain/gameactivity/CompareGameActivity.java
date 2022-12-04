@@ -166,5 +166,11 @@ public class CompareGameActivity extends AppCompatActivity {
         Expression2.setClickable(false);
     }
 
+    @Override
+    public void onBackPressed() {
+        pauseTimer();
+        finish();
+    }
+
 
 }
