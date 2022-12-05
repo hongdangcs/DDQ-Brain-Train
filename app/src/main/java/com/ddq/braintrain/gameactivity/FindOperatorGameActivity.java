@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -28,12 +29,15 @@ public class FindOperatorGameActivity extends AppCompatActivity {
     private int  option1, option2, option3, option4, option5, option6;
     long timeLeft;
     private int count;
-    private int point;
+    private int point1, point2, point3;
     private int level;
     private int score = 0;
     private String text;
     ArrayList<Integer>  numbers;
     private int  optionten1, optionhundred2, optionthouasand3;
+    private int select1, select2;
+    private int  totalSelect;
+    private String temp1, temp2;
 
 
     @Override
@@ -58,7 +62,6 @@ public class FindOperatorGameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int level = intent.getIntExtra("level", 0);
         textView.setText("Level: " + level);
-        Log.d("level", "number " + level);
         if (level < 100){
             level = level - 10 ;
             text = "ten";
@@ -71,12 +74,14 @@ public class FindOperatorGameActivity extends AppCompatActivity {
             level = level - 1000;
             text = "thousand";
         }
+        this.level = level;
         Log.d("level", "number1: " + level);
         gameStart(level);
     }
 
     public void generate(int level){
-        textView.setText("Cấp độ: " + level);
+        int temp = level + 1;
+        textView.setText("Cấp độ: " + temp);
         updateScore(score);
         option1 = numbers.get(0);
         Option1.setText(Integer.toString(option1));
@@ -101,60 +106,168 @@ public class FindOperatorGameActivity extends AppCompatActivity {
             Option6.setText(Integer.toString(option6));
         }
 
-//        point = CompareLevelMenuActivity.getCompareModels().get(level).getScore();
-//        Expression1.setBackgroundColor(0xFF3a378e);
-//        Expression2.setBackgroundColor(0xFF3a378e);
+
+
+
+        if(level < 15){
+            point1 = FindOperatorLevelMenuActivity.getOperatorTenModels().get(level).getPoint();
+        }
+
+        if(level < 20){
+            point2 = FindOperatorLevelMenuActivity.getOperatorHundredModels().get(level).getPoint();
+        }
+
+        if(level < 25){
+            point3 = FindOperatorLevelMenuActivity.getOperatorThousandModels().get(level).getPoint();
+        }
+        Option1.setBackgroundColor(0xFF3a378e);
+        Option2.setBackgroundColor(0xFF3a378e);
+        Option3.setBackgroundColor(0xFF3a378e);
+        Option4.setBackgroundColor(0xFF3a378e);
+        Option5.setBackgroundColor(0xFF3a378e);
+        Option6.setBackgroundColor(0xFF3a378e);
+
+
+
     }
 
-//    public void ClickExpresion1(View view){
-//        if(ExpressionResult1 < ExpressionResult2){
-//            Expression1.setBackgroundColor(0xFF00FF00);
-//            count++;
-//            if(count == 5){
-//                pauseTimer();
-//                timeLeft = timeLeft + 10;
-//                UpdateTimer();
-//                count = 0;
-//            }
-//            level = level + 1;
-//            score = score + point;
-//            generate(level);
-//        }
-//        else{
-//            Expression1.setBackgroundColor(0xFFFF0000);
-//            pauseTimer();
-//            timeLeft = timeLeft - 2;
-//            UpdateTimer();
-//        }
-//    }
-//
-//    public void ClickExpresion2(View view){
-//        if(ExpressionResult1 > ExpressionResult2){
-//            Expression2.setBackgroundColor(0xFF00FF00);
-//            count++;
-//            if(count == 5){
-//                pauseTimer();
-//                timeLeft = timeLeft + 10;
-//                UpdateTimer();
-//                count = 0;
-//            }
-//            level = level + 1;
-//            score = score + point;
-//            generate(level);
-//        }
-//        else{
-//            Expression2.setBackgroundColor(0xFFFF0000);
-//            pauseTimer();
-//            timeLeft = timeLeft - 2;
-//            UpdateTimer();
-//        }
-//    }
+    public void ClickOption1(View view){
+        if(totalSelect == 0){
+            Option1.setBackgroundColor(0xFFFFB665);
+            select1 = option1;
+            temp1 = "option1";
+
+        }
+
+        if(totalSelect == 1){
+            Option1.setBackgroundColor(0xFFFFB665);
+            select2 = option1;
+            temp2 = "option1";
+            checkSelect();
+
+        }
+        totalSelect = totalSelect + 1;
+
+
+    }
+
+    public void ClickOption2(View view){
+        if(totalSelect == 0){
+            Option2.setBackgroundColor(0xFFFFB665);
+            select1 = option2;
+            temp1 = "option2";
+        }
+
+        if(totalSelect == 1){
+            Option2.setBackgroundColor(0xFFFFB665);
+            select2 = option2;
+            temp2 = "option2";
+            checkSelect();
+        }
+        totalSelect = totalSelect + 1;
+
+    }
+    public void ClickOption3(View view){
+        if(totalSelect == 0){
+            Option3.setBackgroundColor(0xFFFFB665);
+            select1 = option3;
+            temp1 = "option3";
+
+        }
+
+        if(totalSelect == 1){
+            Option3.setBackgroundColor(0xFFFFB665);
+            select2 = option3;
+            temp2 = "option3";
+            checkSelect();
+
+        }
+        totalSelect = totalSelect + 1;
+
+    }
+    public void ClickOption4(View view){
+        if(totalSelect == 0){
+            Option4.setBackgroundColor(0xFFFFB665);
+            select1 = option4;
+            temp1 = "option4";
+
+
+        }
+
+        if(totalSelect == 1){
+            Option4.setBackgroundColor(0xFFFFB665);
+            select2 = option4;
+            temp2 = "option4";
+            checkSelect();
+
+        }
+        totalSelect = totalSelect + 1;
+
+    }
+    public void ClickOption5(View view){
+        if(totalSelect == 0){
+            Option5.setBackgroundColor(0xFFFFB665);
+            select1 = option5;
+            temp1 = "option5";
+
+        }
+        if(totalSelect == 1){
+            Option5.setBackgroundColor(0xFFFFB665);
+            select2 = option5;
+            temp2 = "option5";
+            checkSelect();
+
+        }
+        totalSelect = totalSelect + 1;
+
+    }
+
+    public void ClickOption6(View view){
+        if(totalSelect == 0){
+            Option6.setBackgroundColor(0xFFFFB665);
+            select1 = option6;
+            temp1 = "option6";
+
+        }
+
+        if(totalSelect == 1){
+            Option1.setBackgroundColor(0xFFFFB665);
+            select2 = option6;
+            temp2 = "option6";
+            checkSelect();
+
+        }
+        totalSelect = totalSelect + 1;
+
+    }
 
     public void gameStart(int level1) {
+        if(level == 15 && text.equals("ten")){
+            level = 0;
+            level1 = 0;
+            text = "hundred";
+        }
+
+        if(level == 20 && text.equals("hundred")){
+            level = 0;
+            level1 = 0;
+            text = "thousand";
+        }
+
         Option6.setVisibility(View.INVISIBLE);
-        optionten1 = FindOperatorLevelMenuActivity.getOperatorTenModels().get(level1).getOption();
-        optionhundred2 = FindOperatorLevelMenuActivity.getOperatorHundredModels().get(level1).getOption();
-        optionthouasand3 = FindOperatorLevelMenuActivity.getOperatorThousandModels().get(level1).getOption();
+        if(level1 < 15){
+            optionten1 = FindOperatorLevelMenuActivity.getOperatorTenModels().get(level1).getOption();
+        }
+
+        if(level1 < 20){
+            optionhundred2 = FindOperatorLevelMenuActivity.getOperatorHundredModels().get(level1).getOption();
+        }
+
+        if(level1 < 25){
+            optionthouasand3 = FindOperatorLevelMenuActivity.getOperatorThousandModels().get(level1).getOption();
+        }
+
+
         numbers = new ArrayList();
         Random rand = new Random();
         if(optionten1 == 5 && text.equals("ten")){
@@ -227,10 +340,12 @@ public class FindOperatorGameActivity extends AppCompatActivity {
             timeLeft = FindOperatorLevelMenuActivity.getOperatorThousandModels().get(level1).getTime();
 
         }
+
         FindOperatorCompleteNotiTextView.setVisibility(View.INVISIBLE);
 //        nextLevelButton.setVisibility(View.INVISIBLE);
         resultButton.setVisibility(View.INVISIBLE);
         Collections.shuffle(numbers);
+        select1 = select2 = 0;
         generate(level1);
         UpdateTimer();
     }
@@ -290,5 +405,58 @@ public class FindOperatorGameActivity extends AppCompatActivity {
     public void onBackPressed() {
         pauseTimer();
         finish();
+    }
+
+    public void checkSelect(){
+        if(select1 + select2 == 10 || select1 + select2 == 100 || select1+select2 == 1000){
+            Toast.makeText(FindOperatorGameActivity.this, "Câu trả lời Đúng!", Toast.LENGTH_LONG).show();
+            totalSelect = -1;
+            pauseTimer();
+            level++;
+            if(text.equals("ten")){
+                score = score + point1;
+            }
+            if(text.equals("hundred")){
+                score = score + point2;
+            }
+
+            if(text.equals("thousand")){
+                score = score + point3;
+            }
+
+            updateScore(score);
+            gameStart(level);
+        }
+        else{
+            Toast.makeText(FindOperatorGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_LONG).show();
+            if(temp1.equals("option1") || temp2.equals("option1")){
+                Option1.setBackgroundColor(0xFF3a378e);
+            }
+
+            if(temp1.equals("option2") || temp2.equals("option2")){
+                Option2.setBackgroundColor(0xFF3a378e);
+            }
+
+            if(temp1.equals("option3") || temp2.equals("option3")){
+                Option3.setBackgroundColor(0xFF3a378e);
+            }
+
+            if(temp1.equals("option4") || temp2.equals("option4")){
+                Option4.setBackgroundColor(0xFF3a378e);
+            }
+
+            if(temp1.equals("option5") || temp2.equals("option5")){
+                Option5.setBackgroundColor(0xFF3a378e);
+            }
+
+            if(temp1.equals("option6") || temp2.equals("option6")){
+                Option6.setBackgroundColor(0xFF3a378e);
+            }
+
+            totalSelect = -1;
+            select1 = 0;
+            select2 = 0;
+//            generate(level);
+        }
     }
 }
