@@ -4,14 +4,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".gameactivity.NotInPreviousGameActivity"
-    android:orientation="vertical">
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    tools:context=".gameactivity.NotInPreviousGameActivity">
 
 
-    <TextView
-        android:id="@+id/textView2"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="TextView"
-        android:gravity="center"/>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/notInPreviousLevelTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="TextView"
+                android:textColor="@color/very_dark_blue"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/notInPreviousInforTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="6dp"
+                android:text="Ghi nhớ các ô màu vàng" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/notInPreviousTimeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="Thời gian: "
+                    android:textSize="20dp" />
+
+
+                <TextView
+                    android:id="@+id/notInPreviousScoreTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="Điểm: "
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+            <androidx.gridlayout.widget.GridLayout
+                android:id="@+id/notInPreviousGameLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                app:columnCount="4"/>
+
+            <TextView
+                android:id="@+id/notInPreviousCompleteNotiTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@color/golden_yellow_laminate_color"
+                android:gravity="center"
+                android:padding="10dp"
+                android:paddingTop="20dp"
+                android:text="Hết lượt chơi!"
+                android:textColor="@color/very_dark_blue"
+                android:textSize="12dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/notInPreviousResultButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Xem kết quả" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>
