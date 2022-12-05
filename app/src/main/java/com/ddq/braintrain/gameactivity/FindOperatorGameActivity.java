@@ -75,7 +75,6 @@ public class FindOperatorGameActivity extends AppCompatActivity {
             text = "thousand";
         }
         this.level = level;
-        Log.d("level", "number1: " + level);
         gameStart(level);
     }
 
@@ -254,6 +253,12 @@ public class FindOperatorGameActivity extends AppCompatActivity {
             text = "thousand";
         }
 
+        if(level == 25 && text.equals("thousand")){
+            gameEnd();
+            return;
+
+        }
+
         Option6.setVisibility(View.INVISIBLE);
         if(level1 < 15){
             optionten1 = FindOperatorLevelMenuActivity.getOperatorTenModels().get(level1).getOption();
@@ -266,6 +271,9 @@ public class FindOperatorGameActivity extends AppCompatActivity {
         if(level1 < 25){
             optionthouasand3 = FindOperatorLevelMenuActivity.getOperatorThousandModels().get(level1).getOption();
         }
+
+        Log.d("check", String.valueOf(level1));
+        Log.d("check1: ", String.valueOf(optionthouasand3));
 
 
         numbers = new ArrayList();
@@ -397,8 +405,26 @@ public class FindOperatorGameActivity extends AppCompatActivity {
     public void gameStop(){
         FindOperatorCompleteNotiTextView.setVisibility(View.VISIBLE);
         resultButton.setVisibility(View.VISIBLE);
-//        Expression1.setClickable(false);
-//        Expression2.setClickable(false);
+        Option1.setClickable(false);
+        Option2.setClickable(false);
+        Option3.setClickable(false);
+        Option4.setClickable(false);
+        Option5.setClickable(false);
+        Option6.setClickable(false);
+
+    }
+
+    public void gameEnd(){
+        FindOperatorCompleteNotiTextView.setVisibility(View.VISIBLE);
+        FindOperatorCompleteNotiTextView.setText("Hoàn Thành");
+        resultButton.setVisibility(View.VISIBLE);
+        Option1.setClickable(false);
+        Option2.setClickable(false);
+        Option3.setClickable(false);
+        Option4.setClickable(false);
+        Option5.setClickable(false);
+        Option6.setClickable(false);
+
     }
 
     @Override
