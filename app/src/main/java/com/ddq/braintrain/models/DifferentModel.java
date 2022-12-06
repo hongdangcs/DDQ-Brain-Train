@@ -3,6 +3,7 @@ package com.ddq.braintrain.models;
 public class DifferentModel {
     int imageID, completeStatus;
     String imageName, image;
+    int xCoordinate, yCoordinate;
 
     public DifferentModel() {
     }
@@ -12,6 +13,15 @@ public class DifferentModel {
         this.completeStatus = completeStatus;
         this.imageName = imageName;
         this.image = image;
+    }
+
+    public DifferentModel(int imageID, String imageName, String image, int completeStatus, int xCoordinate, int yCoordinate) {
+        this.imageID = imageID;
+        this.completeStatus = completeStatus;
+        this.imageName = imageName;
+        this.image = image;
+        this.xCoordinate = xCoordinate;
+        this.yCoordinate = yCoordinate;
     }
 
     public int getImageID() {
@@ -44,5 +54,21 @@ public class DifferentModel {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getxCoordinate() {
+        return xCoordinate;
+    }
+
+    public void setxCoordinate(int xCoordinate) {
+        this.xCoordinate = xCoordinate;
+    }
+
+    public int getyCoordinate() {
+        return yCoordinate;
+    }
+
+    public void setyCoordinate(int yCoordinate) {
+        this.yCoordinate = yCoordinate;
     }
 }

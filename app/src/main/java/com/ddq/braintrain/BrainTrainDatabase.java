@@ -14,11 +14,13 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS \"attention_game_one\" (\n" +
+        db.execSQL("CREATE TABLE if not exists \"attention_game_one\" (\n" +
                 "\t\"image_id\"\tINTEGER,\n" +
                 "\t\"image_name\"\tTEXT,\n" +
                 "\t\"image\"\tTEXT,\n" +
-                "\t\"complete_status\"\tINTEGER\n" +
+                "\t\"complete_status\"\tINTEGER,\n" +
+                "\t\"x_coordinate\"\tINTEGER,\n" +
+                "\t\"y_coordinate\"\tINTEGER\n" +
                 ")");
         db.execSQL("CREATE TABLE IF NOT EXISTS \"attention_game_three\" (\n" +
                 "\t\"level\"\tINTEGER,\n" +

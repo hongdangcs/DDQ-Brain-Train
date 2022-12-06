@@ -22,9 +22,13 @@ public class DifferentLevelMenuActivity extends AppCompatActivity implements Vie
 
 
     private BrainTrainDatabase brainTrainDatabase;
-    private List<DifferentModel> differentModels;
+    private static List<DifferentModel> differentModels;
     GridLayout differentLevelLayout;
     AppCompatButton btn;
+
+    public static List<DifferentModel> getDifferentModels() {
+        return differentModels;
+    }
 
 
     @Override

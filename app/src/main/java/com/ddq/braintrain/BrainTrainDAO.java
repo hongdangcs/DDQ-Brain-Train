@@ -243,6 +243,7 @@ public class BrainTrainDAO {
 
         int imageID, completeStatus;
         String imageName, image;
+        int xCoordinate, yCoordinate;
 
         SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
         String query = "select * from attention_game_one";
@@ -253,8 +254,10 @@ public class BrainTrainDAO {
                 imageName = cursor.getString(1);
                 image = cursor.getString(2);
                 completeStatus = cursor.getInt(3);
+                xCoordinate = cursor.getInt(4);
+                yCoordinate = cursor.getInt(5);
 
-                returnList.add(new DifferentModel(imageID, imageName, image, completeStatus));
+                returnList.add(new DifferentModel(imageID, imageName, image, completeStatus, xCoordinate, yCoordinate));
 
             } while (cursor.moveToNext());
         }
@@ -262,6 +265,8 @@ public class BrainTrainDAO {
         sqLiteDatabase.close();
         return returnList;
     }
+
+
 
     public List<FlashCardModel> flashCardModels(BrainTrainDatabase db) {
         List<FlashCardModel> returnList = new ArrayList<>();
