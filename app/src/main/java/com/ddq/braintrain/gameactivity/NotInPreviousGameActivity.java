@@ -90,7 +90,7 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
         cardView.setLayoutParams(params);
         cardView.setRadius(70);
         cardView.setTag("picture" + ID + "generate");
-        image.setImageResource(getResources().getIdentifier("animal_image" + ID, "drawable", getPackageName()));
+        image.setImageResource(getResources().getIdentifier("animal_image_" + ID, "drawable", getPackageName()));
         cardView.addView(image);
         cardView.setOnClickListener(NotInPreviousGameActivity.this);
         imageList.add(cardView);
@@ -133,7 +133,7 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
 
     public void gameFinish() {
         disableCardView();
-        score += level * 100 * (imageIndex - 2);
+        score += level * 100 * (imageIndex - 3);
         notInPreviousScoreTextView.setText("Điểm của bạn: " + score);
         notInPreviousResultButton.setVisibility(View.VISIBLE);
 
@@ -147,6 +147,7 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
             gameFinish();
             notInPreviousInforTextView.setText("Chọn lựa đã bị trùng!");
             Log.d(TAG, selected + "\n ban da chon " + v.getTag().toString());
+            Log.d(TAG, "anh so "+imageIndex);
         } else {
             String tag = v.getTag().toString();
             selected += tag;
