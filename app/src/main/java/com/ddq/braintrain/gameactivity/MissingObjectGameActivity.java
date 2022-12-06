@@ -37,7 +37,7 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
     CardView cardView;
     ImageView image;
     CountDownTimer timer;
-    int level, numberOfCard, hideCard, time, correctAnswer = 0, userScore;
+    int level, realLevel, numberOfCard, hideCard, time, correctAnswer = 0, userScore;
     List<Integer> ID;
     List<CardView> forRememberList, questionList, answerList;
 
@@ -49,7 +49,9 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_missing_object_game);
 
         Intent intent = getIntent();
-        level = intent.getIntExtra("level", 0);
+        realLevel = intent.getIntExtra("level", 0);
+
+        level = realLevel;
 
         itemName = "animal_image_";
         row = "complete_status_easy";
@@ -120,7 +122,7 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
             @Override
             public void onClick(View v) {
                 Intent intent = getIntent();
-                intent.putExtra("level", ++level);
+                intent.putExtra("level", ++realLevel);
                 startActivity(intent);
                 finish();
             }
