@@ -172,4 +172,11 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
         db.execSQL("UPDATE "+ table +" SET complete_status=1 WHERE level = " + level);
 
     }
+
+    public void updateCompletedStatus(String table,String row,  int level){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE "+ table +" SET "+ row +" = 1 WHERE level = " + level);
+
+    }
+
 }
