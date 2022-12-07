@@ -21,7 +21,16 @@ public class MemoryActivity extends AppCompatActivity {
     ImageView gridsHighlightComplete, missingObjectComplete, notInPreviousComplete;
 
     private BrainTrainDatabase brainTrainDatabase;
-    private ProgressModel notInPreviousModel, gridsHighlightModel, missingObjectModel;
+    private ProgressModel notInPreviousModel;
+    private ProgressModel gridsHighlightModel;
+
+    private static int missingObjectCurrentScore;
+
+    public static int getMissingObjectCurrentScore() {
+        return missingObjectCurrentScore;
+    }
+
+    private  ProgressModel missingObjectModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +68,8 @@ public class MemoryActivity extends AppCompatActivity {
         }
 
         missingObjectModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 13);
-        missingObjectScore.setText("Điểm của bạn: " + missingObjectModel.getUserScore());
+        missingObjectCurrentScore = missingObjectModel.getUserScore();
+        missingObjectScore.setText("Điểm của bạn: " + missingObjectCurrentScore);
         missingObjectProgress.setText("Đã hoàn thành: " + ((float) missingObjectModel.getUserScore() / (float) missingObjectModel.getMaxScore()) + "%");
         if (missingObjectModel.isCompletedStatus()) {
             missingObjectComplete.setVisibility(View.VISIBLE);

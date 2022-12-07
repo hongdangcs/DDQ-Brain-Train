@@ -21,9 +21,14 @@ import java.util.List;
 public class MissingObjectLevelMenuActivity extends AppCompatActivity implements View.OnClickListener {
 
     private BrainTrainDatabase brainTrainDatabase;
-    private List<MissingObjectModel> missingObjectModels;
+    private static List<MissingObjectModel> missingObjectModels;
     GridLayout missingObjectEasyLevelLayout, missingObjectMediumLevelLayout, missingObjectHardLevelLayout;
     AppCompatButton btn;
+
+    public static List<MissingObjectModel> getMissingObjectModels() {
+        return missingObjectModels;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

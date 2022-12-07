@@ -62,12 +62,11 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
         notInPreviousResultButton.setVisibility(View.INVISIBLE);
 
         ID = new ArrayList<>();
-        for (int i = 1; i < 45; i++) {
+        for (int i = 1; i < 51; i++) {
             ID.add(i);
         }
         Collections.shuffle(ID);
         for (int i = 0; i < ID.size(); i++) {
-
             Log.d(TAG, "-" + ID.get(i));
         }
 
@@ -119,8 +118,7 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
     }
 
     public void checkImageIndex() {
-
-        if (imageIndex == 40) {
+        if (imageIndex == 50) {
             gameFinish();
             notInPreviousInforTextView.setText("Bạn đã hoàn thành trò chơi rất xuất sắc!");
         }
