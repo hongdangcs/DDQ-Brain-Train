@@ -1,19 +1,409 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FlashCardGameActivity">
+    android:background="@color/orange_background"
+    android:orientation="vertical"
+    tools:context=".gameactivity.FlashCardGameActivity">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
+
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:padding="5dp"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/gameNameTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tìm hai vật trùng nhau"
+                android:textColor="@color/very_dark_blue"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/levelTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Cấp độ: 1"
+                android:textColor="@color/navy_blue_color"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/questionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Tìm các cặp có hình bị ẩn giống nhau!"
+                android:textColor="@color/navy_blue_color"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/timeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Thời gian:"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/scoreTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Điểm: "
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+
+                        <androidx.gridlayout.widget.GridLayout
+                            android:id="@+id/flashCardGameLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="5dp"
+                            app:columnCount="4">
+                            <!--
+                                            <androidx.cardview.widget.CardView
+                                                android:id="@+id/imageCardView1"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+                                                android:id="@+id/imageCardView2"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+
+                                                android:id="@+id/imageCardView3"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+                                                android:id="@+id/imageCardView4"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+                                                android:id="@+id/imageCardView5"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+
+                                                android:id="@+id/imageCardView6"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+
+                                                android:id="@+id/imageCardView7"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+
+                                                android:id="@+id/imageCardView8"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+                                                android:id="@+id/imageCardView9"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+
+                                                android:id="@+id/imageCardView10"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+
+                                                android:id="@+id/imageCardView11"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+
+                                                android:id="@+id/imageCardView12"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+
+                                                android:id="@+id/imageCardView13"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+                                                android:id="@+id/imageCardView14"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+                                                android:id="@+id/imageCardView15"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+                                                android:id="@+id/imageCardView16"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+                                                android:id="@+id/imageCardView17"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+                                                android:id="@+id/imageCardView18"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+                                                android:id="@+id/imageCardView19"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                android:visibility="gone"
+                                                app:cardCornerRadius="10dp">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+
+                                            <androidx.cardview.widget.CardView
+                                                android:id="@+id/imageCardView20"
+                                                android:layout_width="74dp"
+                                                android:layout_height="84dp"
+                                                android:layout_margin="3dp"
+                                                app:cardCornerRadius="10dp"
+                                                android:visibility="gone">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    app:srcCompat="@drawable/question_mark_icon" />
+                                            </androidx.cardview.widget.CardView>
+                            -->
+
+                                        </androidx.gridlayout.widget.GridLayout>
+
+                                        <TextView
+                                            android:id="@+id/resultTextView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="@color/orange_background"
+                                            android:backgroundTint="@color/pastel_orange_color"
+                                            android:gravity="center"
+                                            android:text="TextView"
+                                            android:textColor="@color/very_dark_blue"
+                                            android:textSize="20sp"
+                                            android:visibility="visible" />
+
+                                        <androidx.appcompat.widget.AppCompatButton
+                                            android:id="@+id/nextLevelButton"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="màn tiếp theo" />
+
+                                        <androidx.appcompat.widget.AppCompatButton
+                                            android:id="@+id/resultButton"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Kết quả" />
+
+                                        <androidx.appcompat.widget.AppCompatButton
+                                            android:id="@+id/playAgainButton"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="chơi lại màn này" />
+
+                                    </LinearLayout>
+                                </ScrollView>
+
+                            </androidx.appcompat.widget.LinearLayoutCompat>

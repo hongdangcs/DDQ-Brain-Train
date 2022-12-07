@@ -33,9 +33,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:gravity="center"
                 android:text="Tìm con ong"
                 android:textColor="@color/navy_blue_color"
-                android:textSize="16sp" />
+                android:textSize="24sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -78,7 +79,12 @@
                 android:id="@+id/resultTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/orange_background"
+                android:backgroundTint="@color/pastel_orange_color"
+                android:gravity="center"
                 android:text="TextView"
+                android:textColor="@color/very_dark_blue"
+                android:textSize="20sp"
                 android:visibility="visible" />
 
             <Button

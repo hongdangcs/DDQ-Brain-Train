@@ -278,6 +278,7 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
             v.setBackgroundColor(Color.YELLOW);
             Toast.makeText(MissingObjectGameActivity.this, "Câu trả lời Đúng!", Toast.LENGTH_SHORT).show();
             correctAnswer++;
+            v.setClickable(false);
             if(correctAnswer==hideCard){
                 gameCompleted();
             }

@@ -12,7 +12,7 @@ import androidx.gridlayout.widget.GridLayout;
 
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
-import com.ddq.braintrain.FlashCardGameActivity;
+import com.ddq.braintrain.gameactivity.FlashCardGameActivity;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.models.FlashCardModel;
 
@@ -21,9 +21,13 @@ import java.util.List;
 public class FlashCardLevelMenuActivity extends AppCompatActivity implements View.OnClickListener {
 
     private BrainTrainDatabase brainTrainDatabase;
-    private List<FlashCardModel> flashCardModels;
+    private static List<FlashCardModel> flashCardModels;
     GridLayout flashCardEasyLevelLayout, flashCardMediumLevelLayout, flashCardHardLevelLayout;
     AppCompatButton btn;
+
+    public static List<FlashCardModel> getFlashCardModels() {
+        return flashCardModels;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

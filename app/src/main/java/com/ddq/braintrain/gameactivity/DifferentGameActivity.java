@@ -75,6 +75,7 @@ public class DifferentGameActivity extends AppCompatActivity {
 
                     } else {
 
+                        resultTextView.setVisibility(View.VISIBLE);
                         resultTextView.setText("Câu trả lời sai!");
                         Log.d(TAG, "cau tra loi sai "+ x + " "+ y);
                     }
@@ -89,6 +90,7 @@ public class DifferentGameActivity extends AppCompatActivity {
                 level++;
                 gameContinue();
                 nextImageButton.setVisibility(View.INVISIBLE);
+                resultTextView.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -100,18 +102,18 @@ public class DifferentGameActivity extends AppCompatActivity {
 
     public void gameStart(){
         generateImage();
-        startTimer(120000);
+        startTimer(120);
         questionTextView.setText(models.get(level-1).getImageName());
     }
 
     public void gameContinue(){
         generateImage();
-        startTimer(timeLeft*1000);
+        startTimer(timeLeft);
         questionTextView.setText(models.get(level-1).getImageName());
     }
 
     public void startTimer(long timeLeftSecond){
-        timer = new CountDownTimer(timeLeftSecond,1000) {
+        timer = new CountDownTimer(timeLeftSecond*1000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                  timeLeft = millisUntilFinished / 1000;
