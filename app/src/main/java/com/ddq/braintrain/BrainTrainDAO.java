@@ -13,6 +13,7 @@ import com.ddq.braintrain.models.MissingObjectModel;
 import com.ddq.braintrain.models.NotInPreviousModel;
 import com.ddq.braintrain.models.ProgressModel;
 import com.ddq.braintrain.models.SharkBoatModel;
+import com.ddq.braintrain.models.SortingCharGameModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -317,5 +318,27 @@ public class BrainTrainDAO {
         sqLiteDatabase.close();
         return returnList;
     }
+    public List<SortingCharGameModel> sortingCharGameModels(BrainTrainDatabase db) {
+        List<SortingCharGameModel> returnList = new ArrayList<>();
 
+        int id, completeStatus;
+        String word;
+
+        SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
+        String query = "select * from language_game_four";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                id = cursor.getInt(0);
+                word = cursor.getString(1);
+                completeStatus = cursor.getInt(2);
+
+                returnList.add(new SortingCharGameModel(id, word, completeStatus));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return returnList;
+    }
 }
