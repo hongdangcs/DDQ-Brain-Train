@@ -31,9 +31,8 @@ public class CompleteWordGameActivity extends AppCompatActivity {
     private String userInput;
     CountDownTimer timer;
     long timeLeft = START_TIMER, timeRes, totalTimeRes;
-    int score = 0, countWord = 0;
+    int totalScore = 0, score = 0, countWord = 0;
     private char correctLetter;
-    double averageRes = 0, bonusScore = 0, totalScore = 0;
     private TextView txtCompleteWordCount, txtCompleteWordTime, txtCompleteWordScore, txtCompleteWordQuestion, txtCompleteWordNoti;
     AppCompatButton tryAgainButton, submitCompleteWordButton;
     private EditText editCompleteWordAnswer;
@@ -113,7 +112,7 @@ public class CompleteWordGameActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                getTotalScore();
+                totalScore = getTotalScore();
                 timer.cancel();
                 submitCompleteWordButton.setVisibility(View.GONE);
                 editCompleteWordAnswer.setVisibility(View.GONE);
