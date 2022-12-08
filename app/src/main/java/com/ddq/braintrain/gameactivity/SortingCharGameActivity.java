@@ -18,7 +18,7 @@ import java.util.Locale;
 import java.util.Random;
 
 public class SortingCharGameActivity extends AppCompatActivity  {
-    private static final int START_TIMER = 1000;
+    private static final int START_TIMER = 20000;
     CountDownTimer timer;
     long timeLeft = START_TIMER, timeRes, totalTimeRes;
     int score = 0, section = 1;
