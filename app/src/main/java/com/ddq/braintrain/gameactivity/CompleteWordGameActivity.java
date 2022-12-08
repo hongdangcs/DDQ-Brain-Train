@@ -1,6 +1,5 @@
 package com.ddq.braintrain.gameactivity;
 
-import android.content.res.AssetFileDescriptor;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -12,21 +11,14 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.ddq.braintrain.R;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.ddq.braintrain.R;
-
 public class CompleteWordGameActivity extends AppCompatActivity {
-    private final String alphabet = "BCDGHKLMNPQRSTVX";
+    private final String alphabet = "BCDĐGHKLMNPQRSTVX";
     private static final int START_TIMER = 120000;
     private String userInput;
     CountDownTimer timer;
