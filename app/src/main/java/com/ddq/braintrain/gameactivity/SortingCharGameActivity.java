@@ -1,33 +1,24 @@
 package com.ddq.braintrain.gameactivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.R;
-import com.ddq.braintrain.levelmenu.FindOperatorLevelMenuActivity;
 import com.ddq.braintrain.models.SortingCharGameModel;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
 public class SortingCharGameActivity extends AppCompatActivity  {
-    private static final int START_TIMER = 20000;
+    private static final int START_TIMER = 1000;
     CountDownTimer timer;
     long timeLeft = START_TIMER, timeRes, totalTimeRes;
     int score = 0, section = 1;
@@ -75,7 +66,7 @@ public class SortingCharGameActivity extends AppCompatActivity  {
             gameStop();
         } else {
             level++;
-            txtLanguageScore .setText("Điểm: " + timeRes);
+            txtLanguageScore .setText("Điểm: " + score);
             submitButton.setVisibility(View.VISIBLE);
             editAnswer.setVisibility(View.VISIBLE);
             nextLevelButton.setVisibility(View.GONE);
@@ -160,6 +151,7 @@ public class SortingCharGameActivity extends AppCompatActivity  {
 
             @Override
             public void onFinish() {
+                editAnswer.getText().clear();
                 gameStart();
             }
         }.start();
