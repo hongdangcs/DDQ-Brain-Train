@@ -2,6 +2,8 @@ package com.ddq.braintrain.gameactivity;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -54,6 +56,31 @@ public class CompleteWordGameActivity extends AppCompatActivity {
         tryAgainButton.setVisibility(View.GONE);
         txtCompleteWordNoti.setVisibility(View.GONE);
         txtCompleteWordCount.setText("Số câu đúng:" + countWord);
+        submitCompleteWordButton.setEnabled(false);
+        editCompleteWordAnswer.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(s.toString().trim().length()==0){
+                    submitCompleteWordButton.setEnabled(false);
+                } else {
+                    submitCompleteWordButton.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+
+            }
+        });
         String shuffleLetter = shuffle(alphabet);
         Random rnd = new Random();
         correctLetter = shuffleLetter.charAt(rnd.nextInt(shuffleLetter.length()));
@@ -168,6 +195,7 @@ public class CompleteWordGameActivity extends AppCompatActivity {
     public void tryAgain(View view) {
         countWord = 0;
         score = 0;
+        editCompleteWordAnswer.getText().clear();
         gameStart();
     }
 }
