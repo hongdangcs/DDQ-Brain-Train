@@ -14,6 +14,8 @@ import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.models.SortingCharGameModel;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -23,7 +25,7 @@ public class SortingCharGameActivity extends AppCompatActivity  {
     private static final int START_TIMER = 20000;
     CountDownTimer timer;
     long timeLeft = START_TIMER, timeRes, totalTimeRes;
-    int score = 0, section = 1;
+    private int score = 0, section = 1, level = 0, current = 1, index = 0;
     private String correctWord;
     double averageRes = 0, bonusScore = 0, totalScore = 0;
     private TextView textQuestion, txtQId, txtLanguageTime, txtLanguageScore, txtLanguageCompleteNoti, txtLanguageCompleteGame;
@@ -31,7 +33,7 @@ public class SortingCharGameActivity extends AppCompatActivity  {
     private EditText editAnswer;
     private BrainTrainDatabase brainTrainDatabase;
     private static List<SortingCharGameModel> sortingCharGameModels;
-    private int level = 0;
+    private static List<List<SortingCharGameModel>> listQuestions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +51,52 @@ public class SortingCharGameActivity extends AppCompatActivity  {
         txtLanguageCompleteGame.setVisibility(View.GONE);
         brainTrainDatabase = new BrainTrainDatabase(SortingCharGameActivity.this);
         sortingCharGameModels = new BrainTrainDAO().sortingCharGameModels(brainTrainDatabase);
+        separateList();
         gameStart();
 
+    }
+
+    // Separate lists:
+    public void separateList() {
+        Collections.shuffle(sortingCharGameModels);
+        int chunkSize = 10;
+        for (int i = 0; i < sortingCharGameModels.size(); i += chunkSize) {
+            int end = Math.min(sortingCharGameModels.size(), i + chunkSize);
+            listQuestions.add(sortingCharGameModels.subList(i, end));
+        }
+    }
+
+    // Get game question part:
+    public List<SortingCharGameModel> chooseGame(int x){
+        List<SortingCharGameModel> tempList = new ArrayList<>();
+        switch (x) {
+            case 1:
+                for (int i = 0; i < listQuestions.get(0).size(); i++) {
+                    tempList.add(listQuestions.get(0).get(i));
+                }
+                break;
+            case 2:
+                for (int i = 0; i < listQuestions.get(1).size(); i++) {
+                    tempList.add(listQuestions.get(1).get(i));
+                }
+                break;
+            case 3:
+                for (int i = 0; i < listQuestions.get(2).size(); i++) {
+                    tempList.add(listQuestions.get(2).get(i));
+                }
+                break;
+            case 4:
+                for (int i = 0; i < listQuestions.get(3).size(); i++) {
+                    tempList.add(listQuestions.get(3).get(i));
+                }
+                break;
+            case 5:
+                for (int i = 0; i < listQuestions.get(4).size(); i++) {
+                    tempList.add(listQuestions.get(4).get(i));
+                }
+                break;
+        }
+        return tempList;
     }
 
     // Game section:
@@ -65,6 +111,7 @@ public class SortingCharGameActivity extends AppCompatActivity  {
             bonusScore = 0;
             score = 0;
             totalScore = 0;
+            index = 0;
             gameStop();
         } else {
             level++;
@@ -84,31 +131,30 @@ public class SortingCharGameActivity extends AppCompatActivity  {
                         submitButton.setEnabled(true);
                     }
                 }
-
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count,
-                                              int after) {
-                    // TODO Auto-generated method stub
-
-                }
-
+                                              int after) {}
                 @Override
-                public void afterTextChanged(Editable s) {
-                    // TODO Auto-generated method stub
-
-                }
+                public void afterTextChanged(Editable s) {}
             });
-            for (int i = 0; i < sortingCharGameModels.size(); i++) {
-                Collections.shuffle(sortingCharGameModels);
-                txtQId.setText("Câu "+level);
-                correctWord = sortingCharGameModels.get(i).getWord();
-                String word = correctWord;
-                word = word.replaceAll(" ", "").trim();
-                Random r = new Random();
-                word = scramble(r, word);
-                word = word.replaceAll(".(?=.)", "$0 ");
-                textQuestion.setText(word);
-            }
+//            for (int i = 0; i < chooseGame(current).size(); i++) {
+//                txtQId.setText("Câu "+level);
+//                correctWord = chooseGame(current).get(i).getWord();
+//                String word = correctWord;
+//                word = word.replaceAll(" ", "").trim();
+//                Random r = new Random();
+//                word = scramble(r, word);
+//                word = word.replaceAll(".(?=.)", "$0 ");
+//                textQuestion.setText(word);
+//            }
+            txtQId.setText("Câu "+level);
+            correctWord = chooseGame(current).get(index).getWord();
+            String word = correctWord;
+            word = word.replaceAll(" ", "").trim();
+            Random r = new Random();
+            word = scramble(r, word);
+            word = word.replaceAll(".(?=.)", "$0 ");
+            textQuestion.setText(word);
             startTimer();
         }
     }
@@ -179,6 +225,7 @@ public class SortingCharGameActivity extends AppCompatActivity  {
             @Override
             public void onFinish() {
                 editAnswer.getText().clear();
+                index = index + 1;
                 gameStart();
             }
         }.start();
@@ -213,6 +260,7 @@ public class SortingCharGameActivity extends AppCompatActivity  {
             getTimeRes();
             updateScore();
             editAnswer.getText().clear();
+            index = index + 1;
             gameStart();
         }
         else {
@@ -224,7 +272,9 @@ public class SortingCharGameActivity extends AppCompatActivity  {
     public void nextSection(View view) {
         if (section <= 4){
             section = section + 1;
+            current = current + 1;
             level = 0;
+            index = 0;
             gameStart();
         } else {
             nextLevelButton.setVisibility(View.GONE);
@@ -232,6 +282,7 @@ public class SortingCharGameActivity extends AppCompatActivity  {
             submitButton.setVisibility(View.GONE);
             editAnswer.setVisibility(View.GONE);
             txtLanguageCompleteGame.setVisibility(View.VISIBLE);
+            Collections.shuffle(sortingCharGameModels);
         }
     }
 }
