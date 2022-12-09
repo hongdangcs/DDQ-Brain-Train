@@ -2,6 +2,8 @@ package com.ddq.braintrain.gameactivity;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -71,6 +73,31 @@ public class SortingCharGameActivity extends AppCompatActivity  {
             editAnswer.setVisibility(View.VISIBLE);
             nextLevelButton.setVisibility(View.GONE);
             txtLanguageCompleteNoti.setVisibility(View.GONE);
+            submitButton.setEnabled(false);
+            editAnswer.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    if(s.toString().trim().length()==0){
+                        submitButton.setEnabled(false);
+                    } else {
+                        submitButton.setEnabled(true);
+                    }
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count,
+                                              int after) {
+                    // TODO Auto-generated method stub
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    // TODO Auto-generated method stub
+
+                }
+            });
             for (int i = 0; i < sortingCharGameModels.size(); i++) {
                 Collections.shuffle(sortingCharGameModels);
                 txtQId.setText("Câu "+level);
