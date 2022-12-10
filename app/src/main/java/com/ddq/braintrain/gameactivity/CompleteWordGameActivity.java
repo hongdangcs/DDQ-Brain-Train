@@ -61,7 +61,7 @@ public class CompleteWordGameActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(s.toString().trim().length()==0){
+                if(s.toString().trim().length()<2){
                     submitCompleteWordButton.setEnabled(false);
                 } else {
                     submitCompleteWordButton.setEnabled(true);
