@@ -24,6 +24,7 @@ import com.ddq.braintrain.models.FlashCardModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class FlashCardGameActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -135,18 +136,23 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
         level = intent.getIntExtra("level", 0);
         levelTextView.setText("Level: " + level);
 
-        itemName = "animal_image_";
+        int library = (new Random()).nextInt(2);
+
+        if(library ==0){
+
+            itemName = "animal_image_";
+        } else{
+            itemName = "fruit_";
+        }
         if (level > 100 && level < 200) {
             level = level - 100;
             itemName = "transportation_item_";
-//            row = "complete_status_medium";
 
         }
 
         if (level > 1000) {
             level = level - 1000;
             itemName = "household_";
-            //row = "complete_status_hard";
 
         }
 
@@ -313,7 +319,9 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
         cardView.setId(imageIndex);
         // image.setImageResource(getResources().getIdentifier(itemName + ID, "drawable", getPackageName()));
         image.setImageResource(getResources().getIdentifier("question_mark_icon", "drawable", getPackageName()));
+        image.setScaleType(ImageView.ScaleType.CENTER_CROP);
         cardView.addView(image);
+
 //        cardView.setOnClickListener(FlashCardGameActivity.this);
         cardViewList.add(cardView);
         Log.d(TAG, " card tag " + cardView.getTag() + " card id(thu tu) " + cardView.getId());
@@ -337,6 +345,7 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
                     cardView.removeAllViews();
                     image = new ImageView(FlashCardGameActivity.this);
                     image.setImageResource(getResources().getIdentifier(itemName + cardView.getTag(), "drawable", getPackageName()));
+                    image.setScaleType(ImageView.ScaleType.FIT_CENTER);
                     cardView.addView(image);
                     Log.d(TAG, cardView.getId() + "card view clicked");
 
@@ -360,6 +369,7 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
                             }
                             image = new ImageView(FlashCardGameActivity.this);
                             image.setImageResource(R.drawable.question_mark_icon);
+                            image.setScaleType(ImageView.ScaleType.CENTER_CROP);
                             if (image.getParent() != null) {
                                 ((ViewGroup) image.getParent()).removeView(image);
                             }
@@ -373,7 +383,7 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
                                         cardView2.setClickable(true);
                                     }
                                 }
-                            }, 700);
+                            }, 350);
                         }
 
                     } else {
@@ -403,6 +413,7 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
                 cardView.removeAllViews();
                 image = new ImageView(FlashCardGameActivity.this);
                 image.setImageResource(R.drawable.question_mark_icon);
+                image.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 cardView.addView(image);
                 cardView.setClickable(true);
             }
