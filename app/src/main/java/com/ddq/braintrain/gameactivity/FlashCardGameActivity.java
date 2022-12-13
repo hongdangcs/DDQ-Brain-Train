@@ -4,12 +4,13 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -23,8 +24,9 @@ import com.ddq.braintrain.models.FlashCardModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
-public class FlashCardGameActivity extends AppCompatActivity  {
+public class FlashCardGameActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static List<FlashCardModel> flashCardModels;
 
@@ -33,17 +35,18 @@ public class FlashCardGameActivity extends AppCompatActivity  {
     GridLayout flashCardGameLayout;
     CardView cardView;
     ImageView image;
-
+/*
     CardView imageCardView1, imageCardView2, imageCardView3, imageCardView4, imageCardView5, imageCardView6,
             imageCardView7, imageCardView8, imageCardView9, imageCardView10,
             imageCardView11, imageCardView12, imageCardView13, imageCardView14, imageCardView15,
-            imageCardView16, imageCardView17, imageCardView18, imageCardView19, imageCardView20;
+            imageCardView16, imageCardView17, imageCardView18, imageCardView19, imageCardView20;*/
 
-    int level, pair, time, score;
+    int level, pair, time, score, remainingPair, imageIndex;
     List<Integer> ID;
     String itemName;
-    List<CardView> cardViewList, appearCardViewList;
-    List<CardView> clicked;
+    List<CardView> cardViewList;
+    boolean isOpen = false;
+    int openCard;
 
 
     @Override
@@ -83,7 +86,7 @@ public class FlashCardGameActivity extends AppCompatActivity  {
         imageCardView19 = findViewById(R.id.imageCardView19);
         imageCardView20 = findViewById(R.id.imageCardView20);*/
 
-        imageCardView1 = new CardView(FlashCardGameActivity.this);
+/*        imageCardView1 = new CardView(FlashCardGameActivity.this);
         imageCardView2 = new CardView(FlashCardGameActivity.this);
         imageCardView3 = new CardView(FlashCardGameActivity.this);
         imageCardView4 = new CardView(FlashCardGameActivity.this);
@@ -102,7 +105,7 @@ public class FlashCardGameActivity extends AppCompatActivity  {
         imageCardView17 = new CardView(FlashCardGameActivity.this);
         imageCardView18 = new CardView(FlashCardGameActivity.this);
         imageCardView19 = new CardView(FlashCardGameActivity.this);
-        imageCardView20 = new CardView(FlashCardGameActivity.this);
+        imageCardView20 = new CardView(FlashCardGameActivity.this);*/
 
         resultTextView.setVisibility(View.GONE);
         nextLevelButton.setVisibility(View.GONE);
@@ -133,28 +136,36 @@ public class FlashCardGameActivity extends AppCompatActivity  {
         level = intent.getIntExtra("level", 0);
         levelTextView.setText("Level: " + level);
 
-        itemName = "animal_image_";
+        int library = (new Random()).nextInt(2);
+
+        if(library ==0){
+
+            itemName = "animal_image_";
+        } else{
+            itemName = "fruit_";
+        }
         if (level > 100 && level < 200) {
             level = level - 100;
             itemName = "transportation_item_";
-//            row = "complete_status_medium";
 
         }
 
         if (level > 1000) {
             level = level - 1000;
-            itemName = "transportation_item_";
-            //row = "complete_status_hard";
+            itemName = "household_";
 
         }
 
-        int pair = flashCardModels.get(level - 1).getPair();
-        int time = flashCardModels.get(level - 1).getTime();
-        int score = flashCardModels.get(level - 1).getScore();
+        pair = flashCardModels.get(level - 1).getPair();
+        time = flashCardModels.get(level - 1).getTime();
+        score = flashCardModels.get(level - 1).getScore();
+        remainingPair = pair;
         cardViewList = new ArrayList<>();
-        appearCardViewList = new ArrayList<>();
-        clicked = new ArrayList<>();
+        imageIndex = 1;
 
+
+//        v = new View(FlashCardGameActivity.this);
+/*
       cardViewList.add(imageCardView1);
         cardViewList.add(imageCardView2);
         cardViewList.add(imageCardView3);
@@ -174,7 +185,7 @@ public class FlashCardGameActivity extends AppCompatActivity  {
         cardViewList.add(imageCardView17);
         cardViewList.add(imageCardView18);
         cardViewList.add(imageCardView19);
-        cardViewList.add(imageCardView20);
+        cardViewList.add(imageCardView20);*/
 
 
         ID = new ArrayList<>();
@@ -183,17 +194,19 @@ public class FlashCardGameActivity extends AppCompatActivity  {
         }
         Collections.shuffle(ID);
 
-        for(int i = 0; i< pair; i++){
-            cardViewList.get(i).setId(ID.get(i+5));
-            cardViewList.get(i+pair).setId(ID.get(i+5));
+        for (int i = 0; i < pair; i++) {
+            generateCardView(ID.get(i));
+            generateCardView(ID.get(i));
 
-            appearCardViewList.add(cardViewList.get(i));
-            appearCardViewList.add(cardViewList.get(i+pair));
         }
 
-        Collections.shuffle(appearCardViewList);
+        generateGameLayout();
 
-        for( CardView cardView : appearCardViewList){
+        setCardViewOnClickListener(cardViewList);
+
+        // Collections.shuffle(cardViewList);
+/*
+        for( CardView cardView : cardViewList){
             image = new ImageView(FlashCardGameActivity.this);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(230, 280);
             image.setImageResource(getResources().getIdentifier("question_mark_icon", "drawable", getPackageName()));
@@ -229,11 +242,11 @@ public class FlashCardGameActivity extends AppCompatActivity  {
 //                            clicked.clear();
                         }
 
-                    }*/
+
                     Log.d(TAG, cardView.getId() + "card view clicked");
                 }
-            });
-        }
+            });*/
+    }
 
 /*
         for (CardView card: appearCardViewList){
@@ -282,8 +295,8 @@ public class FlashCardGameActivity extends AppCompatActivity  {
                 imageCardView4.addView(image);
                 Log.d(TAG, imageCardView4.getId() + "card view 1 clicked");
             }
-        });*/
-    }
+        });
+    }*/
 /*
         for (int j = 1; j <= pair; j++) {
             generateCardView(j, ID.get(j));
@@ -294,8 +307,8 @@ public class FlashCardGameActivity extends AppCompatActivity  {
 
 */
 //    }
-/*
-    public void generateCardView(int imageIndex, int ID) {
+
+    public void generateCardView(int ID) {
         cardView = new CardView(FlashCardGameActivity.this);
         image = new ImageView(FlashCardGameActivity.this);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(230, 280);
@@ -303,26 +316,123 @@ public class FlashCardGameActivity extends AppCompatActivity  {
         cardView.setLayoutParams(params);
         cardView.setRadius(70);
         cardView.setTag(ID);
+        cardView.setId(imageIndex);
         // image.setImageResource(getResources().getIdentifier(itemName + ID, "drawable", getPackageName()));
         image.setImageResource(getResources().getIdentifier("question_mark_icon", "drawable", getPackageName()));
+        image.setScaleType(ImageView.ScaleType.CENTER_CROP);
         cardView.addView(image);
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                image.setImageResource(getResources().getIdentifier(itemName + ID, "drawable", getPackageName()));
-                cardView.addView(image);
-            }
-        });
-        cardViewList.add(cardView);
 
-        Log.d(TAG, ID + " " + cardView.getTag());
+//        cardView.setOnClickListener(FlashCardGameActivity.this);
+        cardViewList.add(cardView);
+        Log.d(TAG, " card tag " + cardView.getTag() + " card id(thu tu) " + cardView.getId());
+        imageIndex++;
     }
 
     public void generateGameLayout() {
         Collections.shuffle(cardViewList);
         for (CardView cardView : cardViewList) {
             flashCardGameLayout.addView(cardView);
+            Log.d(TAG, " card tag " + cardView.getTag() + " card id(thu tu) " + cardView.getId());
         }
     }
-*/
+
+    public void setCardViewOnClickListener(List<CardView> cardViewList) {
+        for (CardView cardView : cardViewList) {
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    cardView.removeAllViews();
+                    image = new ImageView(FlashCardGameActivity.this);
+                    image.setImageResource(getResources().getIdentifier(itemName + cardView.getTag(), "drawable", getPackageName()));
+                    image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                    cardView.addView(image);
+                    Log.d(TAG, cardView.getId() + "card view clicked");
+
+                    if (isOpen) {
+                        isOpen = false;
+                        if (openCard == (int) cardView.getTag()) {
+                            remainingPair--;
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    cardView.setClickable(false);
+                                    closeCardView((int) cardView.getTag());
+                                    if (remainingPair == 0) gameFinish();
+                                }
+                            }, 700);
+                            Log.d(TAG, "Con lai: " + remainingPair);
+
+                        } else {
+                            for(CardView cardView1: cardViewList){
+                                cardView1.setClickable(false);
+                            }
+                            image = new ImageView(FlashCardGameActivity.this);
+                            image.setImageResource(R.drawable.question_mark_icon);
+                            image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                            if (image.getParent() != null) {
+                                ((ViewGroup) image.getParent()).removeView(image);
+                            }
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    cardView.removeAllViews();
+                                    cardView.addView(image);
+                                    closeOpenCard(openCard);
+                                    for(CardView cardView2: cardViewList){
+                                        cardView2.setClickable(true);
+                                    }
+                                }
+                            }, 350);
+                        }
+
+                    } else {
+                        cardView.setClickable(false);
+                        isOpen = true;
+                        openCard = (int) cardView.getTag();
+                        Log.d(TAG, "card view " + openCard);
+
+                    }
+
+                }
+            });
+        }
+    }
+
+    public void closeCardView(int cardTag) {
+        for (CardView cardView : cardViewList) {
+            if (cardTag == (int) cardView.getTag()) {
+                cardView.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    public void closeOpenCard(int cardTag) {
+        for (CardView cardView : cardViewList) {
+            if (cardTag == (int) cardView.getTag()) {
+                cardView.removeAllViews();
+                image = new ImageView(FlashCardGameActivity.this);
+                image.setImageResource(R.drawable.question_mark_icon);
+                image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                cardView.addView(image);
+                cardView.setClickable(true);
+            }
+        }
+    }
+
+    public void gameFinish() {
+        for (CardView cardView : cardViewList) {
+            cardView.setVisibility(View.GONE);
+
+        }
+
+        resultTextView.setVisibility(View.VISIBLE);
+        nextLevelButton.setVisibility(View.VISIBLE);
+        resultButton.setVisibility(View.VISIBLE);
+        playAgainButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onClick(View v) {
+    }
 }

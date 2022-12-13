@@ -9,7 +9,6 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,6 +27,7 @@ import com.ddq.braintrain.levelmenu.MissingObjectLevelMenuActivity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class MissingObjectGameActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -52,7 +52,7 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         realLevel = intent.getIntExtra("level", 0);
 
         level = realLevel;
-
+/*
         itemName = "animal_image_";
         row = "complete_status_easy";
 
@@ -69,6 +69,29 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
             itemName = "transportation_item_";        row = "complete_status_hard";
 
         }
+
+*/
+        int library = (new Random()).nextInt(2);
+        row = "complete_status_easy";
+        if (library == 0) {
+
+            itemName = "animal_image_";
+        } else {
+            itemName = "fruit_";
+        }
+        if (level > 100 && level < 200) {
+            level = level - 100;
+            itemName = "transportation_item_";
+            row = "complete_status_medium";
+
+        }
+
+        if (level > 1000) {
+            level = level - 1000;
+            itemName = "household_";
+            row = "complete_status_hard";
+        }
+
 
         userScore = MemoryActivity.getMissingObjectCurrentScore();
 
@@ -98,7 +121,7 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         hideCard = MissingObjectLevelMenuActivity.getMissingObjectModels().get(level - 1).getHideCard();
         time = MissingObjectLevelMenuActivity.getMissingObjectModels().get(level - 1).getTime();
 
-        missingObjectLevelTextView.setText("Cấp độ: "+ level);
+        missingObjectLevelTextView.setText("Cấp độ: " + level);
 
         ID = new ArrayList<>();
         for (int i = 1; i < 51; i++) {
@@ -215,15 +238,15 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         missingObjectRememberSetGameLayout.removeAllViews();
         generateLayout(questionList, missingObjectQuestionSetGameLayout);
         generateLayout(answerList, missingObjectAnswerSetGameLayout);
-        for(int i=0;i<answerList.size(); i++){
-            for(CardView cardView : answerList){
+        for (int i = 0; i < answerList.size(); i++) {
+            for (CardView cardView : answerList) {
                 cardView.setClickable(true);
             }
         }
         gamePlayTimer();
     }
 
-    public void gamePlayTimer(){
+    public void gamePlayTimer() {
         timer = new CountDownTimer(60000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -240,10 +263,10 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         }.start();
     }
 
-    public void gameFinish(){
+    public void gameFinish() {
         timer.cancel();
-        for(int i=0;i<answerList.size(); i++){
-            for(CardView cardView : answerList){
+        for (int i = 0; i < answerList.size(); i++) {
+            for (CardView cardView : answerList) {
                 cardView.setClickable(false);
             }
         }
@@ -252,10 +275,10 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         missingObjectResultButton.setVisibility(View.VISIBLE);
     }
 
-    public void gameCompleted(){
+    public void gameCompleted() {
         timer.cancel();
-        for(int i=0;i<answerList.size(); i++){
-            for(CardView cardView : answerList){
+        for (int i = 0; i < answerList.size(); i++) {
+            for (CardView cardView : answerList) {
                 cardView.setClickable(false);
             }
         }
@@ -265,24 +288,24 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         missingObjectNextLevelButton.setVisibility(View.VISIBLE);
 
         BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(MissingObjectGameActivity.this);
-        brainTrainDatabase.updateUserScore(11, userScore+MissingObjectLevelMenuActivity.getMissingObjectModels().get(level - 1).getScore());
-        brainTrainDatabase.updateCompletedStatus("memory_game_three",row, level);
+        brainTrainDatabase.updateUserScore(11, userScore + MissingObjectLevelMenuActivity.getMissingObjectModels().get(level - 1).getScore());
+        brainTrainDatabase.updateCompletedStatus("memory_game_three", row, level);
 
 
     }
 
     @Override
     public void onClick(View v) {
-        if(v.getTag().toString().equals("correctAns")){
+        if (v.getTag().toString().equals("correctAns")) {
             //v.setVisibility(View.GONE);
             v.setBackgroundColor(Color.YELLOW);
             Toast.makeText(MissingObjectGameActivity.this, "Câu trả lời Đúng!", Toast.LENGTH_SHORT).show();
             correctAnswer++;
             v.setClickable(false);
-            if(correctAnswer==hideCard){
+            if (correctAnswer == hideCard) {
                 gameCompleted();
             }
-        } else{
+        } else {
             Toast.makeText(MissingObjectGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_SHORT).show();
             gameFinish();
             missingObjectCompleteNotiTextView.setText("Bạn đã chọn sai hình!");

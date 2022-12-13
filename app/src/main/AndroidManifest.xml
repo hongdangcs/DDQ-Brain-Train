@@ -6,9 +6,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/memory"
+        android:icon="@drawable/logo_old"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/memory"
+        android:roundIcon="@drawable/logo_old"
         android:supportsRtl="true"
         android:theme="@style/Theme.BrainTrain"
         tools:targetApi="31">
