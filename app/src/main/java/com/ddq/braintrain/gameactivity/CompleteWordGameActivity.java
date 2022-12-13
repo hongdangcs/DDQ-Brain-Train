@@ -27,7 +27,7 @@ public class CompleteWordGameActivity extends AppCompatActivity {
     long timeLeft = START_TIMER, timeRes, totalTimeRes;
     int totalScore = 0, score = 0, countWord = 0;
     private char correctLetter;
-    private TextView txtCompleteWordCount, txtCompleteWordTime, txtCompleteWordScore, txtCompleteWordQuestion, txtCompleteWordNoti;
+    private TextView txtCompleteWordCount, txtCompleteWordTime, txtCompleteWordScore, txtCompleteWordQuestion, txtCompleteWordNoti, txtCompleteWordError;
     AppCompatButton tryAgainButton, submitCompleteWordButton;
     private EditText editCompleteWordAnswer;
 
@@ -44,6 +44,7 @@ public class CompleteWordGameActivity extends AppCompatActivity {
         editCompleteWordAnswer = findViewById(R.id.editCompleteWordAnswer);
         tryAgainButton = findViewById(R.id.tryAgainButton);
         submitCompleteWordButton = findViewById(R.id.submitCompleteWordButton);
+        txtCompleteWordError = findViewById(R.id.txtCompleteWordError);
 
         gameStart();
     }
@@ -55,6 +56,7 @@ public class CompleteWordGameActivity extends AppCompatActivity {
         editCompleteWordAnswer.setVisibility(View.VISIBLE);
         tryAgainButton.setVisibility(View.GONE);
         txtCompleteWordNoti.setVisibility(View.GONE);
+        txtCompleteWordError.setVisibility(View.GONE);
         txtCompleteWordCount.setText("Số câu đúng:" + countWord);
         submitCompleteWordButton.setEnabled(false);
         editCompleteWordAnswer.addTextChangedListener(new TextWatcher() {
@@ -182,6 +184,14 @@ public class CompleteWordGameActivity extends AppCompatActivity {
         userInput = editCompleteWordAnswer.getText().toString();
         char firstChar = userInput.charAt(0);
         if (Character.toUpperCase(firstChar) == correctLetter && spellingCheck(userInput) == true){
+            for (char c : userInput.toCharArray()) {
+                txtCompleteWordError.setVisibility(View.GONE);
+                editCompleteWordAnswer.getText().clear();
+                if (c == ' ') {
+                    txtCompleteWordError.setVisibility(View.VISIBLE);
+                    return;
+                }
+            }
             updateScore();
             countWord = countWord + 1;
             txtCompleteWordCount.setText("Số câu đúng: " + countWord);

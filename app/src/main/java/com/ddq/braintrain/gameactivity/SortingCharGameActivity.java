@@ -53,7 +53,6 @@ public class SortingCharGameActivity extends AppCompatActivity  {
         sortingCharGameModels = new BrainTrainDAO().sortingCharGameModels(brainTrainDatabase);
         separateList();
         gameStart();
-
     }
 
     // Separate lists:

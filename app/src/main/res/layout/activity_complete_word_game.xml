@@ -76,12 +76,24 @@
         android:hint="Nhập câu trả lời"
         android:text="" />
 
+    <TextView
+        android:id="@+id/txtCompleteWordError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Bạn chỉ được nhập MỘT từ!"
+        android:textColor="@color/Red"
+        android:background="@color/golden_yellow_laminate_color"
+        android:textSize="16dp"
+        android:paddingTop="20dp"
+        android:layout_margin="10dp"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submitCompleteWordButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hoàn thành"
-        android:layout_marginTop="20dp"
         android:padding="20dp"
         android:background="@color/mint_green_color"
         android:onClick="Submit"/>
