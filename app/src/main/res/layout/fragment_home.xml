@@ -20,7 +20,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:paddingTop="14dp"
             android:text="Loại trò chơi"
             android:textSize="25sp"
             android:textStyle="bold" />
