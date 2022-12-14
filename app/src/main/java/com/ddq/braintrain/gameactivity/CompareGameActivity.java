@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.levelmenu.CompareLevelMenuActivity;
 import com.ddq.braintrain.levelmenu.GridsHighlightLevelMenuActivity;
@@ -74,6 +75,10 @@ public class CompareGameActivity extends AppCompatActivity {
                 UpdateTimer();
                 count = 0;
             }
+            BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(CompareGameActivity.this);
+            brainTrainDatabase.updateUserScore(11, score);
+            int temp = level-1;
+            brainTrainDatabase.updateCompletedStatus("math_game_one", temp);
             level = level + 1;
             score = score + point;
             if(level == 101){
@@ -101,6 +106,10 @@ public class CompareGameActivity extends AppCompatActivity {
                 UpdateTimer();
                 count = 0;
             }
+            BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(CompareGameActivity.this);
+            brainTrainDatabase.updateUserScore(11, score);
+            int temp = level-1;
+            brainTrainDatabase.updateCompletedStatus("math_game_one", temp);
             level = level + 1;
             score = score + point;
             if(level == 101){

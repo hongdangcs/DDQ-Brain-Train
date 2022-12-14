@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.levelmenu.FindOperatorLevelMenuActivity;
 
@@ -436,26 +437,35 @@ public class FindOperatorGameActivity extends AppCompatActivity {
 
     public void checkSelect(){
         if(select1 + select2 == 10 || select1 + select2 == 100 || select1+select2 == 1000){
-            Toast.makeText(FindOperatorGameActivity.this, "Câu trả lời Đúng!", Toast.LENGTH_LONG).show();
+            Toast.makeText(FindOperatorGameActivity.this, "Câu trả lời Đúng!", Toast.LENGTH_SHORT).show();
             totalSelect = -1;
             pauseTimer();
             level++;
             if(text.equals("ten")){
                 score = score + point1;
+                BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(FindOperatorGameActivity.this);
+                brainTrainDatabase.updateUserScore(11, score);
+                brainTrainDatabase.updateCompletedStatus("math_game_two_multiple_of_ten", level);
             }
             if(text.equals("hundred")){
                 score = score + point2;
+                BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(FindOperatorGameActivity.this);
+                brainTrainDatabase.updateUserScore(11, score);
+                brainTrainDatabase.updateCompletedStatus("math_game_two_multiple_of_hundred", level);
             }
 
             if(text.equals("thousand")){
                 score = score + point3;
+                BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(FindOperatorGameActivity.this);
+                brainTrainDatabase.updateUserScore(11, score);
+                brainTrainDatabase.updateCompletedStatus("math_game_two_multiple_of_thousand", level);
             }
 
             updateScore(score);
             gameStart(level);
         }
         else{
-            Toast.makeText(FindOperatorGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_LONG).show();
+            Toast.makeText(FindOperatorGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_SHORT).show();
             if(temp1.equals("option1") || temp2.equals("option1")){
                 Option1.setBackgroundColor(0xFF3a378e);
             }
