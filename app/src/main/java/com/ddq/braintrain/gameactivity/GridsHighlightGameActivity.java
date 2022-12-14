@@ -250,7 +250,7 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
         pauseTimer();
         String btnTag = v.getTag().toString();
         if (btnTag.equals("true")) {
-            Toast.makeText(GridsHighlightGameActivity.this, "Câu trả lời Đúng!", Toast.LENGTH_LONG).show();
+            Toast.makeText(GridsHighlightGameActivity.this, "Câu trả lời Đúng!", Toast.LENGTH_SHORT).show();
             v.setBackgroundDrawable(ContextCompat.getDrawable(GridsHighlightGameActivity.this, R.drawable.grid_tile_highlight));
             updateScore();
             trueAns++;
@@ -262,7 +262,7 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
                 else gameFinish();
             }
         } else {
-            Toast.makeText(GridsHighlightGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_LONG).show();
+            Toast.makeText(GridsHighlightGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_SHORT).show();
             updateTrials();
         }
     }
