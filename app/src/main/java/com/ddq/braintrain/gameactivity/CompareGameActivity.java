@@ -45,12 +45,13 @@ public class CompareGameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         level = intent.getIntExtra("level", 0);
         textView.setText("Level: " + level);
-        gameStart(level);
+        gameStart(level-1);
 
     }
 
     public void generate(int level){
-        textView.setText("Cấp độ: " + level);
+        int temp = level + 1;
+        textView.setText("Cấp độ: " + temp);
         updateScore(score);
         String ExpressionText1 = CompareLevelMenuActivity.getCompareModels().get(level).getExpression1();
         Expression1.setText(ExpressionText1);
@@ -75,7 +76,12 @@ public class CompareGameActivity extends AppCompatActivity {
             }
             level = level + 1;
             score = score + point;
-            generate(level);
+            if(level == 101){
+                gameEnd();
+            }
+            else {
+                generate(level-1);
+            }
         }
         else{
             Expression1.setBackgroundColor(0xFFFF0000);
@@ -97,7 +103,12 @@ public class CompareGameActivity extends AppCompatActivity {
             }
             level = level + 1;
             score = score + point;
-            generate(level);
+            if(level == 101){
+                gameEnd();
+            }
+            else {
+                generate(level-1);
+            }
         }
         else{
             Expression2.setBackgroundColor(0xFFFF0000);
@@ -171,6 +182,20 @@ public class CompareGameActivity extends AppCompatActivity {
         pauseTimer();
         finish();
     }
+
+    public void gameEnd(){
+        CompareCompleteNotiTextView.setVisibility(View.VISIBLE);
+        CompareCompleteNotiTextView.setText("Hoàn Thành");
+        resultButton.setVisibility(View.VISIBLE);
+        Expression1.setClickable(false);
+        Expression2.setClickable(false);
+
+    }
+
+    public void back(){
+        finish();
+    }
+
 
 
 }

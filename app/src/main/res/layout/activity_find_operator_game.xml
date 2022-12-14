@@ -159,7 +159,8 @@
         android:id="@+id/resultButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Kết quả" />
+        android:text="trở về trang chính"
+        android:onClick="Back"/>
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

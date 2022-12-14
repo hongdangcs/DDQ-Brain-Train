@@ -3,6 +3,7 @@ package com.ddq.braintrain.gameactivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -484,5 +485,9 @@ public class FindOperatorGameActivity extends AppCompatActivity {
             select2 = 0;
 //            generate(level);
         }
+    }
+
+    public void back(){
+        finish();
     }
 }
