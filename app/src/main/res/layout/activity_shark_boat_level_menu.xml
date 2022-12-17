@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        app:srcCompat="@drawable/sharkboatbackground"
+        app:srcCompat="@drawable/shark_boat_game_background"
         android:scaleType="centerCrop"
         />
 
@@ -27,20 +27,102 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/sharkBoatLevelLayout"
+    <!--
+    <LinearLayout
+        android:id="@+id/levelName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="5dp"
-        app:columnCount="5"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:layout_weight="1"
+            android:background="#6A0098D4"
+            android:padding="8dp"
+            android:text="Level"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_weight="1"
+            android:background="#6A0098D4"
+            android:padding="8dp"
+            android:text="Kỉ lục"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sharkBoatLevelLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/levelName" />
+
+
+        <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/sharkBoatLevelLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            app:columnCount="5"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+        </androidx.gridlayout.widget.GridLayout>
+ -->
+
+    <TableLayout
+        android:id="@+id/table_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider"
+        android:gravity="center"
+        android:showDividers="middle"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-    </androidx.gridlayout.widget.GridLayout>
+        <TableRow>
+
+            <TextView
+                android:id="@+id/level_column"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#008577"
+                android:fontFamily="sans-serif-medium"
+                android:padding="8dp"
+                android:text="Level"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/score_column"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#008577"
+                android:fontFamily="sans-serif-medium"
+                android:padding="8dp"
+                android:text="Score"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+        </TableRow>
+
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
