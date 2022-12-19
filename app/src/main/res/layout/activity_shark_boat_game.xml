@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".gameactivity.SharkBoatGameActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/shark_boat_game_background"
+        android:scaleType="centerCrop"
+        />
 
     <TextView
         android:id="@+id/textView12"
@@ -14,4 +23,4 @@
         android:textSize="50dp"
         tools:layout_editor_absoluteX="154dp"
         tools:layout_editor_absoluteY="320dp" />
-</LinearLayout>
+</RelativeLayout>
