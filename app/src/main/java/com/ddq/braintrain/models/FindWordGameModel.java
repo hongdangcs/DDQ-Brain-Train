@@ -1,5 +1,7 @@
 package com.ddq.braintrain.models;
 
+import androidx.annotation.NonNull;
+
 public class FindWordGameModel {
     private int id;
     private String word;
@@ -33,5 +35,14 @@ public class FindWordGameModel {
 
     public void setComplete_status(int complete_status) {
         this.complete_status = complete_status;
+    }
+
+    @Override
+    public String toString() {
+        return "FindWordGameModel{" +
+                "id=" + id +
+                ", word='" + word + '\'' +
+                ", complete_status=" + complete_status +
+                '}';
     }
 }
