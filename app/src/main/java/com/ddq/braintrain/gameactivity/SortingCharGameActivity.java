@@ -136,16 +136,6 @@ public class SortingCharGameActivity extends AppCompatActivity  {
                 @Override
                 public void afterTextChanged(Editable s) {}
             });
-//            for (int i = 0; i < chooseGame(current).size(); i++) {
-//                txtQId.setText("Câu "+level);
-//                correctWord = chooseGame(current).get(i).getWord();
-//                String word = correctWord;
-//                word = word.replaceAll(" ", "").trim();
-//                Random r = new Random();
-//                word = scramble(r, word);
-//                word = word.replaceAll(".(?=.)", "$0 ");
-//                textQuestion.setText(word);
-//            }
             txtQId.setText("Câu "+level);
             correctWord = chooseGame(current).get(index).getWord();
             String word = correctWord;
