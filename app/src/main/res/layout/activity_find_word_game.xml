@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="6dp"
-        android:text="Tìm từ bắt đầu bằng một chữ cái" />
+        android:text="Tìm từ ghép có 2 tiếng bắt đầu bằng một chữ cái" />
 
     <LinearLayout
         android:layout_width="match_parent"

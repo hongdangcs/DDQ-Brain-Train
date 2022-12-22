@@ -57,18 +57,23 @@ public class FindWordGameActivity extends AppCompatActivity {
     // Game section:
     private void gameStart() {
         txtFindWordScore.setText("Điểm: " + score);
-        submitFindWordButton.setVisibility(View.VISIBLE);
         editFindWordAnswer.setVisibility(View.VISIBLE);
         tryAgainButton.setVisibility(View.GONE);
         txtFindWordNoti.setVisibility(View.GONE);
         txtFindWordError.setVisibility(View.GONE);
         txtFindWordCount.setText("Số câu đúng:" + countWord);
+
+        topicWord = findWordGameModels.get(index).getWord();
+        topicWord = topicWord.substring(0, 1).toUpperCase() + topicWord.substring(1);
+        txtFindWordQuestion.setText(topicWord);
+        editFindWordAnswer.setText(topicWord + " ");
+
         submitFindWordButton.setEnabled(false);
         editFindWordAnswer.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                if(s.toString().trim().length()<2){
+                int limit = 2 + topicWord.length();
+                if(s.toString().trim().length()< limit){
                     submitFindWordButton.setEnabled(false);
                 } else {
                     submitFindWordButton.setEnabled(true);
@@ -88,8 +93,6 @@ public class FindWordGameActivity extends AppCompatActivity {
 
             }
         });
-        topicWord = findWordGameModels.get(index).getWord();
-        txtFindWordQuestion.setText(topicWord);
         startTimer();
     }
 
@@ -138,29 +141,7 @@ public class FindWordGameActivity extends AppCompatActivity {
 
     // Score section:
     public void updateScore() {
-        switch (userInput.length()) {
-            case 2:
-                score += 200;
-                break;
-            case 3:
-                score += 300;
-                break;
-            case 4:
-                score += 400;
-                break;
-            case 5:
-                score += 500;
-                break;
-            case 6:
-                score += 600;
-                break;
-            case 7:
-                score += 700;
-                break;
-            default:
-                score += 0;
-                break;
-        }
+        score += 200;
         txtFindWordScore.setText("Điểm: " + score);
     }
 
@@ -172,18 +153,12 @@ public class FindWordGameActivity extends AppCompatActivity {
     public void Submit(View view) throws IOException {
         userInput = editFindWordAnswer.getText().toString();
         if (spellingCheck(userInput) == true){
-            for (char c : userInput.toCharArray()) {
-                txtFindWordError.setVisibility(View.GONE);
-                editFindWordAnswer.getText().clear();
-                if (c == ' ') {
-                    txtFindWordError.setVisibility(View.VISIBLE);
-                    return;
-                }
-            }
             updateScore();
             countWord = countWord + 1;
             txtFindWordCount.setText("Số câu đúng: " + countWord);
             editFindWordAnswer.getText().clear();
+            editFindWordAnswer.setText(topicWord + " ");
+            editFindWordAnswer.setSelection(editFindWordAnswer.getText().length());
         } else {
             Toast.makeText(FindWordGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_LONG).show();
         }
@@ -191,9 +166,15 @@ public class FindWordGameActivity extends AppCompatActivity {
 
     // Try again button handle:
     public void tryAgain(View view) {
+        if (index == findWordGameModels.size()){
+            index = 0;
+        } else{
+            index++;
+        }
         countWord = 0;
         score = 0;
         editFindWordAnswer.getText().clear();
+        submitFindWordButton.setVisibility(View.VISIBLE);
         gameStart();
     }
 }
