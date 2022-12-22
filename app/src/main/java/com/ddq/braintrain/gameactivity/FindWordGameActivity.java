@@ -8,32 +8,30 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-
+import com.ddq.braintrain.BrainTrainDAO;
+import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.R;
-
+import com.ddq.braintrain.models.FindWordGameModel;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class FindWordGameActivity extends AppCompatActivity {
-
-    private final String alphabet = "BCDĐGHKLMNPQRSTVX";
     private static final int START_TIMER = 120000;
-    private String userInput;
+    private String userInput, topicWord;;
     CountDownTimer timer;
     long timeLeft = START_TIMER;
-    int totalScore = 0, score = 0, countWord = 0;
-    private char correctLetter;
+    int totalScore = 0, score = 0, countWord = 0, index = 0;
     private TextView txtFindWordCount, txtFindWordTime, txtFindWordScore, txtFindWordQuestion, txtFindWordNoti, txtFindWordError;
     AppCompatButton tryAgainButton, submitFindWordButton;
-    private EditText editCompleteWordAnswer;
+    private EditText editFindWordAnswer;
+    private BrainTrainDatabase brainTrainDatabase;
+    private static List<FindWordGameModel> findWordGameModels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +43,14 @@ public class FindWordGameActivity extends AppCompatActivity {
         txtFindWordScore = (TextView) findViewById(R.id.txtFindWordScore);
         txtFindWordNoti = (TextView) findViewById(R.id.txtFindWordNoti);
         txtFindWordCount = (TextView) findViewById(R.id.txtFindWordCount);
-        editCompleteWordAnswer = findViewById(R.id.editFindWordAnswer);
+        editFindWordAnswer = findViewById(R.id.editFindWordAnswer);
         tryAgainButton = findViewById(R.id.tryAgainButton);
         submitFindWordButton = findViewById(R.id.submitFindWordButton);
         txtFindWordError = findViewById(R.id.txtFindWordError);
+        brainTrainDatabase = new BrainTrainDatabase(FindWordGameActivity.this);
+        findWordGameModels = new BrainTrainDAO().findWordGameModels(brainTrainDatabase);
 
+        Collections.shuffle(findWordGameModels);
         gameStart();
     }
 
@@ -57,13 +58,13 @@ public class FindWordGameActivity extends AppCompatActivity {
     private void gameStart() {
         txtFindWordScore.setText("Điểm: " + score);
         submitFindWordButton.setVisibility(View.VISIBLE);
-        editCompleteWordAnswer.setVisibility(View.VISIBLE);
+        editFindWordAnswer.setVisibility(View.VISIBLE);
         tryAgainButton.setVisibility(View.GONE);
         txtFindWordNoti.setVisibility(View.GONE);
         txtFindWordError.setVisibility(View.GONE);
         txtFindWordCount.setText("Số câu đúng:" + countWord);
         submitFindWordButton.setEnabled(false);
-        editCompleteWordAnswer.addTextChangedListener(new TextWatcher() {
+        editFindWordAnswer.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
@@ -87,25 +88,9 @@ public class FindWordGameActivity extends AppCompatActivity {
 
             }
         });
-        String shuffleLetter = shuffle(alphabet);
-        Random rnd = new Random();
-        correctLetter = shuffleLetter.charAt(rnd.nextInt(shuffleLetter.length()));
-        txtFindWordQuestion.setText(""+correctLetter);
-
+        topicWord = findWordGameModels.get(index).getWord();
+        txtFindWordQuestion.setText(topicWord);
         startTimer();
-    }
-
-    public String shuffle(String input){
-        List<Character> characters = new ArrayList<Character>();
-        for(char c:input.toCharArray()){
-            characters.add(c);
-        }
-        StringBuilder output = new StringBuilder(input.length());
-        while(characters.size()!=0){
-            int randPicker = (int)(Math.random()*characters.size());
-            output.append(characters.remove(randPicker));
-        }
-        return output.toString();
     }
 
     public boolean spellingCheck(String sb) throws IOException {
@@ -140,7 +125,7 @@ public class FindWordGameActivity extends AppCompatActivity {
                 totalScore = getTotalScore();
                 timer.cancel();
                 submitFindWordButton.setVisibility(View.GONE);
-                editCompleteWordAnswer.setVisibility(View.GONE);
+                editFindWordAnswer.setVisibility(View.GONE);
                 tryAgainButton.setVisibility(View.VISIBLE);
                 txtFindWordNoti.setVisibility(View.VISIBLE);
             }
@@ -185,12 +170,11 @@ public class FindWordGameActivity extends AppCompatActivity {
 
     // Submit button handle:
     public void Submit(View view) throws IOException {
-        userInput = editCompleteWordAnswer.getText().toString();
-        char firstChar = userInput.charAt(0);
-        if (Character.toUpperCase(firstChar) == correctLetter && spellingCheck(userInput) == true){
+        userInput = editFindWordAnswer.getText().toString();
+        if (spellingCheck(userInput) == true){
             for (char c : userInput.toCharArray()) {
                 txtFindWordError.setVisibility(View.GONE);
-                editCompleteWordAnswer.getText().clear();
+                editFindWordAnswer.getText().clear();
                 if (c == ' ') {
                     txtFindWordError.setVisibility(View.VISIBLE);
                     return;
@@ -199,7 +183,7 @@ public class FindWordGameActivity extends AppCompatActivity {
             updateScore();
             countWord = countWord + 1;
             txtFindWordCount.setText("Số câu đúng: " + countWord);
-            editCompleteWordAnswer.getText().clear();
+            editFindWordAnswer.getText().clear();
         } else {
             Toast.makeText(FindWordGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_LONG).show();
         }
@@ -209,7 +193,7 @@ public class FindWordGameActivity extends AppCompatActivity {
     public void tryAgain(View view) {
         countWord = 0;
         score = 0;
-        editCompleteWordAnswer.getText().clear();
+        editFindWordAnswer.getText().clear();
         gameStart();
     }
 }

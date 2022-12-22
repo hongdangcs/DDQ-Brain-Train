@@ -150,7 +150,7 @@ public class SortingCharGameActivity extends AppCompatActivity  {
 
     public String scramble( Random random, String inputString )
     {
-        // Convert your string into a simple char array:
+        // Convert string into a simple char array:
         char a[] = inputString.toCharArray();
 
         // Scramble the letters using the standard Fisher-Yates shuffle,

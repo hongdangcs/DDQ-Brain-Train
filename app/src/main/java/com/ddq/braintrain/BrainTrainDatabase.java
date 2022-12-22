@@ -41,6 +41,11 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
                 "\t\"complete_status_medium\"\tINTEGER,\n" +
                 "\t\"complete_status_hard\"\tINTEGER\n" +
                 ")");
+        db.execSQL("CREATE TABLE IF NOT EXISTS \"language_game_twoAndThree\" (\n" +
+                "\t\"id\"\tINTEGER,\n" +
+                "\t\"word\"\tTEXT,\n" +
+                "\t\"complete_status\"\tINTEGER\n" +
+                ")");
         db.execSQL("CREATE TABLE IF NOT EXISTS \"language_game_four\" (\n" +
                 "\t\"id\"\tINTEGER,\n" +
                 "\t\"word\"\tTEXT,\n" +
@@ -145,6 +150,7 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
         db.execSQL("drop table if exists attention_game_three");
         db.execSQL("drop table if exists attention_game_two");
         db.execSQL("drop table if exists language_game_four");
+        db.execSQL("drop table if exists language_game_twoAndThree");
         db.execSQL("drop table if exists math_game_one");
         db.execSQL("drop table if exists math_game_two_multiple_of_hundred");
         db.execSQL("drop table if exists math_game_two_multiple_of_ten");
