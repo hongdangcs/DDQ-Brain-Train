@@ -62,6 +62,10 @@ public class SharkBoatGameView extends View {
             sharkObject = new Shark(getContext(), random.nextInt(screenWidth-20), random.nextInt(screenHeight-20));
             sharks.add(sharkObject);
         }
+        for(int i=0; i<boat; i++){
+            boatObject = new Boat(getContext(), random.nextInt(screenWidth-200), random.nextInt(screenHeight-200));
+            boats.add(boatObject);
+        }
 
     }
 
@@ -76,6 +80,9 @@ public class SharkBoatGameView extends View {
 
         for(Shark shark: sharks){
             shark.draw(canvas);
+        }
+        for(Boat boat: boats){
+            boat.draw(canvas);
         }
     }
 }

@@ -16,7 +16,7 @@ public class Shark {
         Bitmap originalImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.shark);
         int width = originalImage.getWidth();
         int height = originalImage.getHeight();
-        float scaleFactor = 0.02f; // Change this value to adjust the size of the image
+        float scaleFactor = 1.2f; // Change this value to adjust the size of the image
         sharkImage = Bitmap.createScaledBitmap(originalImage, (int)(width * scaleFactor), (int)(height * scaleFactor), false);
     }
 

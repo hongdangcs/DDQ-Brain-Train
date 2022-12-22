@@ -14,7 +14,11 @@ public class Boat {
     public Boat(Context context, int x, int y) {
         this.x = x;
         this.y = y;
-        boatImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.boat);
+        Bitmap originalImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.boat);
+        int width = originalImage.getWidth();
+        int height = originalImage.getHeight();
+        float scaleFactor = 2f; // Change this value to adjust the size of the image
+        boatImage = Bitmap.createScaledBitmap(originalImage, (int)(width * scaleFactor), (int)(height * scaleFactor), false);
         hits = 0;
     }
 
