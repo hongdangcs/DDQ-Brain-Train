@@ -79,6 +79,7 @@ public class MemoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MemoryActivity.this, GridsHighlightLevelMenuActivity.class));
+                finish();
             }
         });
 
@@ -86,6 +87,7 @@ public class MemoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MemoryActivity.this, NotInPreviousLevelMenuActivity.class));
+                finish();
             }
         });
 
@@ -93,6 +95,7 @@ public class MemoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MemoryActivity.this, MissingObjectLevelMenuActivity.class));
+                finish();
             }
         });
 

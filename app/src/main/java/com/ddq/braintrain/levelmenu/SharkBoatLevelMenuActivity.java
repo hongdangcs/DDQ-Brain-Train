@@ -25,7 +25,7 @@ import java.util.List;
 public class SharkBoatLevelMenuActivity extends AppCompatActivity implements View.OnClickListener {
 
     private BrainTrainDatabase brainTrainDatabase;
-    private List<SharkBoatModel> sharkBoatModels;
+    private List<SharkBoatModel> sharkBoatModels ;
     GridLayout sharkBoatLevelLayout;
     AppCompatButton btn;
 
@@ -38,7 +38,6 @@ public class SharkBoatLevelMenuActivity extends AppCompatActivity implements Vie
 
         brainTrainDatabase = new BrainTrainDatabase(SharkBoatLevelMenuActivity.this);
         sharkBoatModels = new BrainTrainDAO().sharkBoatModels(brainTrainDatabase);
-
 /*
         for (int i = 0; i < sharkBoatModels.size(); i++) {
             btn = new AppCompatButton(SharkBoatLevelMenuActivity.this);
@@ -73,16 +72,22 @@ public class SharkBoatLevelMenuActivity extends AppCompatActivity implements Vie
                 @Override
                 public void onClick(View view) {
                     // Handle the click event here
-                    handleLevelClick(model.getLevel());
+                    handleLevelClick(model);
                 }
             });
         }
 
     }
 
-    public void handleLevelClick(int level){
+    public void handleLevelClick(SharkBoatModel model){
         Intent intent = new Intent(SharkBoatLevelMenuActivity.this, SharkBoatGameActivity.class);
-        intent.putExtra("level", level);
+        intent.putExtra("level", model.getLevel());
+        intent.putExtra("score", model.getScore());
+        intent.putExtra("shark", model.getNumberOfShark());
+        intent.putExtra("boat", model.getNumberOfBoat());
+        intent.putExtra("boatpoint", model.getPointPerBoat());
+        intent.putExtra("bitecount", model.getAllowableNumberOfBite());
+        intent.putExtra("passpoint", model.getLevelPassScore());
         startActivity(intent);
     }
 
@@ -90,6 +95,7 @@ public class SharkBoatLevelMenuActivity extends AppCompatActivity implements Vie
     public void onClick(View v) {
         Intent intent = new Intent(SharkBoatLevelMenuActivity.this, SharkBoatGameActivity.class);
         intent.putExtra("level", v.getId());
+
         startActivity(intent);
     }
 /*

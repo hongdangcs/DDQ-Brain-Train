@@ -44,10 +44,7 @@ public class GridsHighlightLevelMenuActivity extends AppCompatActivity implement
             btn = new AppCompatButton(GridsHighlightLevelMenuActivity.this);
             btn.setText("" + highlightGridsModels.get(i).getLevel());
             btn.setId(i + 1);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    150,
-                    150
-            );
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);
             btn.setLayoutParams(params);
             btn.setBackgroundDrawable(ContextCompat.getDrawable(GridsHighlightLevelMenuActivity.this, R.drawable.button_shape));
@@ -64,5 +61,6 @@ public class GridsHighlightLevelMenuActivity extends AppCompatActivity implement
         Intent intent = new Intent(GridsHighlightLevelMenuActivity.this, GridsHighlightGameActivity.class);
         intent.putExtra("level", v.getId());
         startActivity(intent);
+        finish();
     }
 }
