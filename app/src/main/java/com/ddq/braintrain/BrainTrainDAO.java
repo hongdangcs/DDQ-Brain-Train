@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.ddq.braintrain.models.CompareModel;
+import com.ddq.braintrain.models.ConjunctionGameModel;
 import com.ddq.braintrain.models.DifferentModel;
 import com.ddq.braintrain.models.FindOperatorModel;
 import com.ddq.braintrain.models.FlashCardModel;
@@ -364,6 +365,30 @@ public class BrainTrainDAO {
                 completeStatus = cursor.getInt(2);
 
                 returnList.add(new FindWordGameModel(id, word, completeStatus));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return returnList;
+    }
+
+    public List<ConjunctionGameModel> conjunctionGameModels(BrainTrainDatabase db) {
+        List<ConjunctionGameModel> returnList = new ArrayList<>();
+
+        int id, completeStatus;
+        String word;
+
+        SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
+        String query = "select * from language_game_twoAndThree";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                id = cursor.getInt(0);
+                word = cursor.getString(1);
+                completeStatus = cursor.getInt(2);
+
+                returnList.add(new ConjunctionGameModel(id, word, completeStatus));
 
             } while (cursor.moveToNext());
         }
