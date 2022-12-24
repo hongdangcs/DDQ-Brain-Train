@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ConjunctionGameActivity extends AppCompatActivity {
-    private static final int START_TIMER = 120000;
+    private static final int START_TIMER = 60000;
     private String userInput, topicWord;;
     CountDownTimer timer;
     long timeLeft = START_TIMER;
@@ -84,13 +84,11 @@ public class ConjunctionGameActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 // TODO Auto-generated method stub
-
             }
         });
         startTimer();
@@ -153,12 +151,17 @@ public class ConjunctionGameActivity extends AppCompatActivity {
     public void Submit(View view) throws IOException {
         userInput = editConjunctionWordAnswer.getText().toString();
         if (spellingCheck(userInput) == true){
+            timer.cancel();
             updateScore();
             countWord = countWord + 1;
             txtConjunctionWordCount.setText("Số câu đúng: " + countWord);
             editConjunctionWordAnswer.getText().clear();
+            String[] words = userInput.split("\\s");
+            topicWord = words[1].substring(0, 1).toUpperCase() + words[1].substring(1);
             editConjunctionWordAnswer.setText(topicWord + " ");
+            txtConjunctionWordQuestion.setText(topicWord);
             editConjunctionWordAnswer.setSelection(editConjunctionWordAnswer.getText().length());
+            startTimer();
         } else {
             Toast.makeText(ConjunctionGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_LONG).show();
         }
