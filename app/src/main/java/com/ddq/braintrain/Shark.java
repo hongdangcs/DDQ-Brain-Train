@@ -4,6 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Rect;
+
+
+import java.util.Random;
 
 public class Shark {
     private int x;
@@ -29,6 +33,14 @@ public class Shark {
     }
 
     public void move() {
-        // Move the shark in a random direction
+        Random random = new Random();
+        int dx = random.nextInt(5) - 1; // Generate a random number between -1 and 1
+        int dy = random.nextInt(5) - 1; // Generate a random number between -1 and 1
+        x += dx;
+        y += dy;
+    }
+
+    Rect getCollisionShape () {
+        return new Rect(x, y, x + sharkImage.getWidth(), y + sharkImage.getHeight());
     }
 }
