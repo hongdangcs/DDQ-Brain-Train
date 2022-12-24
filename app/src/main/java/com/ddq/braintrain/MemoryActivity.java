@@ -1,12 +1,15 @@
 package com.ddq.braintrain;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 
 import com.ddq.braintrain.levelmenu.GridsHighlightLevelMenuActivity;
@@ -32,6 +35,8 @@ public class MemoryActivity extends AppCompatActivity {
 
     private  ProgressModel missingObjectModel;
 
+    AppCompatButton gridsHighlightGuideButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +54,8 @@ public class MemoryActivity extends AppCompatActivity {
         missingObjectScore = findViewById(R.id.missingObjectScore);
         missingObjectComplete = findViewById(R.id.missingObjectComplete);
         notInPreviousComplete = findViewById(R.id.notInPreviousComplete);
+
+        gridsHighlightGuideButton = findViewById(R.id.gridsHighlightGuideButton);
 
         brainTrainDatabase = new BrainTrainDatabase(MemoryActivity.this);
         gridsHighlightModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 11);
@@ -96,6 +103,25 @@ public class MemoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(MemoryActivity.this, MissingObjectLevelMenuActivity.class));
                 finish();
+            }
+        });
+
+        gridsHighlightGuideButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(MemoryActivity.this);
+                alert.setTitle("Huong dan");
+                alert.setMessage("huong dan choi game bla bla... ");
+                alert.setCancelable(false);
+                alert.setNegativeButton("Da Hieu", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alertDialog = alert.create();
+                alertDialog.show();
             }
         });
 

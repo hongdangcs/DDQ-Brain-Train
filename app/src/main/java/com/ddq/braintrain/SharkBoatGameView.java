@@ -10,15 +10,18 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
-public class SharkBoatGameView extends View {
+public class SharkBoatGameView extends SurfaceView implements Runnable{
 
     Context context, mContext;
     int level, score, shark, boat, boatpoint, bitcount, passpoint;
@@ -27,6 +30,7 @@ public class SharkBoatGameView extends View {
     Display display;
     int screenWidth, screenHeight;
     Rect rect;
+    Boolean isPlaying = true;
 
     Shark sharkObject;
     Boat boatObject;
@@ -35,6 +39,8 @@ public class SharkBoatGameView extends View {
     List<Boat> boats = new ArrayList<>();
 
     Random random = new Random();
+    private Timer timer;
+    Thread thread;
 
     public SharkBoatGameView(Context context, int level, int score, int shark, int boat, int boatpoint, int bitcount, int passpoint) {
         super(context);
@@ -66,7 +72,13 @@ public class SharkBoatGameView extends View {
             boatObject = new Boat(getContext(), random.nextInt(screenWidth-200), random.nextInt(screenHeight-200));
             boats.add(boatObject);
         }
+    }
 
+    private void moveShark() {
+        for(Shark shark: sharks){
+            shark.move();
+        }
+        invalidate(); // This method will call the onDraw() method of the main activity
     }
 
     @Override
@@ -84,5 +96,62 @@ public class SharkBoatGameView extends View {
         for(Boat boat: boats){
             boat.draw(canvas);
         }
+    }
+
+    @Override
+    public void run() {
+
+        while (isPlaying){
+            update();
+            sleep();
+        }
+    }
+
+    public void update(){
+
+    }
+/*
+    public void draw(){
+        if (getHolder().getSurface().isValid()) {
+
+            Canvas canvas = getHolder().lockCanvas();
+            Paint paint = new Paint();
+            paint.setAlpha(65);
+            canvas.drawBitmap(background, null, rect, paint);
+
+
+            for(Shark shark: sharks){
+                shark.draw(canvas);
+            }
+            for(Boat boat: boats){
+                boat.draw(canvas);
+            }
+            getHolder().unlockCanvasAndPost(canvas);
+
+        }
+
+    }
+*/
+    public void sleep(){
+        try {
+            Thread.sleep(17);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void pause(){
+        try {
+            isPlaying = false;
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void resume(){
+        isPlaying = true;
+        thread = new Thread(this);
+        thread.start();
     }
 }
