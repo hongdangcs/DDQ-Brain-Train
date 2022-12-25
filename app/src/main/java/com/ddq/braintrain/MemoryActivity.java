@@ -35,7 +35,7 @@ public class MemoryActivity extends AppCompatActivity {
 
     private  ProgressModel missingObjectModel;
 
-    AppCompatButton gridsHighlightGuideButton;
+    AppCompatButton gridsHighlightGuideButton, missingObjectGuideButton, notInPreviousGuideButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,8 @@ public class MemoryActivity extends AppCompatActivity {
         notInPreviousComplete = findViewById(R.id.notInPreviousComplete);
 
         gridsHighlightGuideButton = findViewById(R.id.gridsHighlightGuideButton);
+        missingObjectGuideButton = findViewById(R.id.missingObjectGuideButton);
+        notInPreviousGuideButton = findViewById(R.id.notInPreviousGuideButton);
 
         brainTrainDatabase = new BrainTrainDatabase(MemoryActivity.this);
         gridsHighlightModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 11);
@@ -110,10 +112,51 @@ public class MemoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(MemoryActivity.this);
-                alert.setTitle("Huong dan");
-                alert.setMessage("huong dan choi game bla bla... ");
+                alert.setTitle("Hướng Dẫn");
+                alert.setMessage("Một ma trận biến đổi sẽ xuất hiện ngẫu nhiên với một mẫu các khối được hiển thị tạm thời (3 giây)\n\n" +
+                        "Nhiệm vụ của người chơi là báo cáo vị trí của các khối bằng cách chạm vào vị trí của ma trận nơi các khối được hiển thị.");
                 alert.setCancelable(false);
-                alert.setNegativeButton("Da Hieu", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alertDialog = alert.create();
+                alertDialog.show();
+            }
+        });
+
+        missingObjectGuideButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(MemoryActivity.this);
+                alert.setTitle("Hướng Dẫn");
+                alert.setMessage("Nhiệm vụ của người chơi là tìm đồ vật trên tấm thẻ có dấu chấm hỏi");
+                alert.setCancelable(false);
+                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alertDialog = alert.create();
+                alertDialog.show();
+            }
+        });
+
+        notInPreviousGuideButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(MemoryActivity.this);
+                alert.setTitle("Hướng Dẫn");
+                alert.setMessage("Người chơi được chọn ngẫu nhiên 1 trong 3 thẻ này và phải ghi nhớ đồ vật trong thẻ đó\n" +
+                        "\n" +
+                        "Trong mỗi vòng, số lượng thẻ tăng lên 1 và người chơi phải chọn 1 thẻ có hình dạng khác không được chọn trước đó");
+                alert.setCancelable(false);
+                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
