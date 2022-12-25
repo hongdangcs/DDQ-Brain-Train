@@ -22,7 +22,15 @@ import java.util.TimerTask;
 
 
 public class SharkBoatGameView extends SurfaceView implements Runnable{
+    public SharkBoatGameView(Context context) {
+        super(context);
+    }
 
+    @Override
+    public void run() {
+
+    }
+/*
     Context context, mContext;
     int level, score, shark, boat, boatpoint, bitcount, passpoint;
     Bitmap background;
@@ -131,7 +139,8 @@ public class SharkBoatGameView extends SurfaceView implements Runnable{
         }
 
     }
-*/
+*///
+    /*
     public void sleep(){
         try {
             Thread.sleep(17);
@@ -153,5 +162,5 @@ public class SharkBoatGameView extends SurfaceView implements Runnable{
         isPlaying = true;
         thread = new Thread(this);
         thread.start();
-    }
+    }*/
 }

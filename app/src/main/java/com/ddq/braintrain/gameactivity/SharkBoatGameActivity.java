@@ -2,11 +2,13 @@ package com.ddq.braintrain.gameactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ddq.braintrain.GameSurface;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.SharkBoatGameView;
 
@@ -31,7 +33,16 @@ private SharkBoatGameView gameView;
         int passpoint = intent.getIntExtra("passpoint", 0);
 //        textView.setText("Level: " + level + " " + score + " " + shark + " " + boat + " " + boatpoint + " " + bitecount + " " + passpoint);
 
-        gameView = new SharkBoatGameView(this, level,score, shark, boat, boatpoint, bitecount, passpoint);
-        setContentView(gameView);
+ //       gameView = new SharkBoatGameView(this, level,score, shark, boat, boatpoint, bitecount, passpoint);
+
+//        setContentView(gameView);
+
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // Set No Title
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        this.setContentView(new GameSurface(this, level,score, shark, boat, boatpoint, bitecount, passpoint));
     }
 }
