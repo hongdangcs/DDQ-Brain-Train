@@ -3,6 +3,7 @@ package com.ddq.braintrain;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -90,6 +91,38 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         conjunctionCardView.setOnClickListener(LanguageActivity.this);
         sortingCharCardView.setOnClickListener(LanguageActivity.this);
 
+        completeWordCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                completeWordGuideButton.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+        findWordCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                findWordGuideButton.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+        conjunctionCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                conjunctionGuideButton.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+        sortingCharCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                sortingCharGuideButton.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
         completeWordGuideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,12 +134,22 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                         "\n" +
                         "Từ bạn tìm thấy càng dài, bạn càng nhận được số điểm cao");
                 alert.setCancelable(false);
-                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+
+                alert.setNegativeButton("Không hiện lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        completeWordGuideButton.setVisibility(View.GONE);
+                    }
+                });
+                alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+
+
 
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
@@ -120,12 +163,22 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                 alert.setTitle("Hướng Dẫn");
                 alert.setMessage("Trong vòng 2 phút, nhiệm vụ là tìm những từ có thể ghép với từ cho sẵn ban đầu thành từ ghép có nghĩa");
                 alert.setCancelable(false);
-                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+
+                alert.setNegativeButton("Không hiện lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        findWordGuideButton.setVisibility(View.GONE);
+                    }
+                });
+                alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+
+
 
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
@@ -141,12 +194,22 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                         "\n" +
                         "Tiếp tục làm điều này cho đến khi không thể tìm thấy nhiều từ hơn để phù hợp");
                 alert.setCancelable(false);
-                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+
+                alert.setNegativeButton("Không hiện lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        conjunctionGuideButton.setVisibility(View.GONE);
+                    }
+                });
+                alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+
+
 
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
@@ -162,12 +225,22 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                         "\n" +
                         "Nhiệm vụ của người chơi là sắp xếp lại thứ tự các chữ cái để tìm ra từ chính xác");
                 alert.setCancelable(false);
-                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+
+                alert.setNegativeButton("Không hiện lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        sortingCharGuideButton.setVisibility(View.GONE);
+                    }
+                });
+                alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+
+
 
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
@@ -196,6 +269,5 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         }
         startActivity(intent);
     }
-
 
 }

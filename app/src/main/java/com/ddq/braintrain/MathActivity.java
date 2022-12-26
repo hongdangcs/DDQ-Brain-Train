@@ -74,6 +74,23 @@ public class MathActivity extends AppCompatActivity {
             }
         });
 
+
+        compareCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                compareGuideButton.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+        findOperatorCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                findOperatorGuideButton.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
         compareGuideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,12 +102,22 @@ public class MathActivity extends AppCompatActivity {
                         "\n" +
                         "Người chơi phải tính giá của các sản phẩm rồi chạm vào sản phẩm có giá trị thấp nhất");
                 alert.setCancelable(false);
-                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+
+                alert.setNegativeButton("Không hiện lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        compareGuideButton.setVisibility(View.GONE);
+                    }
+                });
+                alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+
+
 
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
@@ -104,12 +131,22 @@ public class MathActivity extends AppCompatActivity {
                 alert.setTitle("Hướng Dẫn");
                 alert.setMessage("Nhiệm vụ của người chơi là tìm hai số có tổng là bội số của chục, bội số của trăm hoặc bội số của nghìn");
                 alert.setCancelable(false);
-                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+
+                alert.setNegativeButton("Không hiện lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        findOperatorGuideButton.setVisibility(View.GONE);
+                    }
+                });
+                alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+
+
 
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();

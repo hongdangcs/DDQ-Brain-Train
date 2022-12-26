@@ -1,6 +1,8 @@
 package com.ddq.braintrain;
 
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,7 +10,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -38,7 +42,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
     List<Boat> boats = new ArrayList<>();
     List<Wave> waves = new ArrayList<>();
 
-    int drawCount =0, updateCount=0;
+    int drawCount = 0, updateCount = 0;
 
     public GameSurface(Context context, int level, int score, int sharkNumber, int boatNumber, int boatpoint, int bitcount, int passpoint) {
         super(context);
@@ -83,8 +87,8 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         for (Shark shark : sharks) {
             shark.update();
         }
-        for(Wave wave: waves){
-            if(!wave.isAvailable){
+        for (Wave wave : waves) {
+            if (!wave.isAvailable) {
                 waves.remove(wave);
             }
         }
@@ -96,9 +100,10 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
     public void draw(Canvas canvas) {
         super.draw(canvas);
 
-        Paint paint = new Paint();
-        paint.setAlpha(65);
-        canvas.drawBitmap(background, null, rect, paint);
+        //Paint paint = new Paint();
+        //paint.setAlpha(100);
+        canvas.drawBitmap(background, null, rect, null);
+        Log.d(TAG, "draw: Background");
 
         for (Shark shark : sharks) {
             shark.draw(canvas);
@@ -106,7 +111,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         for (Boat boat : boats) {
             boat.draw(canvas);
         }
-        for(Wave wave : waves){
+        for (Wave wave : waves) {
             wave.draw(canvas);
         }
 
@@ -115,32 +120,32 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int touchX = (int) event.getX();
-        int touchY = (int)event.getY();
-if(waves.size()<boatNumber) {
-    Wave wave = new Wave(getContext(), touchX - 75, touchY - 75);
+        int touchY = (int) event.getY();
+        //if (waves.size() < boatNumber) {
+            Wave wave = new Wave(getContext(), touchX - 75, touchY - 75);
 
-    waves.add(wave);
-}
+            waves.add(wave);
+        //}
         return true;
     }
 
-    public void checkSharkWaveCollision(){
-        for(Shark shark : sharks){
-            for(Wave wave : waves){
-                if(Rect.intersects(shark.getCollisionShape(), wave.getCollisionShape())){
+    public void checkSharkWaveCollision() {
+        for (Shark shark : sharks) {
+            for (Wave wave : waves) {
+                if (Rect.intersects(shark.getCollisionShape(), wave.getCollisionShape())) {
                     shark.setCollision(true);
                 }
             }
         }
     }
 
-    public void checkSharkBoatCollision(){
-        for(Shark shark : sharks){
-            for(Boat boat : boats){
-                if(Rect.intersects(shark.getCollisionShape(), boat.getCollisionShape())){
+    public void checkSharkBoatCollision() {
+        for (Shark shark : sharks) {
+            for (Boat boat : boats) {
+                if (Rect.intersects(shark.getCollisionShape(), boat.getCollisionShape())) {
                     shark.setCollision(true);
                     boat.hit();
-                    if(boat.isDestroyed()){
+                    if (boat.isDestroyed()) {
                         boats.remove(boat);
                     }
                 }
@@ -164,17 +169,32 @@ if(waves.size()<boatNumber) {
     // Implements method of SurfaceHolder.Callback
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
+
+
+        try {
+            //Thread.sleep(1000);
+            this.gameThread.setRunning(false);
+            Log.d(TAG, "surfaceDestroyed: Done");
+            // Parent thread must wait until the end of GameThread.
+            this.gameThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        /*
         boolean retry = true;
         while (retry) {
             try {
+                Thread.sleep(3000);
                 this.gameThread.setRunning(false);
+                Log.d(TAG, "surfaceDestroyed: Done");
                 // Parent thread must wait until the end of GameThread.
                 this.gameThread.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             retry = true;
-        }
+        }*/
     }
 
 }

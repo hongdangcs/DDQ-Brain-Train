@@ -108,6 +108,30 @@ public class MemoryActivity extends AppCompatActivity {
             }
         });
 
+        gridsHighlightCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                gridsHighlightGuideButton.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+        notInPreviousCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                notInPreviousGuideButton.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+        missingObjectCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                missingObjectGuideButton.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
         gridsHighlightGuideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,12 +140,21 @@ public class MemoryActivity extends AppCompatActivity {
                 alert.setMessage("Một ma trận biến đổi sẽ xuất hiện ngẫu nhiên với một mẫu các khối được hiển thị tạm thời (3 giây)\n\n" +
                         "Nhiệm vụ của người chơi là báo cáo vị trí của các khối bằng cách chạm vào vị trí của ma trận nơi các khối được hiển thị.");
                 alert.setCancelable(false);
-                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+
+                alert.setNegativeButton("Không hiện lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        gridsHighlightGuideButton.setVisibility(View.GONE);
+                    }
+                });
+                alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+
 
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
@@ -135,12 +168,21 @@ public class MemoryActivity extends AppCompatActivity {
                 alert.setTitle("Hướng Dẫn");
                 alert.setMessage("Nhiệm vụ của người chơi là tìm đồ vật trên tấm thẻ có dấu chấm hỏi");
                 alert.setCancelable(false);
-                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+
+                alert.setNegativeButton("Không hiện lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        missingObjectGuideButton.setVisibility(View.GONE);
+                    }
+                });
+                alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+
 
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
@@ -156,12 +198,21 @@ public class MemoryActivity extends AppCompatActivity {
                         "\n" +
                         "Trong mỗi vòng, số lượng thẻ tăng lên 1 và người chơi phải chọn 1 thẻ có hình dạng khác không được chọn trước đó");
                 alert.setCancelable(false);
-                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+
+                alert.setNegativeButton("Không hiện lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        notInPreviousGuideButton.setVisibility(View.GONE);
+                    }
+                });
+                alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+
 
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();

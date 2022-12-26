@@ -67,9 +67,11 @@ public class GameThread extends Thread {
 
     public void gameSleep() {
         try {
-            Thread.sleep(25);
+            Thread.sleep(17);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+
+
 }

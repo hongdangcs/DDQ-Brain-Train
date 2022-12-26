@@ -1,7 +1,11 @@
 package com.ddq.braintrain.gameactivity;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -44,5 +48,16 @@ private SharkBoatGameView gameView;
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         this.setContentView(new GameSurface(this, level,score, shark, boat, boatpoint, bitecount, passpoint));
+
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            finish();
+            Log.d(TAG                    , "onKeyDown: done");
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

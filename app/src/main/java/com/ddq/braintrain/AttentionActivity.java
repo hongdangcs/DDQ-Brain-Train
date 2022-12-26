@@ -76,6 +76,31 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
         flashCardCardView.setOnClickListener(AttentionActivity.this);
         sharkBoatCardView.setOnClickListener(AttentionActivity.this);
 
+        differentCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                differentGuideButton.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+        flashCardCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                flashCardGuideButton.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+        sharkBoatCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                sharkBoatGuideButton.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+
         differentGuideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +108,14 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
                 alert.setTitle("Hướng Dẫn");
                 alert.setMessage("Nhiệm vụ là tìm một điểm khác biệt duy nhất trong bức tranh");
                 alert.setCancelable(false);
-                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton("Không hiện lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        differentGuideButton.setVisibility(View.GONE);
+                    }
+                });
+                alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
@@ -104,12 +136,22 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
                         "\n" +
                         "Nhiệm vụ của người chơi là chọn chính xác các hình ghép thành một cặp");
                 alert.setCancelable(false);
-                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+
+                alert.setNegativeButton("Không hiện lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        flashCardGuideButton.setVisibility(View.GONE);
+                    }
+                });
+                alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+
+
 
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
@@ -129,12 +171,22 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
                         "\n" +
                         "Trong 2 phút, cố gắng không để con cá mập nào phá thuyền");
                 alert.setCancelable(false);
-                alert.setNegativeButton("Dã Hiểu", new DialogInterface.OnClickListener() {
+
+                alert.setNegativeButton("Không hiện lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        sharkBoatGuideButton.setVisibility(View.GONE);
+                    }
+                });
+                alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+
+
 
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
