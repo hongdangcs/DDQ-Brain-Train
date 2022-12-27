@@ -11,6 +11,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.ddq.braintrain.gameactivity.SharkBoatGameActivity;
+import com.ddq.braintrain.levelmenu.SharkBoatLevelMenuActivity;
+import com.ddq.braintrain.models.SharkBoatModel;
+
+import java.util.List;
+
 public class SharkBoatGameOverActivity extends AppCompatActivity {
 
     TextView gameOverNoti, sharkBoatScoreTextView;
@@ -18,6 +24,9 @@ public class SharkBoatGameOverActivity extends AppCompatActivity {
 
     int level, score, passScore;
     int isPassed;
+
+    private BrainTrainDatabase brainTrainDatabase;
+    private static List<SharkBoatModel> sharkBoatModels ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +41,7 @@ public class SharkBoatGameOverActivity extends AppCompatActivity {
         sharkBoatNextLevelButton.setVisibility(View.GONE);
 
         Intent intent = getIntent();
-        level = intent.getIntExtra("level", 0);
+        level = intent.getIntExtra("level", 0) -1 ;
         score = intent.getIntExtra("score", 0);
         isPassed = intent.getIntExtra("isPassed", 0);
         passScore = intent.getIntExtra("passscore", 0);
@@ -47,5 +56,36 @@ public class SharkBoatGameOverActivity extends AppCompatActivity {
 
         Log.d(TAG, "onCreate: Created");
 
+
+        brainTrainDatabase = new BrainTrainDatabase(SharkBoatGameOverActivity.this);
+        sharkBoatModels = new BrainTrainDAO().sharkBoatModels(brainTrainDatabase);
+
+        sharkBoatNextLevelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleLevelClick(sharkBoatModels.get(level+1));
+            }
+        });
+
+        sharkBoatPlayAgainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleLevelClick(sharkBoatModels.get(level));
+            }
+        });
+
+    }
+
+    public void handleLevelClick(SharkBoatModel model){
+        Intent intent = new Intent(SharkBoatGameOverActivity.this, SharkBoatGameActivity.class);
+        intent.putExtra("level", model.getLevel());
+        intent.putExtra("score", model.getScore());
+        intent.putExtra("shark", model.getNumberOfShark());
+        intent.putExtra("boat", model.getNumberOfBoat());
+        intent.putExtra("boatpoint", model.getPointPerBoat());
+        intent.putExtra("bitecount", model.getAllowableNumberOfBite());
+        intent.putExtra("passpoint", model.getLevelPassScore());
+        startActivity(intent);
+        finish();
     }
 }

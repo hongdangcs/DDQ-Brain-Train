@@ -1,7 +1,12 @@
 package com.ddq.braintrain.levelmenu;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,9 +30,11 @@ import java.util.List;
 public class SharkBoatLevelMenuActivity extends AppCompatActivity implements View.OnClickListener {
 
     private BrainTrainDatabase brainTrainDatabase;
-    private List<SharkBoatModel> sharkBoatModels ;
+    private static List<SharkBoatModel> sharkBoatModels ;
     GridLayout sharkBoatLevelLayout;
     AppCompatButton btn;
+
+    boolean canOpen = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +65,37 @@ public class SharkBoatLevelMenuActivity extends AppCompatActivity implements Vie
 
 
         for (SharkBoatModel model : sharkBoatModels) {
-            LayoutInflater inflater = LayoutInflater.from(SharkBoatLevelMenuActivity.this);
 
-            View rowView = inflater.inflate(R.layout.table_row_layout, tableLayout, false);
+            View rowView = getLayoutInflater().inflate(R.layout.table_row_layout, tableLayout, false);
             TextView levelTextView = rowView.findViewById(R.id.level_text_view);
             levelTextView.setText(String.valueOf(model.getLevel()));
             TextView scoreTextView = rowView.findViewById(R.id.score_text_view);
             scoreTextView.setText(String.valueOf(model.getScore()));
+            if(model.getCompleteStatus()==1){
+                //Change row color
+                rowView.setBackgroundColor(Color.GREEN);
+
+            }
+
+            if(!canOpen){
+                rowView.setEnabled(false);
+                rowView.setAlpha(0.75f);
+                Log.d(TAG, "onCreate: "+ model.getLevel()+ " can't click");
+            }
+            canOpen = false;
+            if(model.getCompleteStatus()==1){
+                canOpen = true;
+
+            }
+
+
+
+
             tableLayout.addView(rowView);
 
             TableRow row = rowView.findViewById(R.id.table_row);
+            row.setBackgroundColor(Color.YELLOW);
+
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -89,6 +117,7 @@ public class SharkBoatLevelMenuActivity extends AppCompatActivity implements Vie
         intent.putExtra("bitecount", model.getAllowableNumberOfBite());
         intent.putExtra("passpoint", model.getLevelPassScore());
         startActivity(intent);
+        finish();
     }
 
     @Override

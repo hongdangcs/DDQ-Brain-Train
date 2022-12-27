@@ -187,4 +187,9 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
 
     }
 
+    public void updateCell(String table, String cell, int value, int level){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE "+ table +" SET "+ cell +" = "+value +" WHERE level = " + level);
+    }
+
 }

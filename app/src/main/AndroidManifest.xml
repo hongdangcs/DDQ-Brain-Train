@@ -15,7 +15,8 @@
         <activity
             android:name=".SharkBoatGameOverActivity"
             android:exported="false"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:parentActivityName=".levelmenu.SharkBoatLevelMenuActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

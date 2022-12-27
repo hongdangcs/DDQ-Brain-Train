@@ -24,6 +24,8 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
+import com.ddq.braintrain.gameactivity.GridsHighlightGameActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -47,6 +49,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
     Paint scorePaint = new Paint();
     Paint timePaint = new Paint();
+    Paint levelPaint = new Paint();
 
     List<Shark> sharks = new ArrayList<>();
     List<Boat> boats = new ArrayList<>();
@@ -99,12 +102,16 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
         scorePaint.setColor(Color.RED);
         scorePaint.setTextSize(40);
-        scorePaint.setTextAlign(Paint.Align.LEFT);
+        scorePaint.setTextAlign(Paint.Align.CENTER);
 
 
         timePaint.setColor(Color.GREEN);
         timePaint.setTextSize(40);
         timePaint.setTextAlign(Paint.Align.RIGHT);
+
+        levelPaint.setColor(Color.GREEN);
+        levelPaint.setTextSize(40);
+        levelPaint.setTextAlign(Paint.Align.LEFT);
 
         timer = new CountDownTimer(12000, 1000) {
             @Override
@@ -128,6 +135,11 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
             if (currentScore > score) {
                 score = currentScore;
+                BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(mContext);
+                brainTrainDatabase.updateCell("attention_game_three", "score", score, level );
+                if(score>=passpoint){
+                    brainTrainDatabase.updateCell("attention_game_three", "complete_status", 1, level);
+                }
             }
 
             Intent intent = new Intent(mContext, SharkBoatGameOverActivity.class);
@@ -174,8 +186,9 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
             wave.draw(canvas);
         }
 
-        canvas.drawText("Mạng: " + (bitcount-bitten), 14, 44, scorePaint);
+        canvas.drawText("Mạng: " + (bitcount-bitten), screenWidth/2, 44, scorePaint);
         canvas.drawText("Time: " + timeLeft, screenWidth - 14, 44, timePaint);
+        canvas.drawText("Màn: " + level, 14, 44, levelPaint);
 
     }
 
@@ -236,7 +249,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
 
-
+        timer.cancel();
         try {
             //Thread.sleep(1000);
             this.gameThread.setRunning(false);
