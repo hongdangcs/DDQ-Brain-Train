@@ -154,8 +154,6 @@ public class MemoryActivity extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
-
-
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
             }

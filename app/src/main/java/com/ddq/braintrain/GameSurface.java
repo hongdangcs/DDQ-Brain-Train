@@ -3,12 +3,16 @@ package com.ddq.braintrain;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -32,17 +36,26 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
     Random random = new Random();
 
     int level, score, sharkNumber, boatNumber, boatpoint, bitcount, passpoint;
+    int bitten;
 
     Context mContext;
     Rect rect;
 
     Bitmap background = BitmapFactory.decodeResource(getResources(), R.drawable.shark_boat_game_background);
 
+    int screenWidth, screenHeight;
+
+    Paint scorePaint = new Paint();
+    Paint timePaint = new Paint();
+
     List<Shark> sharks = new ArrayList<>();
     List<Boat> boats = new ArrayList<>();
     List<Wave> waves = new ArrayList<>();
 
-    int drawCount = 0, updateCount = 0;
+    CountDownTimer timer;
+    long timeLeft;
+
+    int finishCall = 0;
 
     public GameSurface(Context context, int level, int score, int sharkNumber, int boatNumber, int boatpoint, int bitcount, int passpoint) {
         super(context);
@@ -57,6 +70,8 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         this.bitcount = bitcount;
         this.passpoint = passpoint;
 
+        bitten =0;
+
 
         // Make Game Surface focusable so it can handle events. .
         this.setFocusable(true);
@@ -68,8 +83,8 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         Display display = windowManager.getDefaultDisplay();
         DisplayMetrics displayMetrics = new DisplayMetrics();
         display.getMetrics(displayMetrics);
-        int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
+         screenWidth = displayMetrics.widthPixels;
+         screenHeight = displayMetrics.heightPixels;
         rect = new Rect(0, 0, screenWidth, screenHeight);
 
         for (int i = 0; i < sharkNumber; i++) {
@@ -80,6 +95,50 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
             boat = new Boat(getContext(), screenWidth - random.nextInt(screenWidth - 100), random.nextInt(screenHeight / 3));
             boats.add(boat);
         }
+
+
+        scorePaint.setColor(Color.RED);
+        scorePaint.setTextSize(40);
+        scorePaint.setTextAlign(Paint.Align.LEFT);
+
+
+        timePaint.setColor(Color.GREEN);
+        timePaint.setTextSize(40);
+        timePaint.setTextAlign(Paint.Align.RIGHT);
+
+        timer = new CountDownTimer(12000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeft = millisUntilFinished/1000;
+            }
+
+            @Override
+            public void onFinish() {
+                resultActivity();
+            }
+        }.start();
+    }
+
+    public void resultActivity(){
+        timer.cancel();
+
+        if(finishCall ==0) {
+            finishCall++;
+            int currentScore = sharkNumber * boatpoint - (boatpoint / 5) * bitten;
+
+            if (currentScore > score) {
+                score = currentScore;
+            }
+
+            Intent intent = new Intent(mContext, SharkBoatGameOverActivity.class);
+            intent.putExtra("score", currentScore);
+            intent.putExtra("passscore", passpoint);
+            intent.putExtra("level", level);
+            intent.putExtra("isPassed", currentScore >= passpoint ? 1 : 0);
+            mContext.startActivity(intent);
+            ((Activity) mContext).finish();
+        }
+
     }
 
     public void update() {
@@ -115,6 +174,9 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
             wave.draw(canvas);
         }
 
+        canvas.drawText("Mạng: " + (bitcount-bitten), 14, 44, scorePaint);
+        canvas.drawText("Time: " + timeLeft, screenWidth - 14, 44, timePaint);
+
     }
 
     @Override
@@ -145,6 +207,10 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
                 if (Rect.intersects(shark.getCollisionShape(), boat.getCollisionShape())) {
                     shark.setCollision(true);
                     boat.hit();
+                    bitten++;
+                    if(bitten > bitcount){
+                        resultActivity();
+                    }
                     if (boat.isDestroyed()) {
                         boats.remove(boat);
                     }
