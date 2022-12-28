@@ -75,7 +75,8 @@ public class MemoryActivity extends AppCompatActivity {
         gridsHighlightModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 11);
 
         gridsHighlightScore.setText("Điểm của bạn: " + gridsHighlightModel.getUserScore());
-        gridsHighlightProgress.setText("Đã hoàn thành: " + ((float) gridsHighlightModel.getUserScore() / (float) gridsHighlightModel.getMaxScore()) + "%");
+        String result = String.format("%.2f", ((float) gridsHighlightModel.getUserScore() / (float) gridsHighlightModel.getMaxScore()));
+        gridsHighlightProgress.setText("Đã hoàn thành: " + result + "%");
         if (gridsHighlightModel.isCompletedStatus()) {
             gridsHighlightProgress.setVisibility(View.GONE);
             gridsHighlightComplete.setVisibility(View.VISIBLE);
@@ -94,7 +95,8 @@ public class MemoryActivity extends AppCompatActivity {
 
         notInPreviousModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 12);
         notInPreviousScore.setText("Điểm của bạn: " + notInPreviousModel.getUserScore());
-        notInPreviousProgress.setText("Đã hoàn thành: " + ((float) notInPreviousModel.getUserScore() / (float) notInPreviousModel.getMaxScore()) + "%");
+        String notInPreviousPercent = String.format("%.2f", ((float) notInPreviousModel.getUserScore() / (float) notInPreviousModel.getMaxScore()));
+        notInPreviousProgress.setText("Đã hoàn thành: " + notInPreviousPercent + "%");
         if (notInPreviousModel.isCompletedStatus()) {
             notInPreviousComplete.setVisibility(View.VISIBLE);
         }
@@ -102,7 +104,8 @@ public class MemoryActivity extends AppCompatActivity {
         missingObjectModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 13);
         missingObjectCurrentScore = missingObjectModel.getUserScore();
         missingObjectScore.setText("Điểm của bạn: " + missingObjectCurrentScore);
-        missingObjectProgress.setText("Đã hoàn thành: " + ((float) missingObjectModel.getUserScore() / (float) missingObjectModel.getMaxScore()) + "%");
+        String missingObjectPercent = String.format("%.2f", ((float) missingObjectModel.getUserScore() / (float) missingObjectModel.getMaxScore()));
+        missingObjectProgress.setText("Đã hoàn thành: " + notInPreviousPercent + "%");
         if (missingObjectModel.isCompletedStatus()) {
             missingObjectComplete.setVisibility(View.VISIBLE);
         }

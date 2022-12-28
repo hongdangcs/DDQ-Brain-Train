@@ -60,28 +60,32 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         brainTrainDatabase = new BrainTrainDatabase(LanguageActivity.this);
         completeWordModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 31);
         completeWordScore.setText("Điểm của bạn: " + completeWordModel.getUserScore());
-        completeWordProgress.setText("Đã hoàn thành: " + ((float) completeWordModel.getUserScore() / (float) completeWordModel.getMaxScore()) + "%");
+        String result1 = String.format("%.2f", ((float) completeWordModel.getUserScore() / (float) completeWordModel.getMaxScore()));
+        completeWordProgress.setText("Đã hoàn thành: " + result1 + "%");
         if (completeWordModel.isCompletedStatus()) {
             completeWordCompleted.setVisibility(View.VISIBLE);
         }
 
         findWordModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 32);
         findWordScore.setText("Điểm của bạn: " + findWordModel.getUserScore());
-        findWordProgress.setText("Đã hoàn thành: " + ((float) findWordModel.getUserScore() / (float) findWordModel.getMaxScore()) + "%");
+        String result2 = String.format("%.2f", ((float) findWordModel.getUserScore() / (float) findWordModel.getMaxScore()));
+        findWordProgress.setText("Đã hoàn thành: " + result2 + "%");
         if (findWordModel.isCompletedStatus()) {
             findWordCompleted.setVisibility(View.VISIBLE);
         }
 
         conjunctionModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 33);
         conjunctionScore.setText("Điểm của bạn: " + conjunctionModel.getUserScore());
-        conjunctionProgress.setText("Đã hoàn thành: " + ((float) conjunctionModel.getUserScore() / (float) conjunctionModel.getMaxScore()) + "%");
+        String result3 = String.format("%.2f", ((float) conjunctionModel.getUserScore() / (float) conjunctionModel.getMaxScore()));
+        conjunctionProgress.setText("Đã hoàn thành: " + result3 + "%");
         if (conjunctionModel.isCompletedStatus()) {
             conjunctionCompleted.setVisibility(View.VISIBLE);
         }
 
         sortingCharModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 34);
         sortingCharScore.setText("Điểm của bạn: " + sortingCharModel.getUserScore());
-        sortingCharProgress.setText("Đã hoàn thành: " + ((float) sortingCharModel.getUserScore() / (float) sortingCharModel.getMaxScore()) + "%");
+        String result4 = String.format("%.2f", ((float) sortingCharModel.getUserScore() / (float) sortingCharModel.getMaxScore()));
+        sortingCharProgress.setText("Đã hoàn thành: " + result4 + "%");
         if (sortingCharModel.isCompletedStatus()) {
             sortingCharCompleted.setVisibility(View.VISIBLE);
         }

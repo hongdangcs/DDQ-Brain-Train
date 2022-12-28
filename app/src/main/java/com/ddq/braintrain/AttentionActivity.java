@@ -53,21 +53,24 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
         brainTrainDatabase = new BrainTrainDatabase(AttentionActivity.this);
         differentModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 21);
         differentScore.setText("Điểm của bạn: " + differentModel.getUserScore());
-        differentProgress.setText("Đã hoàn thành: " + ((float) differentModel.getUserScore() / (float) differentModel.getMaxScore()) + "%");
+        String different = String.format("%.2f", ((float) differentModel.getUserScore() / (float) differentModel.getMaxScore()));
+        differentProgress.setText("Đã hoàn thành: " + different + "%");
         if (differentModel.isCompletedStatus()) {
             differentCompleted.setVisibility(View.VISIBLE);
         }
 
         flashCardModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 22);
         flashCardScore.setText("Điểm của bạn: " + flashCardModel.getUserScore());
-        flashCardProgress.setText("Đã hoàn thành: " + ((float) flashCardModel.getUserScore() / (float) flashCardModel.getMaxScore()) + "%");
+        String flashCardPercent = String.format("%.2f", ((float) flashCardModel.getUserScore() / (float) flashCardModel.getMaxScore()));
+        flashCardProgress.setText("Đã hoàn thành: " + flashCardPercent + "%");
         if (flashCardModel.isCompletedStatus()) {
             flashCardCompleted.setVisibility(View.VISIBLE);
         }
 
         sharkBoatModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 23);
         sharkBoatScore.setText("Điểm của bạn: " + sharkBoatModel.getUserScore());
-        sharkBoatProgress.setText("Đã hoàn thành: " + ((float) sharkBoatModel.getUserScore() / (float) sharkBoatModel.getMaxScore()) + "%");
+        String sharkBoatPercent = String.format("%.2f", ((float) sharkBoatModel.getUserScore() / (float) sharkBoatModel.getMaxScore()));
+        sharkBoatProgress.setText("Đã hoàn thành: " + sharkBoatPercent + "%");
         if (sharkBoatModel.isCompletedStatus()) {
             sharkBoatCompleted.setVisibility(View.VISIBLE);
         }
