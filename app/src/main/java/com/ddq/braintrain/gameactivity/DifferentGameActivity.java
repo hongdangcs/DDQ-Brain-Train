@@ -53,7 +53,7 @@ public class DifferentGameActivity extends AppCompatActivity {
         models = DifferentLevelMenuActivity.getDifferentModels();
 
         Intent intent = getIntent();
-         level = intent.getIntExtra("level", 0);
+        level = intent.getIntExtra("level", 0);
 
         gameStart();
 
@@ -62,12 +62,12 @@ public class DifferentGameActivity extends AppCompatActivity {
         imageViewSample.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN){
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     x = event.getX();
                     y = event.getY();
 
-                    if((x > models.get(level-1).getxCoordinate() - 75 && x < models.get(level-1).getxCoordinate() + 75) && (y > models.get(level-1).getyCoordinate() - 75 && y < models.get(level-1).getyCoordinate() + 75)){
-                        Log.d(TAG, "cau tra loi dung " + x + " "+ y);
+                    if ((x > models.get(level - 1).getxCoordinate() - 75 && x < models.get(level - 1).getxCoordinate() + 75) && (y > models.get(level - 1).getyCoordinate() - 75 && y < models.get(level - 1).getyCoordinate() + 75)) {
+                        Log.d(TAG, "cau tra loi dung " + x + " " + y);
                         timer.cancel();
                         resultTextView.setVisibility(View.VISIBLE);
                         resultTextView.setText("Câu trả lời đúng!");
@@ -77,7 +77,7 @@ public class DifferentGameActivity extends AppCompatActivity {
 
                         resultTextView.setVisibility(View.VISIBLE);
                         resultTextView.setText("Câu trả lời sai!");
-                        Log.d(TAG, "cau tra loi sai "+ x + " "+ y);
+                        Log.d(TAG, "cau tra loi sai " + x + " " + y);
                     }
                 }
                 return true;
@@ -95,28 +95,28 @@ public class DifferentGameActivity extends AppCompatActivity {
         });
     }
 
-    public void generateImage(){
-        imageViewSample.setImageResource(getResources().getIdentifier(models.get(level-1).getImage(), "drawable", getPackageName()));
-        imageViewSample.setTag(""+(level - 1));
+    public void generateImage() {
+        imageViewSample.setImageResource(getResources().getIdentifier(models.get(level - 1).getImage(), "drawable", getPackageName()));
+        imageViewSample.setTag("" + (level - 1));
     }
 
-    public void gameStart(){
+    public void gameStart() {
         generateImage();
         startTimer(120);
-        questionTextView.setText(models.get(level-1).getImageName());
+        questionTextView.setText(models.get(level - 1).getImageName());
     }
 
-    public void gameContinue(){
+    public void gameContinue() {
         generateImage();
         startTimer(timeLeft);
-        questionTextView.setText(models.get(level-1).getImageName());
+        questionTextView.setText(models.get(level - 1).getImageName());
     }
 
-    public void startTimer(long timeLeftSecond){
-        timer = new CountDownTimer(timeLeftSecond*1000,1000) {
+    public void startTimer(long timeLeftSecond) {
+        timer = new CountDownTimer(timeLeftSecond * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                 timeLeft = millisUntilFinished / 1000;
+                timeLeft = millisUntilFinished / 1000;
                 updateTimeLeft(timeLeft);
             }
 
@@ -127,11 +127,11 @@ public class DifferentGameActivity extends AppCompatActivity {
         }.start();
     }
 
-    public void updateTimeLeft(long timeLeft){
+    public void updateTimeLeft(long timeLeft) {
         timeTextView.setText("Còn lại: " + timeLeft + " giây!");
     }
 
-    public void gameFinish(){
+    public void gameFinish() {
         imageViewSample.setClickable(false);
     }
 

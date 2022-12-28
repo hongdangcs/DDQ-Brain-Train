@@ -169,27 +169,27 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
 
     }
 
-    public void updateUserScore(int gameID, int score){
+    public void updateUserScore(int gameID, int score) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE progress SET user_score="+ score+" WHERE game_id = "+gameID);
+        db.execSQL("UPDATE progress SET user_score=" + score + " WHERE game_id = " + gameID);
 
     }
 
-    public void updateCompletedStatus(String table, int level){
+    public void updateCompletedStatus(String table, int level) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE "+ table +" SET complete_status=1 WHERE level = " + level);
+        db.execSQL("UPDATE " + table + " SET complete_status=1 WHERE level = " + level);
 
     }
 
-    public void updateCompletedStatus(String table,String row,  int level){
+    public void updateCompletedStatus(String table, String row, int level) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE "+ table +" SET "+ row +" = 1 WHERE level = " + level);
+        db.execSQL("UPDATE " + table + " SET " + row + " = 1 WHERE level = " + level);
 
     }
 
-    public void updateCell(String table, String cell, int value, int level){
+    public void updateCell(String table, String cell, int value, int level) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE "+ table +" SET "+ cell +" = "+value +" WHERE level = " + level);
+        db.execSQL("UPDATE " + table + " SET " + cell + " = " + value + " WHERE level = " + level);
     }
 
 }

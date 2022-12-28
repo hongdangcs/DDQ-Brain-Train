@@ -3,7 +3,6 @@ package com.ddq.braintrain.gameactivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,17 +27,17 @@ public class FindOperatorGameActivity extends AppCompatActivity {
     private Button Option1, Option2, Option3, Option4, Option5, Option6;
     AppCompatButton btn, nextLevelButton, resultButton;
     CountDownTimer timer;
-    private int  option1, option2, option3, option4, option5, option6;
+    private int option1, option2, option3, option4, option5, option6;
     long timeLeft;
     private int count;
     private int point1, point2, point3;
     private int level;
     private int score = 0;
     private String text;
-    ArrayList<Integer>  numbers;
-    private int  optionten1, optionhundred2, optionthouasand3;
+    ArrayList<Integer> numbers;
+    private int optionten1, optionhundred2, optionthouasand3;
     private int select1, select2;
-    private int  totalSelect;
+    private int totalSelect;
     private String temp1, temp2;
 
 
@@ -46,7 +45,6 @@ public class FindOperatorGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_operator_game);
-
 
 
         textView = findViewById(R.id.FindOperatorLevelTextView);
@@ -64,15 +62,13 @@ public class FindOperatorGameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int level = intent.getIntExtra("level", 0);
         textView.setText("Level: " + level);
-        if (level < 100){
-            level = level - 10 ;
+        if (level < 100) {
+            level = level - 10;
             text = "ten";
-        }
-        else if(level < 1000 && level >= 100){
+        } else if (level < 1000 && level >= 100) {
             level = level - 100;
             text = "hundred";
-        }
-        else if(level < 10000 && level >= 1000){
+        } else if (level < 10000 && level >= 1000) {
             level = level - 1000;
             text = "thousand";
         }
@@ -80,7 +76,7 @@ public class FindOperatorGameActivity extends AppCompatActivity {
         gameStart(level);
     }
 
-    public void generate(int level){
+    public void generate(int level) {
         int temp = level + 1;
         textView.setText("Cấp độ: " + temp);
         updateScore(score);
@@ -94,31 +90,29 @@ public class FindOperatorGameActivity extends AppCompatActivity {
         Option4.setText(Integer.toString(option4));
         option5 = numbers.get(4);
         Option5.setText(Integer.toString(option5));
-        if(optionten1 == 6 && text.equals("ten")){
+        if (optionten1 == 6 && text.equals("ten")) {
             option6 = numbers.get(5);
             Option6.setText(Integer.toString(option6));
         }
-        if(optionhundred2 == 6 && text.equals("hundred")){
+        if (optionhundred2 == 6 && text.equals("hundred")) {
             option6 = numbers.get(5);
             Option6.setText(Integer.toString(option6));
         }
-        if(optionthouasand3 == 6 && text.equals("thousand")){
+        if (optionthouasand3 == 6 && text.equals("thousand")) {
             option6 = numbers.get(5);
             Option6.setText(Integer.toString(option6));
         }
 
 
-
-
-        if(level < 15){
+        if (level < 15) {
             point1 = FindOperatorLevelMenuActivity.getOperatorTenModels().get(level).getPoint();
         }
 
-        if(level < 20){
+        if (level < 20) {
             point2 = FindOperatorLevelMenuActivity.getOperatorHundredModels().get(level).getPoint();
         }
 
-        if(level < 25){
+        if (level < 25) {
             point3 = FindOperatorLevelMenuActivity.getOperatorThousandModels().get(level).getPoint();
         }
         Option1.setBackgroundColor(0xFF3a378e);
@@ -129,18 +123,17 @@ public class FindOperatorGameActivity extends AppCompatActivity {
         Option6.setBackgroundColor(0xFF3a378e);
 
 
-
     }
 
-    public void ClickOption1(View view){
-        if(totalSelect == 0){
+    public void ClickOption1(View view) {
+        if (totalSelect == 0) {
             Option1.setBackgroundColor(0xFFFFB665);
             select1 = option1;
             temp1 = "option1";
 
         }
 
-        if(totalSelect == 1){
+        if (totalSelect == 1) {
             Option1.setBackgroundColor(0xFFFFB665);
             select2 = option1;
             temp2 = "option1";
@@ -152,14 +145,14 @@ public class FindOperatorGameActivity extends AppCompatActivity {
 
     }
 
-    public void ClickOption2(View view){
-        if(totalSelect == 0){
+    public void ClickOption2(View view) {
+        if (totalSelect == 0) {
             Option2.setBackgroundColor(0xFFFFB665);
             select1 = option2;
             temp1 = "option2";
         }
 
-        if(totalSelect == 1){
+        if (totalSelect == 1) {
             Option2.setBackgroundColor(0xFFFFB665);
             select2 = option2;
             temp2 = "option2";
@@ -168,15 +161,16 @@ public class FindOperatorGameActivity extends AppCompatActivity {
         totalSelect = totalSelect + 1;
 
     }
-    public void ClickOption3(View view){
-        if(totalSelect == 0){
+
+    public void ClickOption3(View view) {
+        if (totalSelect == 0) {
             Option3.setBackgroundColor(0xFFFFB665);
             select1 = option3;
             temp1 = "option3";
 
         }
 
-        if(totalSelect == 1){
+        if (totalSelect == 1) {
             Option3.setBackgroundColor(0xFFFFB665);
             select2 = option3;
             temp2 = "option3";
@@ -186,8 +180,9 @@ public class FindOperatorGameActivity extends AppCompatActivity {
         totalSelect = totalSelect + 1;
 
     }
-    public void ClickOption4(View view){
-        if(totalSelect == 0){
+
+    public void ClickOption4(View view) {
+        if (totalSelect == 0) {
             Option4.setBackgroundColor(0xFFFFB665);
             select1 = option4;
             temp1 = "option4";
@@ -195,7 +190,7 @@ public class FindOperatorGameActivity extends AppCompatActivity {
 
         }
 
-        if(totalSelect == 1){
+        if (totalSelect == 1) {
             Option4.setBackgroundColor(0xFFFFB665);
             select2 = option4;
             temp2 = "option4";
@@ -205,14 +200,15 @@ public class FindOperatorGameActivity extends AppCompatActivity {
         totalSelect = totalSelect + 1;
 
     }
-    public void ClickOption5(View view){
-        if(totalSelect == 0){
+
+    public void ClickOption5(View view) {
+        if (totalSelect == 0) {
             Option5.setBackgroundColor(0xFFFFB665);
             select1 = option5;
             temp1 = "option5";
 
         }
-        if(totalSelect == 1){
+        if (totalSelect == 1) {
             Option5.setBackgroundColor(0xFFFFB665);
             select2 = option5;
             temp2 = "option5";
@@ -223,15 +219,15 @@ public class FindOperatorGameActivity extends AppCompatActivity {
 
     }
 
-    public void ClickOption6(View view){
-        if(totalSelect == 0){
+    public void ClickOption6(View view) {
+        if (totalSelect == 0) {
             Option6.setBackgroundColor(0xFFFFB665);
             select1 = option6;
             temp1 = "option6";
 
         }
 
-        if(totalSelect == 1){
+        if (totalSelect == 1) {
             Option1.setBackgroundColor(0xFFFFB665);
             select2 = option6;
             temp2 = "option6";
@@ -243,34 +239,34 @@ public class FindOperatorGameActivity extends AppCompatActivity {
     }
 
     public void gameStart(int level1) {
-        if(level == 15 && text.equals("ten")){
+        if (level == 15 && text.equals("ten")) {
             level = 0;
             level1 = 0;
             text = "hundred";
         }
 
-        if(level == 20 && text.equals("hundred")){
+        if (level == 20 && text.equals("hundred")) {
             level = 0;
             level1 = 0;
             text = "thousand";
         }
 
-        if(level == 25 && text.equals("thousand")){
+        if (level == 25 && text.equals("thousand")) {
             gameEnd();
             return;
 
         }
 
         Option6.setVisibility(View.INVISIBLE);
-        if(level1 < 15){
+        if (level1 < 15) {
             optionten1 = FindOperatorLevelMenuActivity.getOperatorTenModels().get(level1).getOption();
         }
 
-        if(level1 < 20){
+        if (level1 < 20) {
             optionhundred2 = FindOperatorLevelMenuActivity.getOperatorHundredModels().get(level1).getOption();
         }
 
-        if(level1 < 25){
+        if (level1 < 25) {
             optionthouasand3 = FindOperatorLevelMenuActivity.getOperatorThousandModels().get(level1).getOption();
         }
 
@@ -280,22 +276,22 @@ public class FindOperatorGameActivity extends AppCompatActivity {
 
         numbers = new ArrayList();
         Random rand = new Random();
-        if(optionten1 == 5 && text.equals("ten")){
+        if (optionten1 == 5 && text.equals("ten")) {
             int int_random = rand.nextInt(9) + 1;
             numbers.add(int_random);
-            numbers.add(10-int_random);
-            for(int i = 0; i < 3; i++){
+            numbers.add(10 - int_random);
+            for (int i = 0; i < 3; i++) {
                 int_random = rand.nextInt(9) + 1;
                 numbers.add(int_random);
             }
             timeLeft = FindOperatorLevelMenuActivity.getOperatorTenModels().get(level1).getTime();
 
         }
-        if(optionhundred2 == 5 && text.equals("hundred")){
+        if (optionhundred2 == 5 && text.equals("hundred")) {
             int int_random = rand.nextInt(81) + 10;
             numbers.add(int_random);
-            numbers.add(100-int_random);
-            for(int i = 0; i < 3; i++){
+            numbers.add(100 - int_random);
+            for (int i = 0; i < 3; i++) {
                 int_random = rand.nextInt(81) + 10;
                 numbers.add(int_random);
             }
@@ -303,47 +299,47 @@ public class FindOperatorGameActivity extends AppCompatActivity {
 
         }
 
-        if(optionten1 == 6 && text.equals("ten")){
+        if (optionten1 == 6 && text.equals("ten")) {
             Option6.setVisibility(View.VISIBLE);
             int int_random = rand.nextInt(9) + 1;
             numbers.add(int_random);
-            numbers.add(10-int_random);
-            for(int i = 0; i < 4; i++){
+            numbers.add(10 - int_random);
+            for (int i = 0; i < 4; i++) {
                 int_random = rand.nextInt(9) + 1;
                 numbers.add(int_random);
             }
             timeLeft = FindOperatorLevelMenuActivity.getOperatorTenModels().get(level1).getTime();
 
         }
-        if(optionhundred2 == 6 && text.equals("hundred")){
+        if (optionhundred2 == 6 && text.equals("hundred")) {
             Option6.setVisibility(View.VISIBLE);
             int int_random = rand.nextInt(81) + 10;
             numbers.add(int_random);
-            numbers.add(100-int_random);
-            for(int i = 0; i < 4; i++){
+            numbers.add(100 - int_random);
+            for (int i = 0; i < 4; i++) {
                 int_random = rand.nextInt(81) + 10;
                 numbers.add(int_random);
             }
             timeLeft = FindOperatorLevelMenuActivity.getOperatorHundredModels().get(level1).getTime();
 
         }
-        if(optionthouasand3 == 5 && text.equals("thousand")){
+        if (optionthouasand3 == 5 && text.equals("thousand")) {
             int int_random = rand.nextInt(801) + 100;
             numbers.add(int_random);
-            numbers.add(1000-int_random);
-            for(int i = 0; i < 3; i++){
+            numbers.add(1000 - int_random);
+            for (int i = 0; i < 3; i++) {
                 int_random = rand.nextInt(801) + 100;
                 numbers.add(int_random);
             }
             timeLeft = FindOperatorLevelMenuActivity.getOperatorThousandModels().get(level1).getTime();
 
         }
-        if(optionthouasand3 == 6 && text.equals("thousand")){
+        if (optionthouasand3 == 6 && text.equals("thousand")) {
             Option6.setVisibility(View.VISIBLE);
             int int_random = rand.nextInt(801) + 100;
             numbers.add(int_random);
-            numbers.add(1000-int_random);
-            for(int i = 0; i < 4; i++){
+            numbers.add(1000 - int_random);
+            for (int i = 0; i < 4; i++) {
                 int_random = rand.nextInt(801) + 100;
                 numbers.add(int_random);
             }
@@ -361,7 +357,7 @@ public class FindOperatorGameActivity extends AppCompatActivity {
     }
 
     public void UpdateTimer() {
-        timer = new CountDownTimer(timeLeft*1000, 1000) {
+        timer = new CountDownTimer(timeLeft * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeft = millisUntilFinished / 1000;
@@ -391,7 +387,7 @@ public class FindOperatorGameActivity extends AppCompatActivity {
 //        }.start();
 //    }
 
-    public void pauseTimer(){
+    public void pauseTimer() {
         timer.cancel();
     }
 
@@ -399,12 +395,12 @@ public class FindOperatorGameActivity extends AppCompatActivity {
         FindOperatorTimeTextView.setText("Bạn còn: " + timeLeft + " giây");
     }
 
-    public void updateScore(int score){
-        FindOperatorScoreTextView.setText("Điểm: "+ score);
+    public void updateScore(int score) {
+        FindOperatorScoreTextView.setText("Điểm: " + score);
 
     }
 
-    public void gameStop(){
+    public void gameStop() {
         FindOperatorCompleteNotiTextView.setVisibility(View.VISIBLE);
         resultButton.setVisibility(View.VISIBLE);
         Option1.setClickable(false);
@@ -416,7 +412,7 @@ public class FindOperatorGameActivity extends AppCompatActivity {
 
     }
 
-    public void gameEnd(){
+    public void gameEnd() {
         FindOperatorCompleteNotiTextView.setVisibility(View.VISIBLE);
         FindOperatorCompleteNotiTextView.setText("Hoàn Thành");
         resultButton.setVisibility(View.VISIBLE);
@@ -435,26 +431,26 @@ public class FindOperatorGameActivity extends AppCompatActivity {
         finish();
     }
 
-    public void checkSelect(){
-        if(select1 + select2 == 10 || select1 + select2 == 100 || select1+select2 == 1000){
+    public void checkSelect() {
+        if (select1 + select2 == 10 || select1 + select2 == 100 || select1 + select2 == 1000) {
             Toast.makeText(FindOperatorGameActivity.this, "Câu trả lời Đúng!", Toast.LENGTH_SHORT).show();
             totalSelect = -1;
             pauseTimer();
             level++;
-            if(text.equals("ten")){
+            if (text.equals("ten")) {
                 score = score + point1;
                 BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(FindOperatorGameActivity.this);
                 brainTrainDatabase.updateUserScore(11, score);
                 brainTrainDatabase.updateCompletedStatus("math_game_two_multiple_of_ten", level);
             }
-            if(text.equals("hundred")){
+            if (text.equals("hundred")) {
                 score = score + point2;
                 BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(FindOperatorGameActivity.this);
                 brainTrainDatabase.updateUserScore(11, score);
                 brainTrainDatabase.updateCompletedStatus("math_game_two_multiple_of_hundred", level);
             }
 
-            if(text.equals("thousand")){
+            if (text.equals("thousand")) {
                 score = score + point3;
                 BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(FindOperatorGameActivity.this);
                 brainTrainDatabase.updateUserScore(11, score);
@@ -463,30 +459,29 @@ public class FindOperatorGameActivity extends AppCompatActivity {
 
             updateScore(score);
             gameStart(level);
-        }
-        else{
+        } else {
             Toast.makeText(FindOperatorGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_SHORT).show();
-            if(temp1.equals("option1") || temp2.equals("option1")){
+            if (temp1.equals("option1") || temp2.equals("option1")) {
                 Option1.setBackgroundColor(0xFF3a378e);
             }
 
-            if(temp1.equals("option2") || temp2.equals("option2")){
+            if (temp1.equals("option2") || temp2.equals("option2")) {
                 Option2.setBackgroundColor(0xFF3a378e);
             }
 
-            if(temp1.equals("option3") || temp2.equals("option3")){
+            if (temp1.equals("option3") || temp2.equals("option3")) {
                 Option3.setBackgroundColor(0xFF3a378e);
             }
 
-            if(temp1.equals("option4") || temp2.equals("option4")){
+            if (temp1.equals("option4") || temp2.equals("option4")) {
                 Option4.setBackgroundColor(0xFF3a378e);
             }
 
-            if(temp1.equals("option5") || temp2.equals("option5")){
+            if (temp1.equals("option5") || temp2.equals("option5")) {
                 Option5.setBackgroundColor(0xFF3a378e);
             }
 
-            if(temp1.equals("option6") || temp2.equals("option6")){
+            if (temp1.equals("option6") || temp2.equals("option6")) {
                 Option6.setBackgroundColor(0xFF3a378e);
             }
 
@@ -497,7 +492,7 @@ public class FindOperatorGameActivity extends AppCompatActivity {
         }
     }
 
-    public void back(){
+    public void back() {
         finish();
     }
 }

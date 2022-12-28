@@ -25,6 +25,8 @@ public class MissingObjectLevelMenuActivity extends AppCompatActivity implements
     GridLayout missingObjectEasyLevelLayout, missingObjectMediumLevelLayout, missingObjectHardLevelLayout;
     AppCompatButton btn;
 
+    boolean canPlay = true;
+
     public static List<MissingObjectModel> getMissingObjectModels() {
         return missingObjectModels;
     }
@@ -44,18 +46,28 @@ public class MissingObjectLevelMenuActivity extends AppCompatActivity implements
         missingObjectModels = new BrainTrainDAO().missingObjectModels(brainTrainDatabase);
 
         for (int i = 0; i < missingObjectModels.size(); i++) {
+
             btn = new AppCompatButton(MissingObjectLevelMenuActivity.this);
             btn.setText("" + missingObjectModels.get(i).getLevel());
             btn.setId(i + 1);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);
             btn.setLayoutParams(params);
-            btn.setBackgroundDrawable(ContextCompat.getDrawable(MissingObjectLevelMenuActivity.this, R.drawable.button_shape));
+            btn.setBackgroundDrawable(ContextCompat.getDrawable(MissingObjectLevelMenuActivity.this, R.drawable.button_shape_cant_play));
+
+            if(canPlay){
+               // btn.setClickable(true);
+                btn.setOnClickListener(MissingObjectLevelMenuActivity.this);
+                btn.setBackgroundDrawable(ContextCompat.getDrawable(MissingObjectLevelMenuActivity.this, R.drawable.button_shape));
+            }
+            canPlay=false;
+
             if (missingObjectModels.get(i).getCompleteStatusEasy() == 1) {
                 btn.setBackgroundDrawable(ContextCompat.getDrawable(MissingObjectLevelMenuActivity.this, R.drawable.button_shape_completed));
+                canPlay = true;
             }
+
             missingObjectEasyLevelLayout.addView(btn);
-            btn.setOnClickListener(MissingObjectLevelMenuActivity.this);
         }
 
         for (int i = 0; i < missingObjectModels.size(); i++) {
@@ -65,12 +77,22 @@ public class MissingObjectLevelMenuActivity extends AppCompatActivity implements
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);
             btn.setLayoutParams(params);
-            btn.setBackgroundDrawable(ContextCompat.getDrawable(MissingObjectLevelMenuActivity.this, R.drawable.button_shape));
-            if (missingObjectModels.get(i).getCompleteStatusEasy() == 1) {
+            btn.setBackgroundDrawable(ContextCompat.getDrawable(MissingObjectLevelMenuActivity.this, R.drawable.button_shape_cant_play));
+
+
+            if(canPlay){
+                // btn.setClickable(true);
+                btn.setOnClickListener(MissingObjectLevelMenuActivity.this);
+                btn.setBackgroundDrawable(ContextCompat.getDrawable(MissingObjectLevelMenuActivity.this, R.drawable.button_shape));
+            }
+            canPlay=false;
+
+
+            if (missingObjectModels.get(i).getCompleteStatusMedium() == 1) {
                 btn.setBackgroundDrawable(ContextCompat.getDrawable(MissingObjectLevelMenuActivity.this, R.drawable.button_shape_completed));
+                canPlay = true;
             }
             missingObjectMediumLevelLayout.addView(btn);
-            btn.setOnClickListener(MissingObjectLevelMenuActivity.this);
         }
 
         for (int i = 0; i < missingObjectModels.size(); i++) {
@@ -80,12 +102,22 @@ public class MissingObjectLevelMenuActivity extends AppCompatActivity implements
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);
             btn.setLayoutParams(params);
-            btn.setBackgroundDrawable(ContextCompat.getDrawable(MissingObjectLevelMenuActivity.this, R.drawable.button_shape));
-            if (missingObjectModels.get(i).getCompleteStatusEasy() == 1) {
+            btn.setBackgroundDrawable(ContextCompat.getDrawable(MissingObjectLevelMenuActivity.this, R.drawable.button_shape_cant_play));
+
+
+            if(canPlay){
+                // btn.setClickable(true);
+                btn.setOnClickListener(MissingObjectLevelMenuActivity.this);
+                btn.setBackgroundDrawable(ContextCompat.getDrawable(MissingObjectLevelMenuActivity.this, R.drawable.button_shape));
+            }
+            canPlay=false;
+
+
+            if (missingObjectModels.get(i).getCompleteStatusHard() == 1) {
                 btn.setBackgroundDrawable(ContextCompat.getDrawable(MissingObjectLevelMenuActivity.this, R.drawable.button_shape_completed));
+                canPlay = true;
             }
             missingObjectHardLevelLayout.addView(btn);
-            btn.setOnClickListener(MissingObjectLevelMenuActivity.this);
         }
     }
 

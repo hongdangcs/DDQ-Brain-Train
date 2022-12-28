@@ -7,9 +7,9 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 public class Boat {
-    private int x;
-    private int y;
-    private Bitmap boatImage;
+    private final int x;
+    private final int y;
+    private final Bitmap boatImage;
     private int hits;
 
     public Boat(Context context, int x, int y) {
@@ -19,7 +19,7 @@ public class Boat {
         int width = originalImage.getWidth();
         int height = originalImage.getHeight();
         float scaleFactor = 2f; // Change this value to adjust the size of the image
-        boatImage = Bitmap.createScaledBitmap(originalImage, (int)(width * scaleFactor), (int)(height * scaleFactor), false);
+        boatImage = Bitmap.createScaledBitmap(originalImage, (int) (width * scaleFactor), (int) (height * scaleFactor), false);
         hits = 0;
     }
 
@@ -35,7 +35,7 @@ public class Boat {
         return hits >= 5;
     }
 
-    Rect getCollisionShape () {
+    Rect getCollisionShape() {
         return new Rect(x, y, x + boatImage.getWidth(), y + boatImage.getHeight());
     }
 }

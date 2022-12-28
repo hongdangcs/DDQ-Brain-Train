@@ -1,20 +1,6 @@
 package com.ddq.braintrain;
 
-import android.content.Context;
-import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.ddq.braintrain.models.SharkBoatModel;
-
-import java.util.ArrayList;
-
-public class SharkBoatLevelAdapter{ /*extends RecyclerView.Adapter<SharkBoatLevelAdapter.ViewHolder>{
+public class SharkBoatLevelAdapter { /*extends RecyclerView.Adapter<SharkBoatLevelAdapter.ViewHolder>{
 
     private ArrayList<SharkBoatModel> sharkBoatModels;
     private Context mContext;

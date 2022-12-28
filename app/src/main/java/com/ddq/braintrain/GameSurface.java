@@ -16,15 +16,12 @@ import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
-
-import com.ddq.braintrain.gameactivity.GridsHighlightGameActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +70,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         this.bitcount = bitcount;
         this.passpoint = passpoint;
 
-        bitten =0;
+        bitten = 0;
 
 
         // Make Game Surface focusable so it can handle events. .
@@ -86,8 +83,8 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         Display display = windowManager.getDefaultDisplay();
         DisplayMetrics displayMetrics = new DisplayMetrics();
         display.getMetrics(displayMetrics);
-         screenWidth = displayMetrics.widthPixels;
-         screenHeight = displayMetrics.heightPixels;
+        screenWidth = displayMetrics.widthPixels;
+        screenHeight = displayMetrics.heightPixels;
         rect = new Rect(0, 0, screenWidth, screenHeight);
 
         for (int i = 0; i < sharkNumber; i++) {
@@ -116,7 +113,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         timer = new CountDownTimer(12000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                timeLeft = millisUntilFinished/1000;
+                timeLeft = millisUntilFinished / 1000;
             }
 
             @Override
@@ -126,18 +123,18 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         }.start();
     }
 
-    public void resultActivity(){
+    public void resultActivity() {
         timer.cancel();
 
-        if(finishCall ==0) {
+        if (finishCall == 0) {
             finishCall++;
             int currentScore = sharkNumber * boatpoint - (boatpoint / 5) * bitten;
 
             if (currentScore > score) {
                 score = currentScore;
                 BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(mContext);
-                brainTrainDatabase.updateCell("attention_game_three", "score", score, level );
-                if(score>=passpoint){
+                brainTrainDatabase.updateCell("attention_game_three", "score", score, level);
+                if (score >= passpoint) {
                     brainTrainDatabase.updateCell("attention_game_three", "complete_status", 1, level);
                 }
             }
@@ -186,7 +183,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
             wave.draw(canvas);
         }
 
-        canvas.drawText("Mạng: " + (bitcount-bitten), screenWidth/2, 44, scorePaint);
+        canvas.drawText("Mạng: " + (bitcount - bitten), screenWidth / 2, 44, scorePaint);
         canvas.drawText("Time: " + timeLeft, screenWidth - 14, 44, timePaint);
         canvas.drawText("Màn: " + level, 14, 44, levelPaint);
 
@@ -197,9 +194,9 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         int touchX = (int) event.getX();
         int touchY = (int) event.getY();
         //if (waves.size() < boatNumber) {
-            Wave wave = new Wave(getContext(), touchX - 75, touchY - 75);
+        Wave wave = new Wave(getContext(), touchX - 75, touchY - 75);
 
-            waves.add(wave);
+        waves.add(wave);
         //}
         return true;
     }
@@ -221,7 +218,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
                     shark.setCollision(true);
                     boat.hit();
                     bitten++;
-                    if(bitten > bitcount){
+                    if (bitten > bitcount) {
                         resultActivity();
                     }
                     if (boat.isDestroyed()) {

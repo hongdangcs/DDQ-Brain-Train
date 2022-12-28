@@ -145,7 +145,7 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
             gameFinish();
             notInPreviousInforTextView.setText("Chọn lựa đã bị trùng!");
             Log.d(TAG, selected + "\n ban da chon " + v.getTag().toString());
-            Log.d(TAG, "anh so "+imageIndex);
+            Log.d(TAG, "anh so " + imageIndex);
         } else {
             String tag = v.getTag().toString();
             selected += tag;

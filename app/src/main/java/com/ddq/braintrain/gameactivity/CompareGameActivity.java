@@ -1,10 +1,8 @@
 package com.ddq.braintrain.gameactivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,7 +13,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.levelmenu.CompareLevelMenuActivity;
-import com.ddq.braintrain.levelmenu.GridsHighlightLevelMenuActivity;
 
 public class CompareGameActivity extends AppCompatActivity {
 
@@ -46,11 +43,11 @@ public class CompareGameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         level = intent.getIntExtra("level", 0);
         textView.setText("Level: " + level);
-        gameStart(level-1);
+        gameStart(level - 1);
 
     }
 
-    public void generate(int level){
+    public void generate(int level) {
         int temp = level + 1;
         textView.setText("Cấp độ: " + temp);
         updateScore(score);
@@ -65,11 +62,11 @@ public class CompareGameActivity extends AppCompatActivity {
         Expression2.setBackgroundColor(0xFF3a378e);
     }
 
-    public void ClickExpresion1(View view){
-        if(ExpressionResult1 < ExpressionResult2){
+    public void ClickExpresion1(View view) {
+        if (ExpressionResult1 < ExpressionResult2) {
             Expression1.setBackgroundColor(0xFF00FF00);
             count++;
-            if(count == 5){
+            if (count == 5) {
                 pauseTimer();
                 timeLeft = timeLeft + 10;
                 UpdateTimer();
@@ -77,18 +74,16 @@ public class CompareGameActivity extends AppCompatActivity {
             }
             BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(CompareGameActivity.this);
             brainTrainDatabase.updateUserScore(11, score);
-            int temp = level-1;
+            int temp = level - 1;
             brainTrainDatabase.updateCompletedStatus("math_game_one", temp);
             level = level + 1;
             score = score + point;
-            if(level == 101){
+            if (level == 101) {
                 gameEnd();
+            } else {
+                generate(level - 1);
             }
-            else {
-                generate(level-1);
-            }
-        }
-        else{
+        } else {
             Expression1.setBackgroundColor(0xFFFF0000);
             pauseTimer();
             timeLeft = timeLeft - 2;
@@ -96,11 +91,11 @@ public class CompareGameActivity extends AppCompatActivity {
         }
     }
 
-    public void ClickExpresion2(View view){
-        if(ExpressionResult1 > ExpressionResult2){
+    public void ClickExpresion2(View view) {
+        if (ExpressionResult1 > ExpressionResult2) {
             Expression2.setBackgroundColor(0xFF00FF00);
             count++;
-            if(count == 5){
+            if (count == 5) {
                 pauseTimer();
                 timeLeft = timeLeft + 10;
                 UpdateTimer();
@@ -108,18 +103,16 @@ public class CompareGameActivity extends AppCompatActivity {
             }
             BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(CompareGameActivity.this);
             brainTrainDatabase.updateUserScore(11, score);
-            int temp = level-1;
+            int temp = level - 1;
             brainTrainDatabase.updateCompletedStatus("math_game_one", temp);
             level = level + 1;
             score = score + point;
-            if(level == 101){
+            if (level == 101) {
                 gameEnd();
+            } else {
+                generate(level - 1);
             }
-            else {
-                generate(level-1);
-            }
-        }
-        else{
+        } else {
             Expression2.setBackgroundColor(0xFFFF0000);
             pauseTimer();
             timeLeft = timeLeft - 2;
@@ -136,7 +129,7 @@ public class CompareGameActivity extends AppCompatActivity {
     }
 
     public void UpdateTimer() {
-        timer = new CountDownTimer(timeLeft*1000, 1000) {
+        timer = new CountDownTimer(timeLeft * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeft = millisUntilFinished / 1000;
@@ -166,7 +159,7 @@ public class CompareGameActivity extends AppCompatActivity {
         }.start();
     }
 
-    public void pauseTimer(){
+    public void pauseTimer() {
         timer.cancel();
     }
 
@@ -174,12 +167,12 @@ public class CompareGameActivity extends AppCompatActivity {
         CompareTimeTextView.setText("Bạn còn: " + timeLeft + " giây");
     }
 
-    public void updateScore(int score){
-        CompareScoreTextView.setText("Điểm: "+ score);
+    public void updateScore(int score) {
+        CompareScoreTextView.setText("Điểm: " + score);
 
     }
 
-    public void gameStop(){
+    public void gameStop() {
         CompareCompleteNotiTextView.setVisibility(View.VISIBLE);
         resultButton.setVisibility(View.VISIBLE);
         Expression1.setClickable(false);
@@ -192,7 +185,7 @@ public class CompareGameActivity extends AppCompatActivity {
         finish();
     }
 
-    public void gameEnd(){
+    public void gameEnd() {
         CompareCompleteNotiTextView.setVisibility(View.VISIBLE);
         CompareCompleteNotiTextView.setText("Hoàn Thành");
         resultButton.setVisibility(View.VISIBLE);
@@ -201,10 +194,9 @@ public class CompareGameActivity extends AppCompatActivity {
 
     }
 
-    public void back(){
+    public void back() {
         finish();
     }
-
 
 
 }

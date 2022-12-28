@@ -8,8 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.R;
@@ -21,7 +23,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-public class SortingCharGameActivity extends AppCompatActivity  {
+public class SortingCharGameActivity extends AppCompatActivity {
     private static final int START_TIMER = 20000;
     CountDownTimer timer;
     long timeLeft = START_TIMER, timeRes, totalTimeRes;
@@ -33,7 +35,7 @@ public class SortingCharGameActivity extends AppCompatActivity  {
     private EditText editAnswer;
     private BrainTrainDatabase brainTrainDatabase;
     private static List<SortingCharGameModel> sortingCharGameModels;
-    private static List<List<SortingCharGameModel>> listQuestions = new ArrayList<>();
+    private static final List<List<SortingCharGameModel>> listQuestions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,7 @@ public class SortingCharGameActivity extends AppCompatActivity  {
     }
 
     // Get game question part:
-    public List<SortingCharGameModel> chooseGame(int x){
+    public List<SortingCharGameModel> chooseGame(int x) {
         List<SortingCharGameModel> tempList = new ArrayList<>();
         switch (x) {
             case 1:
@@ -114,7 +116,7 @@ public class SortingCharGameActivity extends AppCompatActivity  {
             gameStop();
         } else {
             level++;
-            txtLanguageScore .setText("Điểm: " + score);
+            txtLanguageScore.setText("Điểm: " + score);
             submitButton.setVisibility(View.VISIBLE);
             editAnswer.setVisibility(View.VISIBLE);
             nextLevelButton.setVisibility(View.GONE);
@@ -124,19 +126,19 @@ public class SortingCharGameActivity extends AppCompatActivity  {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                    if(s.toString().trim().length()==0){
-                        submitButton.setEnabled(false);
-                    } else {
-                        submitButton.setEnabled(true);
-                    }
+                    submitButton.setEnabled(s.toString().trim().length() != 0);
                 }
+
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count,
-                                              int after) {}
+                                              int after) {
+                }
+
                 @Override
-                public void afterTextChanged(Editable s) {}
+                public void afterTextChanged(Editable s) {
+                }
             });
-            txtQId.setText("Câu "+level);
+            txtQId.setText("Câu " + level);
             correctWord = chooseGame(current).get(index).getWord();
             String word = correctWord;
             word = word.replaceAll(" ", "").trim();
@@ -148,17 +150,17 @@ public class SortingCharGameActivity extends AppCompatActivity  {
         }
     }
 
-    public String scramble( Random random, String inputString )
-    {
+    public String scramble(Random random, String inputString) {
         // Convert string into a simple char array:
-        char a[] = inputString.toCharArray();
+        char[] a = inputString.toCharArray();
 
         // Scramble the letters using the standard Fisher-Yates shuffle,
-        for( int i=0 ; i<a.length ; i++ )
-        {
+        for (int i = 0; i < a.length; i++) {
             int j = random.nextInt(a.length);
             // Swap letters
-            char temp = a[i]; a[i] = a[j];  a[j] = temp;
+            char temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
         }
 
         return new String(a);
@@ -244,22 +246,21 @@ public class SortingCharGameActivity extends AppCompatActivity  {
     // Submit button handle:
     public void Submit(View view) {
         String userInput = editAnswer.getText().toString().toLowerCase(Locale.ROOT);
-        if (userInput.equals(correctWord)){
+        if (userInput.equals(correctWord)) {
             timer.cancel();
             getTimeRes();
             updateScore();
             editAnswer.getText().clear();
             index = index + 1;
             gameStart();
-        }
-        else {
+        } else {
             Toast.makeText(SortingCharGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_LONG).show();
         }
     }
 
     // Next section handle:
     public void nextSection(View view) {
-        if (section <= 4){
+        if (section <= 4) {
             section = section + 1;
             current = current + 1;
             level = 0;

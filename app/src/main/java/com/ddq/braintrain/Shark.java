@@ -75,33 +75,36 @@ public class Shark {
 
          */
 
-        if(isCollision){
-            this.x = oldX; this.y = oldY;
+        if (isCollision) {
+            this.x = oldX;
+            this.y = oldY;
             this.movingVectorX = -this.movingVectorX;
             this.movingVectorY = -this.movingVectorY;
             isCollision = false;
-        } else{
+        } else {
 
-        this.oldX = x; this.oldY = y;
+            this.oldX = x;
+            this.oldY = y;
 
-        this.x = x + movingVectorX;
-        this.y = y + movingVectorY;
+            this.x = x + movingVectorX;
+            this.y = y + movingVectorY;
 
-        if (this.x < 0) {
-            this.x = 0;
-            this.movingVectorX = -this.movingVectorX;
-        } else if (this.x > this.gameSurface.getWidth() - width) {
-            this.x = this.gameSurface.getWidth() - width;
-            this.movingVectorX = -this.movingVectorX;
+            if (this.x < 0) {
+                this.x = 0;
+                this.movingVectorX = -this.movingVectorX;
+            } else if (this.x > this.gameSurface.getWidth() - width) {
+                this.x = this.gameSurface.getWidth() - width;
+                this.movingVectorX = -this.movingVectorX;
+            }
+
+            if (this.y < 0) {
+                this.y = 0;
+                this.movingVectorY = -this.movingVectorY;
+            } else if (this.y > this.gameSurface.getHeight() - height) {
+                this.y = this.gameSurface.getHeight() - height;
+                this.movingVectorY = -this.movingVectorY;
+            }
         }
-
-        if (this.y < 0) {
-            this.y = 0;
-            this.movingVectorY = -this.movingVectorY;
-        } else if (this.y > this.gameSurface.getHeight() - height) {
-            this.y = this.gameSurface.getHeight() - height;
-            this.movingVectorY = -this.movingVectorY;
-        }}
 
     }
 
@@ -113,7 +116,7 @@ public class Shark {
         return new Rect(x, y, x + width, y + height);
     }
 
-    void changeDirection(){
+    void changeDirection() {
         movingVectorX = -movingVectorX;
         movingVectorY = -movingVectorY;
         Log.d(TAG, "changeDirection: Changed!!" + movingVectorX);

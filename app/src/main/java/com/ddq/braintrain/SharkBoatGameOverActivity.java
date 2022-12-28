@@ -2,8 +2,6 @@ package com.ddq.braintrain;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,8 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.ddq.braintrain.gameactivity.SharkBoatGameActivity;
-import com.ddq.braintrain.levelmenu.SharkBoatLevelMenuActivity;
 import com.ddq.braintrain.models.SharkBoatModel;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class SharkBoatGameOverActivity extends AppCompatActivity {
     int isPassed;
 
     private BrainTrainDatabase brainTrainDatabase;
-    private static List<SharkBoatModel> sharkBoatModels ;
+    private static List<SharkBoatModel> sharkBoatModels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +40,18 @@ public class SharkBoatGameOverActivity extends AppCompatActivity {
         sharkBoatNextLevelButton.setVisibility(View.GONE);
 
         Intent intent = getIntent();
-        level = intent.getIntExtra("level", 0) -1 ;
+        level = intent.getIntExtra("level", 0) - 1;
         score = intent.getIntExtra("score", 0);
         isPassed = intent.getIntExtra("isPassed", 0);
         passScore = intent.getIntExtra("passscore", 0);
 
-        if(isPassed==1){
+        if (isPassed == 1) {
             gameOverNoti.setText("Đã hoàn thành màn chơi");
             sharkBoatNextLevelButton.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             gameOverNoti.setText("Chưa vượt qua màn chơi");
         }
-        sharkBoatScoreTextView.setText("Điểm: "+ score+"/"+passScore);
+        sharkBoatScoreTextView.setText("Điểm: " + score + "/" + passScore);
 
         Log.d(TAG, "onCreate: Created");
 
@@ -63,7 +62,7 @@ public class SharkBoatGameOverActivity extends AppCompatActivity {
         sharkBoatNextLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleLevelClick(sharkBoatModels.get(level+1));
+                handleLevelClick(sharkBoatModels.get(level + 1));
             }
         });
 
@@ -76,7 +75,7 @@ public class SharkBoatGameOverActivity extends AppCompatActivity {
 
     }
 
-    public void handleLevelClick(SharkBoatModel model){
+    public void handleLevelClick(SharkBoatModel model) {
         Intent intent = new Intent(SharkBoatGameOverActivity.this, SharkBoatGameActivity.class);
         intent.putExtra("level", model.getLevel());
         intent.putExtra("score", model.getScore());

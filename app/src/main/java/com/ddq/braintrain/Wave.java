@@ -13,8 +13,8 @@ import android.util.Log;
 public class Wave {
 
 
-     private int x;
-    private  int y;
+    private final int x;
+    private final int y;
     private final Bitmap waveImage;
     int width, height;
     boolean isAvailable;
@@ -37,7 +37,7 @@ public class Wave {
         Log.d(TAG, "Wave: after " + width);
     }
 
-    public void startTimer(){
+    public void startTimer() {
         timer = new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {

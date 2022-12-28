@@ -8,6 +8,7 @@ import com.ddq.braintrain.models.CompareModel;
 import com.ddq.braintrain.models.ConjunctionGameModel;
 import com.ddq.braintrain.models.DifferentModel;
 import com.ddq.braintrain.models.FindOperatorModel;
+import com.ddq.braintrain.models.FindWordGameModel;
 import com.ddq.braintrain.models.FlashCardModel;
 import com.ddq.braintrain.models.HighlightGridsModel;
 import com.ddq.braintrain.models.MissingObjectModel;
@@ -15,7 +16,6 @@ import com.ddq.braintrain.models.NotInPreviousModel;
 import com.ddq.braintrain.models.ProgressModel;
 import com.ddq.braintrain.models.SharkBoatModel;
 import com.ddq.braintrain.models.SortingCharGameModel;
-import com.ddq.braintrain.models.FindWordGameModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +35,11 @@ public class BrainTrainDAO {
         return model;
     }
 
-    public static boolean updateUserScore(BrainTrainDatabase db, int gameID, int score){
+    public static boolean updateUserScore(BrainTrainDatabase db, int gameID, int score) {
         SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("GAME_ID", score);
-        return sqLiteDatabase.update("progress", cv, "game_id = "+ gameID, null)>0;
+        return sqLiteDatabase.update("progress", cv, "game_id = " + gameID, null) > 0;
     }
 
     public List<HighlightGridsModel> highlightGridsModels(BrainTrainDatabase db) {
@@ -157,7 +157,7 @@ public class BrainTrainDAO {
                 ExpressionResult2 = cursor.getInt(6);
                 completeStatus = cursor.getInt(2);
 
-                returnList.add(new CompareModel(level, score, Expression1, Expression2, ExpressionResult1, ExpressionResult2,   completeStatus));
+                returnList.add(new CompareModel(level, score, Expression1, Expression2, ExpressionResult1, ExpressionResult2, completeStatus));
 
             } while (cursor.moveToNext());
         }
@@ -270,7 +270,6 @@ public class BrainTrainDAO {
     }
 
 
-
     public List<FlashCardModel> flashCardModels(BrainTrainDatabase db) {
         List<FlashCardModel> returnList = new ArrayList<>();
 
@@ -325,6 +324,7 @@ public class BrainTrainDAO {
         sqLiteDatabase.close();
         return returnList;
     }
+
     public List<SortingCharGameModel> sortingCharGameModels(BrainTrainDatabase db) {
         List<SortingCharGameModel> returnList = new ArrayList<>();
 

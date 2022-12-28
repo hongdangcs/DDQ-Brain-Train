@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.models.FindWordGameModel;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,7 +26,7 @@ import java.util.List;
 
 public class FindWordGameActivity extends AppCompatActivity {
     private static final int START_TIMER = 120000;
-    private String userInput, topicWord;;
+    private String userInput, topicWord;
     CountDownTimer timer;
     long timeLeft = START_TIMER;
     int totalScore = 0, score = 0, countWord = 0, index = 0;
@@ -73,11 +76,7 @@ public class FindWordGameActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 int limit = 2 + topicWord.length();
-                if(s.toString().trim().length()< limit){
-                    submitFindWordButton.setEnabled(false);
-                } else {
-                    submitFindWordButton.setEnabled(true);
-                }
+                submitFindWordButton.setEnabled(s.toString().trim().length() >= limit);
             }
 
             @Override
@@ -102,8 +101,8 @@ public class FindWordGameActivity extends AppCompatActivity {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("output.txt")));
             String line;
-            while((line = br.readLine())!=null) {
-                if(line.matches(".*\\b"+sb+"\\b.*")) {
+            while ((line = br.readLine()) != null) {
+                if (line.matches(".*\\b" + sb + "\\b.*")) {
                     return true;
                 }
             }
@@ -145,14 +144,14 @@ public class FindWordGameActivity extends AppCompatActivity {
         txtFindWordScore.setText("Điểm: " + score);
     }
 
-    public int getTotalScore () {
+    public int getTotalScore() {
         return score * countWord;
     }
 
     // Submit button handle:
     public void Submit(View view) throws IOException {
         userInput = editFindWordAnswer.getText().toString();
-        if (spellingCheck(userInput) == true){
+        if (spellingCheck(userInput) == true) {
             updateScore();
             countWord = countWord + 1;
             txtFindWordCount.setText("Số câu đúng: " + countWord);
@@ -166,9 +165,9 @@ public class FindWordGameActivity extends AppCompatActivity {
 
     // Try again button handle:
     public void tryAgain(View view) {
-        if (index == findWordGameModels.size()){
+        if (index == findWordGameModels.size()) {
             index = 0;
-        } else{
+        } else {
             index++;
         }
         countWord = 0;

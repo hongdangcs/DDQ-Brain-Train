@@ -26,7 +26,7 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
     private BrainTrainDatabase brainTrainDatabase;
     private ProgressModel differentModel, flashCardModel, sharkBoatModel;
 
-    AppCompatButton differentGuideButton, flashCardGuideButton,sharkBoatGuideButton;
+    AppCompatButton differentGuideButton, flashCardGuideButton, sharkBoatGuideButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +152,6 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
                 });
 
 
-
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
             }
@@ -187,12 +186,10 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
                 });
 
 
-
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
             }
         });
-
 
 
     }

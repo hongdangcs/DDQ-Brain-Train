@@ -144,6 +144,8 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         missingObjectNextLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (realLevel == 10) realLevel = 100;
+                else if (realLevel == 100) realLevel = 1000;
                 Intent intent = getIntent();
                 intent.putExtra("level", ++realLevel);
                 startActivity(intent);
@@ -286,6 +288,10 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         missingObjectCompleteNotiTextView.setVisibility(View.VISIBLE);
         missingObjectResultButton.setVisibility(View.VISIBLE);
         missingObjectNextLevelButton.setVisibility(View.VISIBLE);
+
+        if (realLevel == 1010) {
+            missingObjectNextLevelButton.setVisibility(View.GONE);
+        }
 
         BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(MissingObjectGameActivity.this);
         brainTrainDatabase.updateUserScore(11, userScore + MissingObjectLevelMenuActivity.getMissingObjectModels().get(level - 1).getScore());

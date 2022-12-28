@@ -138,10 +138,10 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
 
         int library = (new Random()).nextInt(2);
 
-        if(library ==0){
+        if (library == 0) {
 
             itemName = "animal_image_";
-        } else{
+        } else {
             itemName = "fruit_";
         }
         if (level > 100 && level < 200) {
@@ -364,7 +364,7 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
                             Log.d(TAG, "Con lai: " + remainingPair);
 
                         } else {
-                            for(CardView cardView1: cardViewList){
+                            for (CardView cardView1 : cardViewList) {
                                 cardView1.setClickable(false);
                             }
                             image = new ImageView(FlashCardGameActivity.this);
@@ -379,7 +379,7 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
                                     cardView.removeAllViews();
                                     cardView.addView(image);
                                     closeOpenCard(openCard);
-                                    for(CardView cardView2: cardViewList){
+                                    for (CardView cardView2 : cardViewList) {
                                         cardView2.setClickable(true);
                                     }
                                 }

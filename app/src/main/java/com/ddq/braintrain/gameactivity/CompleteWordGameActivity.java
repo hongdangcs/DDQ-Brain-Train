@@ -8,9 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+
 import com.ddq.braintrain.R;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -63,11 +66,7 @@ public class CompleteWordGameActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(s.toString().trim().length()<2){
-                    submitCompleteWordButton.setEnabled(false);
-                } else {
-                    submitCompleteWordButton.setEnabled(true);
-                }
+                submitCompleteWordButton.setEnabled(s.toString().trim().length() >= 2);
             }
 
             @Override
@@ -86,19 +85,19 @@ public class CompleteWordGameActivity extends AppCompatActivity {
         String shuffleLetter = shuffle(alphabet);
         Random rnd = new Random();
         correctLetter = shuffleLetter.charAt(rnd.nextInt(shuffleLetter.length()));
-        txtCompleteWordQuestion.setText(""+correctLetter);
+        txtCompleteWordQuestion.setText("" + correctLetter);
 
         startTimer();
     }
 
-    public String shuffle(String input){
+    public String shuffle(String input) {
         List<Character> characters = new ArrayList<Character>();
-        for(char c:input.toCharArray()){
+        for (char c : input.toCharArray()) {
             characters.add(c);
         }
         StringBuilder output = new StringBuilder(input.length());
-        while(characters.size()!=0){
-            int randPicker = (int)(Math.random()*characters.size());
+        while (characters.size() != 0) {
+            int randPicker = (int) (Math.random() * characters.size());
             output.append(characters.remove(randPicker));
         }
         return output.toString();
@@ -110,8 +109,8 @@ public class CompleteWordGameActivity extends AppCompatActivity {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("output.txt")));
             String line;
-            while((line = br.readLine())!=null) {
-                if(line.matches(".*\\b"+sb+"\\b.*")) {
+            while ((line = br.readLine()) != null) {
+                if (line.matches(".*\\b" + sb + "\\b.*")) {
                     return true;
                 }
             }
@@ -175,7 +174,7 @@ public class CompleteWordGameActivity extends AppCompatActivity {
         txtCompleteWordScore.setText("Điểm: " + score);
     }
 
-    public int getTotalScore () {
+    public int getTotalScore() {
         return score * countWord;
     }
 
@@ -183,7 +182,7 @@ public class CompleteWordGameActivity extends AppCompatActivity {
     public void Submit(View view) throws IOException {
         userInput = editCompleteWordAnswer.getText().toString();
         char firstChar = userInput.charAt(0);
-        if (Character.toUpperCase(firstChar) == correctLetter && spellingCheck(userInput) == true){
+        if (Character.toUpperCase(firstChar) == correctLetter && spellingCheck(userInput) == true) {
             for (char c : userInput.toCharArray()) {
                 txtCompleteWordError.setVisibility(View.GONE);
                 editCompleteWordAnswer.getText().clear();

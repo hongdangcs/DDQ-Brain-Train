@@ -13,7 +13,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.gridlayout.widget.GridLayout;
 
-import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.MemoryActivity;
 import com.ddq.braintrain.R;
@@ -87,8 +86,8 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
 
     public void generateGrid() {
         list = new ArrayList<AppCompatButton>();
-        int gridx = GridsHighlightLevelMenuActivity.getHighlightGridsModels().get(level - 1).getGridx();
-        int gridy = GridsHighlightLevelMenuActivity.getHighlightGridsModels().get(level - 1).getGridy();
+        int gridx = MemoryActivity.getHighlightGridsModels().get(level - 1).getGridx();
+        int gridy = MemoryActivity.getHighlightGridsModels().get(level - 1).getGridy();
         gridsHighlightGameLayout.setColumnCount(gridx);
         gridsHighlightGameLayout.setRowCount(gridy);
 

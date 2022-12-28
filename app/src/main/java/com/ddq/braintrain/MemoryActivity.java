@@ -12,10 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 
+import com.ddq.braintrain.gameactivity.GridsHighlightGameActivity;
 import com.ddq.braintrain.levelmenu.GridsHighlightLevelMenuActivity;
 import com.ddq.braintrain.levelmenu.MissingObjectLevelMenuActivity;
 import com.ddq.braintrain.levelmenu.NotInPreviousLevelMenuActivity;
+import com.ddq.braintrain.models.HighlightGridsModel;
 import com.ddq.braintrain.models.ProgressModel;
+
+import java.util.List;
 
 public class MemoryActivity extends AppCompatActivity {
 
@@ -33,7 +37,15 @@ public class MemoryActivity extends AppCompatActivity {
         return missingObjectCurrentScore;
     }
 
-    private  ProgressModel missingObjectModel;
+    private ProgressModel missingObjectModel;
+    private static List<HighlightGridsModel> highlightGridsModels;
+
+    public static List<HighlightGridsModel> getHighlightGridsModels() {
+        return highlightGridsModels;
+    }
+
+
+    int gridHighlightLevelToPlay = 2;
 
     AppCompatButton gridsHighlightGuideButton, missingObjectGuideButton, notInPreviousGuideButton;
 
@@ -69,6 +81,17 @@ public class MemoryActivity extends AppCompatActivity {
             gridsHighlightComplete.setVisibility(View.VISIBLE);
         }
 
+        highlightGridsModels = new BrainTrainDAO().highlightGridsModels(brainTrainDatabase);
+        for(HighlightGridsModel model : highlightGridsModels){
+            if(model.getCompleteStatus() == 1){
+                gridHighlightLevelToPlay++;
+            } else {
+                if(gridHighlightLevelToPlay>2) gridHighlightLevelToPlay--;
+                gridHighlightLevelToPlay/=2;
+                break;
+            }
+        }
+
         notInPreviousModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 12);
         notInPreviousScore.setText("Điểm của bạn: " + notInPreviousModel.getUserScore());
         notInPreviousProgress.setText("Đã hoàn thành: " + ((float) notInPreviousModel.getUserScore() / (float) notInPreviousModel.getMaxScore()) + "%");
@@ -87,7 +110,9 @@ public class MemoryActivity extends AppCompatActivity {
         gridsHighlightCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MemoryActivity.this, GridsHighlightLevelMenuActivity.class));
+                Intent intent = new Intent(MemoryActivity.this, GridsHighlightGameActivity.class);
+                intent.putExtra("level", gridHighlightLevelToPlay);
+                startActivity(intent);
                 finish();
             }
         });

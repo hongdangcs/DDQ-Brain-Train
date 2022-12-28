@@ -118,7 +118,6 @@ public class MathActivity extends AppCompatActivity {
                 });
 
 
-
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
             }
@@ -145,7 +144,6 @@ public class MathActivity extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
-
 
 
                 AlertDialog alertDialog = alert.create();

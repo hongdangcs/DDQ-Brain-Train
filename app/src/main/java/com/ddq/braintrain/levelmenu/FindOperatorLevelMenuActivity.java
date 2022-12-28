@@ -14,7 +14,6 @@ import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.gameactivity.FindOperatorGameActivity;
-import com.ddq.braintrain.models.CompareModel;
 import com.ddq.braintrain.models.FindOperatorModel;
 
 import java.util.List;
@@ -26,12 +25,15 @@ public class FindOperatorLevelMenuActivity extends AppCompatActivity implements 
     private static List<FindOperatorModel> findOperatorModels;
     private static List<FindOperatorModel> findOperatorModels2;
     private static List<FindOperatorModel> findOperatorModels3;
+
     public static List<FindOperatorModel> getOperatorTenModels() {
         return findOperatorModels;
     }
+
     public static List<FindOperatorModel> getOperatorHundredModels() {
         return findOperatorModels2;
     }
+
     public static List<FindOperatorModel> getOperatorThousandModels() {
         return findOperatorModels3;
     }

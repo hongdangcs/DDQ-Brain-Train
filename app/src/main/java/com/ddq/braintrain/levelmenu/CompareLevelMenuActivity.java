@@ -15,7 +15,6 @@ import com.ddq.braintrain.BrainTrainDatabase;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.gameactivity.CompareGameActivity;
 import com.ddq.braintrain.models.CompareModel;
-import com.ddq.braintrain.models.HighlightGridsModel;
 
 import java.util.List;
 
@@ -23,9 +22,11 @@ public class CompareLevelMenuActivity extends AppCompatActivity implements View.
 
     private BrainTrainDatabase brainTrainDatabase;
     private static List<CompareModel> compareModels;
+
     public static List<CompareModel> getCompareModels() {
         return compareModels;
     }
+
     GridLayout compareLevelLayout;
     AppCompatButton btn;
 
@@ -44,10 +45,7 @@ public class CompareLevelMenuActivity extends AppCompatActivity implements View.
             btn = new AppCompatButton(CompareLevelMenuActivity.this);
             btn.setText("" + compareModels.get(i).getLevel());
             btn.setId(i + 1);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    150,
-                    150
-            );
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);
             btn.setLayoutParams(params);
             btn.setBackgroundDrawable(ContextCompat.getDrawable(CompareLevelMenuActivity.this, R.drawable.button_shape));

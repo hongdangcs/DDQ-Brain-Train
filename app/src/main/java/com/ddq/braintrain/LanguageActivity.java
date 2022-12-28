@@ -3,7 +3,6 @@ package com.ddq.braintrain;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,7 +27,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
     private BrainTrainDatabase brainTrainDatabase;
     private ProgressModel completeWordModel, findWordModel, conjunctionModel, sortingCharModel;
 
-    AppCompatButton completeWordGuideButton, findWordGuideButton,conjunctionGuideButton,sortingCharGuideButton;
+    AppCompatButton completeWordGuideButton, findWordGuideButton, conjunctionGuideButton, sortingCharGuideButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +149,6 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                 });
 
 
-
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
             }
@@ -177,7 +175,6 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                         dialog.cancel();
                     }
                 });
-
 
 
                 AlertDialog alertDialog = alert.create();
@@ -210,7 +207,6 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                 });
 
 
-
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
             }
@@ -239,7 +235,6 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                         dialog.cancel();
                     }
                 });
-
 
 
                 AlertDialog alertDialog = alert.create();

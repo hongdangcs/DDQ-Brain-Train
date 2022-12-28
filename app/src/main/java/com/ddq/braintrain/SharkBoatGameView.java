@@ -2,26 +2,10 @@ package com.ddq.braintrain;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.SurfaceView;
-import android.view.View;
-import android.view.WindowManager;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
-public class SharkBoatGameView extends SurfaceView implements Runnable{
+public class SharkBoatGameView extends SurfaceView implements Runnable {
     public SharkBoatGameView(Context context) {
         super(context);
     }

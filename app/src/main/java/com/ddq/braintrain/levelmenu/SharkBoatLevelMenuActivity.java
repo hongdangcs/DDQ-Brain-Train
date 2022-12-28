@@ -2,21 +2,17 @@ package com.ddq.braintrain.levelmenu;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.ContextCompat;
 import androidx.gridlayout.widget.GridLayout;
 
 import com.ddq.braintrain.BrainTrainDAO;
@@ -30,7 +26,7 @@ import java.util.List;
 public class SharkBoatLevelMenuActivity extends AppCompatActivity implements View.OnClickListener {
 
     private BrainTrainDatabase brainTrainDatabase;
-    private static List<SharkBoatModel> sharkBoatModels ;
+    private static List<SharkBoatModel> sharkBoatModels;
     GridLayout sharkBoatLevelLayout;
     AppCompatButton btn;
 
@@ -71,24 +67,18 @@ public class SharkBoatLevelMenuActivity extends AppCompatActivity implements Vie
             levelTextView.setText(String.valueOf(model.getLevel()));
             TextView scoreTextView = rowView.findViewById(R.id.score_text_view);
             scoreTextView.setText(String.valueOf(model.getScore()));
-            if(model.getCompleteStatus()==1){
+            if (model.getCompleteStatus() == 1) {
                 //Change row color
                 rowView.setBackgroundColor(Color.GREEN);
 
             }
 
-            if(!canOpen){
+            if (!canOpen) {
                 rowView.setEnabled(false);
                 rowView.setAlpha(0.75f);
-                Log.d(TAG, "onCreate: "+ model.getLevel()+ " can't click");
+                Log.d(TAG, "onCreate: " + model.getLevel() + " can't click");
             }
-            canOpen = false;
-            if(model.getCompleteStatus()==1){
-                canOpen = true;
-
-            }
-
-
+            canOpen = model.getCompleteStatus() == 1;
 
 
             tableLayout.addView(rowView);
@@ -107,7 +97,7 @@ public class SharkBoatLevelMenuActivity extends AppCompatActivity implements Vie
 
     }
 
-    public void handleLevelClick(SharkBoatModel model){
+    public void handleLevelClick(SharkBoatModel model) {
         Intent intent = new Intent(SharkBoatLevelMenuActivity.this, SharkBoatGameActivity.class);
         intent.putExtra("level", model.getLevel());
         intent.putExtra("score", model.getScore());
