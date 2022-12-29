@@ -47,7 +47,7 @@ public class MathActivity extends AppCompatActivity {
         brainTrainDatabase = new BrainTrainDatabase(MathActivity.this);
         findOperatorModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 41);
         findOperatorScore.setText("Điểm của bạn: " + findOperatorModel.getUserScore());
-        String result1 = String.format("%.2f", ((float) findOperatorModel.getUserScore() / (float) findOperatorModel.getMaxScore()));
+        String result1 = String.format("%.2f", 100*((float) findOperatorModel.getUserScore() / (float) findOperatorModel.getMaxScore()));
         findOperatorProgress.setText("Đã hoàn thành: " + result1 + "%");
         if (findOperatorModel.isCompletedStatus()) {
             findOperatorCompleted.setVisibility(View.VISIBLE);
@@ -55,7 +55,7 @@ public class MathActivity extends AppCompatActivity {
 
         compareModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 42);
         compareScore.setText("Điểm của bạn: " + compareModel.getUserScore());
-        String result2 = String.format("%.2f", ((float) compareModel.getUserScore() / (float) compareModel.getMaxScore()));
+        String result2 = String.format("%.2f", 100*((float) compareModel.getUserScore() / (float) compareModel.getMaxScore()));
         compareProgress.setText("Đã hoàn thành: " + result2 + "%");
         if (compareModel.isCompletedStatus()) {
             compareCompleted.setVisibility(View.VISIBLE);

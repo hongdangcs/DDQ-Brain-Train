@@ -225,14 +225,6 @@
                         android:layout_marginLeft="10dp"
                         android:text="@string/language_des" />
 
-                    <ProgressBar
-                        android:id="@+id/languageProgress"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:progress="20"
-                        android:progressDrawable="@drawable/custom_progress" />
                 </LinearLayout>
 
                 <ImageView

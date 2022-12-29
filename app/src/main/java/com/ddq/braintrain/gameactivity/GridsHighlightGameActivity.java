@@ -35,6 +35,7 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
     int trials = TRIALS, level = 0, trueAns = 0, score = 0;
 
     List<AppCompatButton> list;
+    int currentTotalScore = MemoryActivity.getGridHighlightTotalScore();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,7 +206,13 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
     }
 
     public void nextLevel() {
+        BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(GridsHighlightGameActivity.this);
         score += level * 100;
+        if(MemoryActivity.getHighlightGridsModels().get(level -1).getCompleteStatus() == 0){
+            currentTotalScore+= score;
+            brainTrainDatabase.updateUserScore(11, currentTotalScore);
+
+        }
         gridsHighlightScoreTextView.setText("Điểm: " + score);
         disableGridButton();
         enableNextLevelButton();
@@ -213,8 +220,6 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
 
         updateScore();
 
-        BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(GridsHighlightGameActivity.this);
-        brainTrainDatabase.updateUserScore(11, score);
         brainTrainDatabase.updateCompletedStatus("memory_game_one", level);
 
     }

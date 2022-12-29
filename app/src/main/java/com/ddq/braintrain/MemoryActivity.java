@@ -1,8 +1,11 @@
 package com.ddq.braintrain;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,8 +47,13 @@ public class MemoryActivity extends AppCompatActivity {
         return highlightGridsModels;
     }
 
-
     int gridHighlightLevelToPlay = 2;
+
+    static int gridHighlightTotalScore;
+
+    public static int getGridHighlightTotalScore() {
+        return gridHighlightTotalScore;
+    }
 
     AppCompatButton gridsHighlightGuideButton, missingObjectGuideButton, notInPreviousGuideButton;
 
@@ -75,7 +83,9 @@ public class MemoryActivity extends AppCompatActivity {
         gridsHighlightModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 11);
 
         gridsHighlightScore.setText("Điểm của bạn: " + gridsHighlightModel.getUserScore());
-        String result = String.format("%.2f", ((float) gridsHighlightModel.getUserScore() / (float) gridsHighlightModel.getMaxScore()));
+        String result = String.format("%.2f", 100*((float) gridsHighlightModel.getUserScore() / (float) gridsHighlightModel.getMaxScore()));
+        gridHighlightTotalScore =gridsHighlightModel.getUserScore();
+                Log.d(TAG, "onCreate: "+gridsHighlightModel.getMaxScore());
         gridsHighlightProgress.setText("Đã hoàn thành: " + result + "%");
         if (gridsHighlightModel.isCompletedStatus()) {
             gridsHighlightProgress.setVisibility(View.GONE);
@@ -95,7 +105,9 @@ public class MemoryActivity extends AppCompatActivity {
 
         notInPreviousModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 12);
         notInPreviousScore.setText("Điểm của bạn: " + notInPreviousModel.getUserScore());
-        String notInPreviousPercent = String.format("%.2f", ((float) notInPreviousModel.getUserScore() / (float) notInPreviousModel.getMaxScore()));
+        String notInPreviousPercent = String.format("%.2f", 100*((float) notInPreviousModel.getUserScore() / (float) notInPreviousModel.getMaxScore()));
+
+        Log.d(TAG, "onCreate: "+notInPreviousModel.getMaxScore());
         notInPreviousProgress.setText("Đã hoàn thành: " + notInPreviousPercent + "%");
         if (notInPreviousModel.isCompletedStatus()) {
             notInPreviousComplete.setVisibility(View.VISIBLE);
@@ -104,8 +116,8 @@ public class MemoryActivity extends AppCompatActivity {
         missingObjectModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 13);
         missingObjectCurrentScore = missingObjectModel.getUserScore();
         missingObjectScore.setText("Điểm của bạn: " + missingObjectCurrentScore);
-        String missingObjectPercent = String.format("%.2f", ((float) missingObjectModel.getUserScore() / (float) missingObjectModel.getMaxScore()));
-        missingObjectProgress.setText("Đã hoàn thành: " + notInPreviousPercent + "%");
+        String missingObjectPercent = String.format("%.2f", 100*((float) missingObjectModel.getUserScore() / (float) missingObjectModel.getMaxScore()));
+        missingObjectProgress.setText("Đã hoàn thành: " + missingObjectPercent + "%");
         if (missingObjectModel.isCompletedStatus()) {
             missingObjectComplete.setVisibility(View.VISIBLE);
         }

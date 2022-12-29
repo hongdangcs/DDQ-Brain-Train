@@ -91,14 +91,6 @@
                             android:layout_height="match_parent"
                             android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/completeWordProgress"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text="Quá Trình: "
-                                android:layout_weight="1"/>
-
                             <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/completeWordGuideButton"
                                 android:layout_width="50dp"
@@ -191,14 +183,6 @@
                             android:layout_height="match_parent"
                             android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/findWordProgress"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text="Quá Trình: "
-                                android:layout_weight="1"/>
-
                             <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/findWordGuideButton"
                                 android:layout_width="50dp"
@@ -289,14 +273,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/conjunctionProgress"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text="Quá Trình: "
-                                android:layout_weight="1"/>
 
                             <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/conjunctionGuideButton"
@@ -390,14 +366,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/sortingCharProgress"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text="Quá Trình: "
-                                android:layout_weight="1"/>
 
                             <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/sortingCharGuideButton"

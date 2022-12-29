@@ -246,6 +246,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
 
+        ((Activity) mContext).finish();
         timer.cancel();
         try {
             //Thread.sleep(1000);

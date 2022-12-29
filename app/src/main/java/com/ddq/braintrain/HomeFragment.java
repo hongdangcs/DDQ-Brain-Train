@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.viewmodel.CreationExtras;
+
+import com.ddq.braintrain.models.ProgressModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +31,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private String mParam2;
 
     private static CardView attentionCardView, memoryCardView, mathCardView, languageCardView;
+    private ProgressBar memoryProgress, attentionProgress, mathProgress;
+
+    private BrainTrainDatabase brainTrainDatabase;
+    ProgressModel progressModel;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -74,6 +82,46 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         attentionCardView.setOnClickListener(this);
         mathCardView.setOnClickListener(this);
         languageCardView.setOnClickListener(this);
+
+        memoryProgress = view.findViewById(R.id.memoryProgress);
+        attentionProgress = view.findViewById(R.id.attentionProgress);
+        mathProgress = view.findViewById(R.id.mathProgress);
+
+        brainTrainDatabase = new BrainTrainDatabase(getActivity());
+        int memoryUserScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 11)).getUserScore()
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 12)).getUserScore() +
+                (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 13)).getUserScore() ;
+        int memoryMaxScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 11)).getMaxScore()
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 12)).getMaxScore() +
+                (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 13)).getMaxScore() ;
+        memoryProgress.setProgress((100*memoryUserScore)/memoryMaxScore);
+
+
+        int attentionUserScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 21)).getUserScore()
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 221)).getUserScore() +
+                 (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 222)).getUserScore() +
+                 (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 223)).getUserScore() +
+                (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 23)).getUserScore() ;
+        int attentionMaxScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 21)).getMaxScore()
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 221)).getMaxScore() +
+                 (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 222)).getMaxScore() +
+                 (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 223)).getMaxScore() +
+                (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 23)).getMaxScore() ;
+        attentionProgress.setProgress((100*attentionUserScore)/attentionMaxScore);
+
+
+        int mathUserScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 41)).getUserScore()
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 421)).getUserScore() +
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 422)).getUserScore() +
+                (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 423)).getUserScore() ;
+        int mathMaxScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 41)).getMaxScore()
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 421)).getMaxScore() +
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 422)).getMaxScore() +
+                (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 423)).getMaxScore() ;
+        mathProgress.setProgress((100*mathUserScore)/mathMaxScore);
+
+/*
+
 /*
         memoryCardView.setOnClickListener(new View.OnClickListener() {
             @Override
