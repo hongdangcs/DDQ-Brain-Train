@@ -1,5 +1,6 @@
 package com.ddq.braintrain.gameactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -14,7 +15,9 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
+import com.ddq.braintrain.LanguageActivity;
 import com.ddq.braintrain.R;
+import com.ddq.braintrain.models.ProgressModel;
 import com.ddq.braintrain.models.SortingCharGameModel;
 
 import java.util.ArrayList;
@@ -27,12 +30,13 @@ public class SortingCharGameActivity extends AppCompatActivity {
     private static final int START_TIMER = 20000;
     CountDownTimer timer;
     long timeLeft = START_TIMER, timeRes, totalTimeRes;
-    private int score = 0, section = 1, level = 0, current = 1, index = 0;
+    private int score = 0, section = 1, level = 0, current = 1, index = 0, totalScore = 0;
     private String correctWord;
-    double averageRes = 0, bonusScore = 0, totalScore = 0;
+    double averageRes = 0, bonusScore = 0;
     private TextView textQuestion, txtQId, txtLanguageTime, txtLanguageScore, txtLanguageCompleteNoti, txtLanguageCompleteGame;
     AppCompatButton nextLevelButton, submitButton;
     private EditText editAnswer;
+    private ProgressModel maxScore;
     private BrainTrainDatabase brainTrainDatabase;
     private static List<SortingCharGameModel> sortingCharGameModels;
     private static final List<List<SortingCharGameModel>> listQuestions = new ArrayList<>();
@@ -53,8 +57,20 @@ public class SortingCharGameActivity extends AppCompatActivity {
         txtLanguageCompleteGame.setVisibility(View.GONE);
         brainTrainDatabase = new BrainTrainDatabase(SortingCharGameActivity.this);
         sortingCharGameModels = new BrainTrainDAO().sortingCharGameModels(brainTrainDatabase);
+        maxScore = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 34);
         separateList();
         gameStart();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        getTotalScore();
+        if (maxScore.getUserScore() < totalScore) {
+            brainTrainDatabase.updateUserScore(34, (int) totalScore);
+        }
+        startActivity(new Intent(SortingCharGameActivity.this, LanguageActivity.class));
+        this.finish();
     }
 
     // Separate lists:
@@ -227,6 +243,10 @@ public class SortingCharGameActivity extends AppCompatActivity {
         txtLanguageCompleteNoti.setText("Hết giờ!");
         txtLanguageCompleteNoti.setVisibility(View.VISIBLE);
         rememberTimer();
+        getTotalScore();
+        if (maxScore.getUserScore() < totalScore) {
+            brainTrainDatabase.updateUserScore(34, Math.toIntExact(Math.round(totalScore)));
+        }
     }
 
     // Score section
@@ -239,8 +259,9 @@ public class SortingCharGameActivity extends AppCompatActivity {
         bonusScore = score / averageRes;
     }
 
-    public void getTotalScore() {
-        totalScore = score + bonusScore;
+    public int getTotalScore() {
+        totalScore = (int) (score + bonusScore);
+        return totalScore;
     }
 
     // Submit button handle:

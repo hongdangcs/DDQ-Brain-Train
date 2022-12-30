@@ -1,5 +1,6 @@
 package com.ddq.braintrain.gameactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -14,8 +15,10 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
+import com.ddq.braintrain.LanguageActivity;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.models.FindWordGameModel;
+import com.ddq.braintrain.models.ProgressModel;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -29,11 +32,12 @@ public class FindWordGameActivity extends AppCompatActivity {
     private String userInput, topicWord;
     CountDownTimer timer;
     long timeLeft = START_TIMER;
-    int totalScore = 0, score = 0, countWord = 0, index = 0;
+    int totalScore = 0, score = 0, countWord = 0, index = 0, currentScore = 0;
     private TextView txtFindWordCount, txtFindWordTime, txtFindWordScore, txtFindWordQuestion, txtFindWordNoti, txtFindWordError;
     AppCompatButton tryAgainButton, submitFindWordButton;
     private EditText editFindWordAnswer;
     private BrainTrainDatabase brainTrainDatabase;
+    private ProgressModel maxScore;
     private static List<FindWordGameModel> findWordGameModels;
 
     @Override
@@ -54,7 +58,20 @@ public class FindWordGameActivity extends AppCompatActivity {
         findWordGameModels = new BrainTrainDAO().findWordGameModels(brainTrainDatabase);
 
         Collections.shuffle(findWordGameModels);
+        maxScore = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 32);
         gameStart();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        getTotalScore();
+        if (maxScore.getUserScore() < currentScore) {
+            totalScore = currentScore;
+            brainTrainDatabase.updateUserScore(32, totalScore);
+        }
+        startActivity(new Intent(FindWordGameActivity.this, LanguageActivity.class));
+        this.finish();
     }
 
     // Game section:
@@ -130,6 +147,11 @@ public class FindWordGameActivity extends AppCompatActivity {
                 editFindWordAnswer.setVisibility(View.GONE);
                 tryAgainButton.setVisibility(View.VISIBLE);
                 txtFindWordNoti.setVisibility(View.VISIBLE);
+                getTotalScore();
+                if (maxScore.getUserScore() < currentScore) {
+                    totalScore = currentScore;
+                    brainTrainDatabase.updateUserScore(32, totalScore);
+                }
             }
         }.start();
     }
@@ -145,7 +167,8 @@ public class FindWordGameActivity extends AppCompatActivity {
     }
 
     public int getTotalScore() {
-        return score * countWord;
+        currentScore = score * countWord;
+        return currentScore;
     }
 
     // Submit button handle:

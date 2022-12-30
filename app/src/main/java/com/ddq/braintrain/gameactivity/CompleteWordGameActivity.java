@@ -1,5 +1,6 @@
 package com.ddq.braintrain.gameactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -12,7 +13,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.ddq.braintrain.BrainTrainDAO;
+import com.ddq.braintrain.BrainTrainDatabase;
+import com.ddq.braintrain.LanguageActivity;
 import com.ddq.braintrain.R;
+import com.ddq.braintrain.models.ProgressModel;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -28,10 +33,12 @@ public class CompleteWordGameActivity extends AppCompatActivity {
     private String userInput;
     CountDownTimer timer;
     long timeLeft = START_TIMER, timeRes, totalTimeRes;
-    int totalScore = 0, score = 0, countWord = 0;
+    int totalScore = 0, score = 0, countWord = 0, currentScore;
     private char correctLetter;
+    private ProgressModel maxScore;
     private TextView txtCompleteWordCount, txtCompleteWordTime, txtCompleteWordScore, txtCompleteWordQuestion, txtCompleteWordNoti, txtCompleteWordError;
     AppCompatButton tryAgainButton, submitCompleteWordButton;
+    private BrainTrainDatabase brainTrainDatabase;
     private EditText editCompleteWordAnswer;
 
     @Override
@@ -48,8 +55,22 @@ public class CompleteWordGameActivity extends AppCompatActivity {
         tryAgainButton = findViewById(R.id.tryAgainButton);
         submitCompleteWordButton = findViewById(R.id.submitCompleteWordButton);
         txtCompleteWordError = findViewById(R.id.txtCompleteWordError);
+        brainTrainDatabase = new BrainTrainDatabase(CompleteWordGameActivity.this);
+        maxScore = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 31);
 
         gameStart();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        getTotalScore();
+        if (maxScore.getUserScore() < currentScore) {
+            totalScore = currentScore;
+            brainTrainDatabase.updateUserScore(31, totalScore);
+        }
+        startActivity(new Intent(CompleteWordGameActivity.this, LanguageActivity.class));
+        this.finish();
     }
 
     // Game section:
@@ -138,6 +159,11 @@ public class CompleteWordGameActivity extends AppCompatActivity {
                 editCompleteWordAnswer.setVisibility(View.GONE);
                 tryAgainButton.setVisibility(View.VISIBLE);
                 txtCompleteWordNoti.setVisibility(View.VISIBLE);
+                getTotalScore();
+                if (maxScore.getUserScore() < currentScore) {
+                    totalScore = currentScore;
+                    brainTrainDatabase.updateUserScore(31, totalScore);
+                }
             }
         }.start();
     }
@@ -175,7 +201,8 @@ public class CompleteWordGameActivity extends AppCompatActivity {
     }
 
     public int getTotalScore() {
-        return score * countWord;
+        currentScore = score * countWord;
+        return currentScore;
     }
 
     // Submit button handle:

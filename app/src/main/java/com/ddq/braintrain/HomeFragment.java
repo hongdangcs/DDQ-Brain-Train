@@ -119,26 +119,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 32)).getMaxScore() +
                 + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 33)).getMaxScore() +
                 (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 34)).getMaxScore() ;
-        int progress = 0;
-        int languageGame1 = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 31).getUserScore();
-        int languageGame2 = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 32).getUserScore();
-        int languageGame3 = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 33).getUserScore();
-        int languageGame4 = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 34).getUserScore();
-        if (progress < 100){
-            if (languageGame1 > 0){
-                progress += 25;
-            }
-            else if (languageGame2 > 0){
-                progress += 25;
-            }
-            else if (languageGame3 > 0){
-                progress += 25;
-            }
-            else if (languageGame4 > 0){
-                progress += 25;
-            }
-        }
-        languageProgress.setProgress(progress);
+        languageProgress.setProgress((100*languageUserScore)/languageMaxScore);
 
 
         int mathUserScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 41)).getUserScore()
