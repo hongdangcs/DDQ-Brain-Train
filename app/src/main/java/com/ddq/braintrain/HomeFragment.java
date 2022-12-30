@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private String mParam2;
 
     private static CardView attentionCardView, memoryCardView, mathCardView, languageCardView;
-    private ProgressBar memoryProgress, attentionProgress, mathProgress;
+    private ProgressBar memoryProgress, attentionProgress, mathProgress, languageProgress;
 
     private BrainTrainDatabase brainTrainDatabase;
     ProgressModel progressModel;
@@ -86,6 +86,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         memoryProgress = view.findViewById(R.id.memoryProgress);
         attentionProgress = view.findViewById(R.id.attentionProgress);
         mathProgress = view.findViewById(R.id.mathProgress);
+        languageProgress = view.findViewById(R.id.languageProgress);
 
         brainTrainDatabase = new BrainTrainDatabase(getActivity());
         int memoryUserScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 11)).getUserScore()
@@ -108,6 +109,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                  (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 223)).getMaxScore() +
                 (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 23)).getMaxScore() ;
         attentionProgress.setProgress((100*attentionUserScore)/attentionMaxScore);
+
+
+        int languageUserScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 31)).getUserScore()
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 32)).getUserScore() +
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 33)).getUserScore() +
+                (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 34)).getUserScore() ;
+        int languageMaxScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 31)).getMaxScore()
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 32)).getMaxScore() +
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 33)).getMaxScore() +
+                (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 34)).getMaxScore() ;
+        languageProgress.setProgress((100*languageUserScore)/languageMaxScore);
 
 
         int mathUserScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 41)).getUserScore()

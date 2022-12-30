@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -25,11 +26,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class ConjunctionGameActivity extends AppCompatActivity {
-    private static final int START_TIMER = 60000;
+    private static final int START_TIMER = 10000;
     private String userInput, topicWord;
     CountDownTimer timer;
     long timeLeft = START_TIMER;
-    int totalScore = 0, score = 0, countWord = 0, index = 0;
+    int totalScore = 0, score = 0, countWord = 0, index = 0, currentScore = 0;
     private TextView txtConjunctionWordCount, txtConjunctionWordTime, txtConjunctionWordScore, txtConjunctionWordQuestion, txtConjunctionWordNoti, txtConjunctionWordError;
     AppCompatButton tryAgainButton, submitConjunctionWordButton;
     private EditText editConjunctionWordAnswer;
@@ -40,7 +41,6 @@ public class ConjunctionGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conjunction_game);
-
         txtConjunctionWordQuestion = (TextView) findViewById(R.id.txtConjunctionWordQuestion);
         txtConjunctionWordTime = (TextView) findViewById(R.id.txtConjunctionWordTime);
         txtConjunctionWordScore = (TextView) findViewById(R.id.txtConjunctionWordScore);
@@ -52,9 +52,16 @@ public class ConjunctionGameActivity extends AppCompatActivity {
         txtConjunctionWordError = findViewById(R.id.txtConjunctionWordError);
         brainTrainDatabase = new BrainTrainDatabase(ConjunctionGameActivity.this);
         conjunctionGameModels = new BrainTrainDAO().conjunctionGameModels(brainTrainDatabase);
-
+        brainTrainDatabase.updateUserScore(33, totalScore);
         Collections.shuffle(conjunctionGameModels);
         gameStart();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        brainTrainDatabase.updateUserScore(33, totalScore);
+        this.finish();
     }
 
     // Game section:
@@ -122,12 +129,18 @@ public class ConjunctionGameActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                totalScore = getTotalScore();
                 timer.cancel();
                 submitConjunctionWordButton.setVisibility(View.GONE);
                 editConjunctionWordAnswer.setVisibility(View.GONE);
                 tryAgainButton.setVisibility(View.VISIBLE);
                 txtConjunctionWordNoti.setVisibility(View.VISIBLE);
+                getTotalScore();
+                if (totalScore < currentScore) {
+                    totalScore = currentScore;
+                    brainTrainDatabase.updateUserScore(33, totalScore);
+                }
+//                totalScore = currentScore;
+//                brainTrainDatabase.updateUserScore(33, totalScore);
             }
         }.start();
     }
@@ -143,7 +156,8 @@ public class ConjunctionGameActivity extends AppCompatActivity {
     }
 
     public int getTotalScore() {
-        return score * countWord;
+        currentScore = score * countWord;
+        return currentScore;
     }
 
     // Submit button handle:
