@@ -37,6 +37,7 @@
         android:layout_centerVertical="true">
 
         <EditText
+            android:id="@+id/userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_10dp"
@@ -52,9 +53,11 @@
 
 
         <EditText
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_10dp"
+            android:autofillHints=""
             android:background="@color/white"
             android:drawableStart="@drawable/ic_lock"
             android:drawablePadding="@dimen/size_10dp"
@@ -63,20 +66,23 @@
             android:minHeight="48dp"
             android:padding="@dimen/size_10dp"
             android:password="true"
-            android:textColorHint="@color/Gray"
-            android:autofillHints="" />
+            android:textColorHint="@color/Gray" />
 
         <RadioGroup
+            android:id="@+id/gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <RadioButton
+                android:id="@+id/male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nam"
+                android:checked="true"
                 android:backgroundTint="@color/white"></RadioButton>
 
             <RadioButton
+                android:id="@+id/female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
@@ -85,6 +91,7 @@
         </RadioGroup>
 
         <EditText
+            android:id="@+id/dob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_10dp"
@@ -92,12 +99,13 @@
             android:drawableStart="@drawable/ic_calender"
             android:drawablePadding="@dimen/size_10dp"
             android:hint="@string/ngay_sinh"
-            android:inputType="datetime"
+            android:inputType="text"
             android:minHeight="48dp"
             android:padding="@dimen/size_10dp"
             android:textColorHint="@color/Gray" />
 
         <EditText
+            android:id="@+id/personal_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_10dp"
@@ -122,6 +130,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/ButtonColor"
                 android:padding="@dimen/size_10dp"
+                android:onClick="SignUp"
                 android:text="@string/dang_ky" />
 
             <Button
@@ -129,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/size_10dp"
                 android:layout_weight="1"
-                android:onClick="SignIn"
+                android:onClick="Out"
                 android:padding="@dimen/size_10dp"
                 android:text="@string/thoat"
                 android:textColor="#1DE9B6" />

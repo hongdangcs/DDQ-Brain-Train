@@ -1,10 +1,14 @@
 package com.ddq.braintrain;
 
+import android.accounts.Account;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.ddq.braintrain.models.AccountModel;
 
 public class BrainTrainDatabase extends SQLiteOpenHelper {
 
@@ -14,6 +18,13 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS \"account\" (\n" +
+                "\t\"userName\"\tTEXT Primary Key,\n" +
+                "\t\"password\"\tTEXT,\n" +
+                "\t\"gender\"\tTEXT,\n" +
+                "\t\"dob\"\tTEXT,\n" +
+                "\t\"personal_id\"\tTEXT Primary Key\n" +
+                ")");
         db.execSQL("CREATE TABLE if not exists \"attention_game_one\" (\n" +
                 "\t\"image_id\"\tINTEGER,\n" +
                 "\t\"image_name\"\tTEXT,\n" +
@@ -146,6 +157,7 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("drop table if exists account");
         db.execSQL("drop table if exists attention_game_one");
         db.execSQL("drop table if exists attention_game_three");
         db.execSQL("drop table if exists attention_game_two");
@@ -192,4 +204,19 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
         db.execSQL("UPDATE " + table + " SET " + cell + " = " + value + " WHERE level = " + level);
     }
 
+    public boolean insertAccount(String userName, String password, String gender, String dob, String personal_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("userName", userName);
+        contentValues.put("password",  password);
+        contentValues.put("gender", gender);
+        contentValues.put("dob", dob);
+        contentValues.put("personal_id", personal_id);
+        long result = db.insert("account", null, contentValues);
+        if (result == -1){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }
