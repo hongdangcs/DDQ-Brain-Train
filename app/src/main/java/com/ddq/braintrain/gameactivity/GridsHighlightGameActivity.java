@@ -83,6 +83,7 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
                 finish();
             }
         });
+
     }
 
     public void generateGrid() {
@@ -271,7 +272,13 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
         }
     }
 
-//
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(GridsHighlightGameActivity.this, MemoryActivity.class));
+        finish();
+    }
+
+    //
 //    public void generateGrid(int level) {
 //
 //        list = new ArrayList<AppCompatButton>();
