@@ -29,7 +29,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ConjunctionGameActivity extends AppCompatActivity {
-    private static final int START_TIMER = 10000;
+    private static final int START_TIMER = 60000;
     private String userInput, topicWord;
     CountDownTimer timer;
     long timeLeft = START_TIMER;
