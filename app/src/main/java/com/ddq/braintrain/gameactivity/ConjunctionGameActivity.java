@@ -1,5 +1,6 @@
 package com.ddq.braintrain.gameactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -15,8 +16,10 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
+import com.ddq.braintrain.LanguageActivity;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.models.ConjunctionGameModel;
+import com.ddq.braintrain.models.ProgressModel;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -35,6 +38,7 @@ public class ConjunctionGameActivity extends AppCompatActivity {
     AppCompatButton tryAgainButton, submitConjunctionWordButton;
     private EditText editConjunctionWordAnswer;
     private BrainTrainDatabase brainTrainDatabase;
+    private ProgressModel maxScore;
     private static List<ConjunctionGameModel> conjunctionGameModels;
 
     @Override
@@ -52,15 +56,21 @@ public class ConjunctionGameActivity extends AppCompatActivity {
         txtConjunctionWordError = findViewById(R.id.txtConjunctionWordError);
         brainTrainDatabase = new BrainTrainDatabase(ConjunctionGameActivity.this);
         conjunctionGameModels = new BrainTrainDAO().conjunctionGameModels(brainTrainDatabase);
-        brainTrainDatabase.updateUserScore(33, totalScore);
         Collections.shuffle(conjunctionGameModels);
+
+        maxScore = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 33);
         gameStart();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        brainTrainDatabase.updateUserScore(33, totalScore);
+        getTotalScore();
+        if (maxScore.getUserScore() < currentScore) {
+            totalScore = currentScore;
+            brainTrainDatabase.updateUserScore(33, totalScore);
+        }
+        startActivity(new Intent(ConjunctionGameActivity.this, LanguageActivity.class));
         this.finish();
     }
 
@@ -135,12 +145,10 @@ public class ConjunctionGameActivity extends AppCompatActivity {
                 tryAgainButton.setVisibility(View.VISIBLE);
                 txtConjunctionWordNoti.setVisibility(View.VISIBLE);
                 getTotalScore();
-                if (totalScore < currentScore) {
+                if (maxScore.getUserScore() < currentScore) {
                     totalScore = currentScore;
                     brainTrainDatabase.updateUserScore(33, totalScore);
                 }
-//                totalScore = currentScore;
-//                brainTrainDatabase.updateUserScore(33, totalScore);
             }
         }.start();
     }

@@ -255,6 +255,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
         startActivity(intent);
+        finish();
     }
 
 }
