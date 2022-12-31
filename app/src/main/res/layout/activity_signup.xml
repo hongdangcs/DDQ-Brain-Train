@@ -124,13 +124,13 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btnSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/size_10dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/ButtonColor"
                 android:padding="@dimen/size_10dp"
-                android:onClick="SignUp"
                 android:text="@string/dang_ky" />
 
             <Button

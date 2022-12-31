@@ -3,6 +3,7 @@ package com.ddq.braintrain;
 import android.accounts.Account;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -11,6 +12,12 @@ import androidx.annotation.Nullable;
 import com.ddq.braintrain.models.AccountModel;
 
 public class BrainTrainDatabase extends SQLiteOpenHelper {
+    public  static final String TABLE_NAME = "account";
+    public  static final String COL = "userName" ;
+    public  static final String COL_1 = "password";
+    public  static final String COL_2 = "gender";
+    public  static final String COL_3 = "dob";
+    public  static final String COL_4= "personal_id";
 
     public BrainTrainDatabase(@Nullable Context context) {
         super(context, "ddqbraintrain.db", null, 1);
@@ -204,19 +211,37 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
         db.execSQL("UPDATE " + table + " SET " + cell + " = " + value + " WHERE level = " + level);
     }
 
-    public boolean insertAccount(String userName, String password, String gender, String dob, String personal_id) {
+    public Boolean insertAccount(String userName, String password, String gender, String dob, String personal_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("userName", userName);
-        contentValues.put("password",  password);
-        contentValues.put("gender", gender);
-        contentValues.put("dob", dob);
-        contentValues.put("personal_id", personal_id);
-        long result = db.insert("account", null, contentValues);
+        contentValues.put(COL, userName);
+        contentValues.put(COL_1,  password);
+        contentValues.put(COL_2, gender);
+        contentValues.put(COL_3, dob);
+        contentValues.put(COL_4, personal_id);
+        long result = db.insert(TABLE_NAME, null, contentValues);
         if (result == -1){
             return false;
         }else{
             return true;
         }
+    }
+
+    public boolean checkUserName (String userName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * from account where userName=?", new String[] {userName});
+        if (cursor.getCount()>0){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkUserNamePassword (String userName, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * from account where userName=? and password=?", new String[] {userName, password});
+        if (cursor.getCount()>0){
+            return true;
+        }
+        return false;
     }
 }
