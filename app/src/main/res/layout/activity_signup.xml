@@ -102,6 +102,10 @@
             android:inputType="text"
             android:minHeight="48dp"
             android:padding="@dimen/size_10dp"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:textColorHint="@color/Gray" />
 
         <EditText

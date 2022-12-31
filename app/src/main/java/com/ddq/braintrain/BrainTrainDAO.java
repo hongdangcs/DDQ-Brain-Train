@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.ddq.braintrain.models.AccountModel;
 import com.ddq.braintrain.models.CompareModel;
 import com.ddq.braintrain.models.ConjunctionGameModel;
 import com.ddq.braintrain.models.DifferentModel;
@@ -389,6 +390,31 @@ public class BrainTrainDAO {
                 completeStatus = cursor.getInt(2);
 
                 returnList.add(new ConjunctionGameModel(id, word, completeStatus));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return returnList;
+    }
+
+    public List<AccountModel> accountModels(BrainTrainDatabase db) {
+        List<AccountModel> returnList = new ArrayList<>();
+
+        String userName, password, gender, dob, personal_id;
+
+        SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
+        String query = "select * from account";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                userName = cursor.getString(0);
+                password = cursor.getString(1);
+                gender = cursor.getString(2);
+                dob = cursor.getString(3);
+                personal_id = cursor.getString(4);
+
+                returnList.add(new AccountModel(userName, password, gender, dob, personal_id));
 
             } while (cursor.moveToNext());
         }

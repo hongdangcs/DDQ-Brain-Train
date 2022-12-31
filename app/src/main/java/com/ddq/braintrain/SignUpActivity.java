@@ -1,11 +1,13 @@
 package com.ddq.braintrain;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -13,7 +15,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class SignUpActivity extends AppCompatActivity {
+    final Calendar myCalendar= Calendar.getInstance();
     private RadioGroup radioGenderGroup;
     private RadioButton radioGenderButton;
     private Button btnSignUp;
@@ -32,8 +39,30 @@ public class SignUpActivity extends AppCompatActivity {
         dob = findViewById(R.id.dob);
         personal_id = findViewById(R.id.personal_id);
         btnSignUp = findViewById(R.id.btnSignUp);
+        DatePickerDialog.OnDateSetListener date =new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH,month);
+                myCalendar.set(Calendar.DAY_OF_MONTH,day);
+                updateLabel();
+            }
+        };
+        dob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(SignUpActivity.this,date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
         SignUp();
 
+    }
+
+    private void updateLabel(){
+        String myFormat="MM/dd/yyyy";
+        SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);
+        dob.setText(dateFormat.format(myCalendar.getTime()));
     }
 
     public void SignUp() {

@@ -11,6 +11,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SignInActivity extends AppCompatActivity {
+    private static String user;
+
+    private static String pass;
     EditText userName, password;
     Button signin;
     BrainTrainDatabase brainTrainDatabase;
@@ -28,8 +31,8 @@ public class SignInActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user = userName.getText().toString();
-                String pass = password.getText().toString();
+                user = userName.getText().toString();
+                pass = password.getText().toString();
 
                 if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass)){
                     Toast.makeText(SignInActivity.this, "All fields Required!", Toast.LENGTH_SHORT).show();
@@ -52,5 +55,9 @@ public class SignInActivity extends AppCompatActivity {
     public void SignUp(View view) {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
+    }
+
+    public static String getUser() {
+        return user;
     }
 }

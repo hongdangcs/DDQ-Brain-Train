@@ -10,14 +10,16 @@ import androidx.fragment.app.FragmentTransaction;
 import com.ddq.braintrain.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
+    private String userName;
+    SignInActivity signInActivity;
+    BrainTrainDatabase brainTrainDatabase;
     ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-
+        brainTrainDatabase = new BrainTrainDatabase(this);
         copyDatabase();
 
         setContentView(binding.getRoot());
@@ -29,8 +31,12 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new HomeFragment());
                     break;
                 case R.id.profile:
-                    replaceFragment(new SignInRequestFragment());
-
+                    userName = signInActivity.getUser();
+                    if (userName != null) {
+                        replaceFragment(new ProfileFragment());
+                    } else {
+                        replaceFragment(new SignInRequestFragment());
+                    }
                     break;
                 case R.id.setting:
                     replaceFragment(new SettingFragment());
