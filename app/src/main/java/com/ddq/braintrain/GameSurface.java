@@ -40,7 +40,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
     Context mContext;
     Rect rect;
 
-    Bitmap background = BitmapFactory.decodeResource(getResources(), R.drawable.shark_boat_game_background);
+    Bitmap background = BitmapFactory.decodeResource(getResources(), R.drawable.sea_surface);
 
     int screenWidth, screenHeight;
 

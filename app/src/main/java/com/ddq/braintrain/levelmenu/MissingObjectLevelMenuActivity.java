@@ -49,6 +49,7 @@ public class MissingObjectLevelMenuActivity extends AppCompatActivity implements
 
             btn = new AppCompatButton(MissingObjectLevelMenuActivity.this);
             btn.setText("" + missingObjectModels.get(i).getLevel());
+            btn.setTextSize(26);
             btn.setId(i + 1);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);
@@ -73,6 +74,7 @@ public class MissingObjectLevelMenuActivity extends AppCompatActivity implements
         for (int i = 0; i < missingObjectModels.size(); i++) {
             btn = new AppCompatButton(MissingObjectLevelMenuActivity.this);
             btn.setText("" + missingObjectModels.get(i).getLevel());
+            btn.setTextSize(26);
             btn.setId(i + 101);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);
@@ -98,6 +100,7 @@ public class MissingObjectLevelMenuActivity extends AppCompatActivity implements
         for (int i = 0; i < missingObjectModels.size(); i++) {
             btn = new AppCompatButton(MissingObjectLevelMenuActivity.this);
             btn.setText("" + missingObjectModels.get(i).getLevel());
+            btn.setTextSize(26);
             btn.setId(i + 1001);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);

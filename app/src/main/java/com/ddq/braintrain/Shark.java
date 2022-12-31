@@ -19,7 +19,7 @@ public class Shark {
 
     private final GameSurface gameSurface;
 
-    protected Bitmap image;
+    protected Bitmap image, originImage, flipImage;
     protected int x;
     protected int y;
     int width;
@@ -39,9 +39,17 @@ public class Shark {
         this.width = originalImage.getWidth();
         this.height = originalImage.getHeight();
         float scaleFactor = 1.2f; // Change this value to adjust the size of the image
-        image = Bitmap.createScaledBitmap(originalImage, (int) (width * scaleFactor), (int) (height * scaleFactor), false);
-        this.width = image.getWidth();
-        this.height = image.getHeight();
+        originImage = Bitmap.createScaledBitmap(originalImage, (int) (width * scaleFactor), (int) (height * scaleFactor), false);
+
+
+         originalImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.sharkflip);
+        flipImage = Bitmap.createScaledBitmap(originalImage, (int) (width * scaleFactor), (int) (height * scaleFactor), false);
+
+        image = originImage;
+
+
+        this.width = originImage.getWidth();
+        this.height = originImage.getHeight();
 
         this.oldX = x;
         this.oldY = y;
@@ -74,6 +82,10 @@ public class Shark {
 
 
          */
+
+        if(movingVectorX >=0){
+            image = flipImage;
+        } else  image = originImage;
 
         if (isCollision) {
             this.x = oldX;

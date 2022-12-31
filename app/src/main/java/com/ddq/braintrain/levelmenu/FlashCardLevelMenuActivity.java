@@ -45,6 +45,7 @@ public class FlashCardLevelMenuActivity extends AppCompatActivity implements Vie
         for (int i = 0; i < flashCardModels.size(); i++) {
             btn = new AppCompatButton(FlashCardLevelMenuActivity.this);
             btn.setText("" + flashCardModels.get(i).getLevel());
+            btn.setTextSize(26);
             btn.setId(i + 1);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);
@@ -60,6 +61,7 @@ public class FlashCardLevelMenuActivity extends AppCompatActivity implements Vie
         for (int i = 0; i < flashCardModels.size(); i++) {
             btn = new AppCompatButton(FlashCardLevelMenuActivity.this);
             btn.setText("" + flashCardModels.get(i).getLevel());
+            btn.setTextSize(26);
             btn.setId(i + 101);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);
@@ -75,6 +77,7 @@ public class FlashCardLevelMenuActivity extends AppCompatActivity implements Vie
         for (int i = 0; i < flashCardModels.size(); i++) {
             btn = new AppCompatButton(FlashCardLevelMenuActivity.this);
             btn.setText("" + flashCardModels.get(i).getLevel());
+            btn.setTextSize(26);
             btn.setId(i + 1001);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);

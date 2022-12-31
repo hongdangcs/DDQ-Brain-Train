@@ -45,6 +45,7 @@ public class DifferentLevelMenuActivity extends AppCompatActivity implements Vie
         for (int i = 0; i < differentModels.size(); i++) {
             btn = new AppCompatButton(DifferentLevelMenuActivity.this);
             btn.setText("" + differentModels.get(i).getImageID());
+            btn.setTextSize(26);
             btn.setId(i + 1);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     150,

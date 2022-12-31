@@ -25,7 +25,7 @@ import java.util.List;
 
 public class GridsHighlightGameActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView textView, gridsHighlightTimeTextView, gridHighlightInforTextView, gridsHighlightCompleteNotiTextView, gridsHighlightOpportunityTextView, gridsHighlightScoreTextView;
+    private TextView textView, gridsHighlightTimeTextView, gridHighlightInforTextView, gridsHighlightCompleteNotiTextView, gridsHighlightScoreTextView;
     AppCompatButton btn, nextLevelButton, resultButton, replayButton;
     GridLayout gridsHighlightGameLayout;
 
@@ -47,7 +47,6 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
         gridHighlightInforTextView = findViewById(R.id.gridHighlightInforTextView);
         gridsHighlightCompleteNotiTextView = findViewById(R.id.gridsHighlightCompleteNotiTextView);
         gridsHighlightScoreTextView = findViewById(R.id.gridsHighlightScoreTextView);
-        gridsHighlightOpportunityTextView = findViewById(R.id.gridsHighlightOpportunityTextView);
         nextLevelButton = findViewById(R.id.nextLevelButton);
         resultButton = findViewById(R.id.resultButton);
         replayButton = findViewById(R.id.replayButton);
@@ -61,7 +60,6 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
         resultButton.setVisibility(View.GONE);
         gridsHighlightCompleteNotiTextView.setVisibility(View.GONE);
         textView.setText("Cấp độ: " + level);
-        gridsHighlightOpportunityTextView.setText("Còn " + trials + " lượt!");
         gridsHighlightScoreTextView.setText("Điểm: " + score);
 
         generateGrid();
@@ -172,7 +170,6 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
 
     public void updateTrials() {
         trials--;
-        gridsHighlightOpportunityTextView.setText("Còn " + trials + " lượt!");
         if (trials == 0) {
             gameStop();
         } else {

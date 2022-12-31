@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".levelmenu.DifferentLevelMenuActivity"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/orange_background"
+        android:gravity="center"
         android:text="Chọn Mức Chơi"
         android:textColor="@color/very_dark_blue"
         android:textSize="40dp" />
@@ -17,6 +19,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/orange_background"
         tools:ignore="SpeakableTextPresentCheck">
 
         <androidx.gridlayout.widget.GridLayout

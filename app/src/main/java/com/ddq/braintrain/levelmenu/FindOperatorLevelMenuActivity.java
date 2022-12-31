@@ -57,6 +57,7 @@ public class FindOperatorLevelMenuActivity extends AppCompatActivity implements 
         for (int i = 0; i < findOperatorModels.size(); i++) {
             btn = new AppCompatButton(FindOperatorLevelMenuActivity.this);
             btn.setText("" + findOperatorModels.get(i).getLevel());
+            btn.setTextSize(26);
             btn.setId(i + 10);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     150,
@@ -76,6 +77,7 @@ public class FindOperatorLevelMenuActivity extends AppCompatActivity implements 
         for (int i = 0; i < findOperatorModels2.size(); i++) {
             btn = new AppCompatButton(FindOperatorLevelMenuActivity.this);
             btn.setText("" + findOperatorModels2.get(i).getLevel());
+            btn.setTextSize(26);
             btn.setId(i + 100);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     150,
@@ -96,6 +98,7 @@ public class FindOperatorLevelMenuActivity extends AppCompatActivity implements 
         for (int i = 0; i < findOperatorModels3.size(); i++) {
             btn = new AppCompatButton(FindOperatorLevelMenuActivity.this);
             btn.setText("" + findOperatorModels3.get(i).getLevel());
+            btn.setTextSize(26);
             btn.setId(i + 1000);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     150,

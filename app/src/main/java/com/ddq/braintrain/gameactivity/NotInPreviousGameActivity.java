@@ -24,7 +24,7 @@ import java.util.List;
 
 public class NotInPreviousGameActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView notInPreviousLevelTextView, notInPreviousInforTextView, notInPreviousTimeTextView, notInPreviousScoreTextView, notInPreviousCompleteNotiTextView;
+    TextView notInPreviousLevelTextView, notInPreviousInforTextView, notInPreviousScoreTextView, notInPreviousCompleteNotiTextView;
     AppCompatButton notInPreviousResultButton;
     GridLayout notInPreviousGameLayout;
     CardView cardView;
@@ -46,7 +46,6 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
 
         notInPreviousLevelTextView = findViewById(R.id.notInPreviousLevelTextView);
         notInPreviousInforTextView = findViewById(R.id.notInPreviousInforTextView);
-        notInPreviousTimeTextView = findViewById(R.id.notInPreviousTimeTextView);
         notInPreviousScoreTextView = findViewById(R.id.notInPreviousScoreTextView);
         notInPreviousCompleteNotiTextView = findViewById(R.id.notInPreviousCompleteNotiTextView);
         notInPreviousResultButton = findViewById(R.id.notInPreviousResultButton);

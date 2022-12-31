@@ -24,7 +24,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="6dp"
-        android:text="Tìm tổng 2 số chia hết cho 10, 100, 1000" />
+        android:text="Tìm hai số có tổng bằng 1000"
+        android:textSize="18dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,8 +57,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="horizontal">
 
         <Button
@@ -66,9 +68,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="6dp"
-            android:text="Button"
+            android:text="1"
             android:gravity="center"
             android:padding="6dp"
+            android:textSize="24dp"
+            android:background="@drawable/oparator_button"
             android:onClick="ClickOption1"/>
 
         <Button
@@ -79,7 +83,9 @@
             android:layout_margin="6dp"
             android:gravity="center"
             android:padding="6dp"
+            android:textSize="24dp"
             android:text="Button"
+            android:background="@drawable/oparator_button"
             android:onClick="ClickOption2"/>
 
         <Button
@@ -89,15 +95,19 @@
             android:layout_weight="1"
             android:layout_margin="6dp"
             android:gravity="center"
+            android:textSize="24dp"
             android:padding="6dp"
             android:text="Button"
+            android:background="@drawable/oparator_button"
             android:onClick="ClickOption3"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
         android:orientation="horizontal">
 
         <Button
@@ -107,7 +117,9 @@
             android:layout_weight="1"
             android:layout_margin="6dp"
             android:text="Button"
+            android:textSize="24dp"
             android:gravity="center"
+            android:background="@drawable/oparator_button"
             android:padding="6dp"
             android:onClick="ClickOption4"/>
 
@@ -118,7 +130,9 @@
             android:layout_weight="1"
             android:layout_margin="6dp"
             android:gravity="center"
+            android:textSize="24dp"
             android:padding="6dp"
+            android:background="@drawable/oparator_button"
             android:text="Button"
             android:onClick="ClickOption5"/>
 
@@ -129,6 +143,8 @@
             android:layout_weight="1"
             android:layout_margin="6dp"
             android:gravity="center"
+            android:background="@drawable/oparator_button"
+            android:textSize="24dp"
             android:padding="6dp"
             android:text="Button"
             android:onClick="ClickOption6"/>

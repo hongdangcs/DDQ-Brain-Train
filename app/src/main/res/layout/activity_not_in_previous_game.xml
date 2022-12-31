@@ -34,22 +34,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="6dp"
-                android:text="Ghi nhớ các ô màu vàng" />
+                android:text="Ghi nhớ các ô màu vàng"
+                android:textSize="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/notInPreviousTimeTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="6dp"
-                    android:text="Thời gian: "
-                    android:textSize="20dp" />
 
 
                 <TextView

@@ -23,6 +23,7 @@
                 android:id="@+id/gameNameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="Tìm đồ vật khác biệt"
                 android:textColor="@color/very_dark_blue"
                 android:textSize="24dp"
@@ -32,7 +33,7 @@
                 android:id="@+id/questionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:text="Tìm con ong"
                 android:textColor="@color/navy_blue_color"
@@ -49,7 +50,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Thời gian:" />
+                    android:text="Thời gian:"
+                    android:textColor="@color/very_dark_blue"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/scoreTextView"
@@ -57,7 +60,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Điểm: " />
+                    android:text="Điểm: "
+                    android:textColor="@color/very_dark_blue"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <androidx.cardview.widget.CardView

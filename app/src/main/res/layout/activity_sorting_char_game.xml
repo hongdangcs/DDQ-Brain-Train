@@ -24,7 +24,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="6dp"
-        android:text="Sắp xếp chữ cái" />
+        android:text="Sắp xếp chữ cái"
+        android:textSize="16dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

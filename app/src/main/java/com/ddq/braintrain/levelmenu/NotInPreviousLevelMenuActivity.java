@@ -38,6 +38,7 @@ public class NotInPreviousLevelMenuActivity extends AppCompatActivity implements
         for (int i = 0; i < notInPreviousModels.size(); i++) {
             btn = new AppCompatButton(NotInPreviousLevelMenuActivity.this);
             btn.setText("" + notInPreviousModels.get(i).getLevel());
+            btn.setTextSize(26);
             btn.setId(i + 1);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     150,

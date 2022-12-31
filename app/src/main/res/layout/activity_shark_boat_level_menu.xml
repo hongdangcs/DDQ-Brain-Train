@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        app:srcCompat="@drawable/shark_boat_game_background"
+        app:srcCompat="@drawable/sea_surface"
         android:scaleType="centerCrop"
         />
 

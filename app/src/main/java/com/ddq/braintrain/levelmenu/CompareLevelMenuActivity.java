@@ -44,6 +44,7 @@ public class CompareLevelMenuActivity extends AppCompatActivity implements View.
         for (int i = 0; i < compareModels.size(); i++) {
             btn = new AppCompatButton(CompareLevelMenuActivity.this);
             btn.setText("" + compareModels.get(i).getLevel());
+            btn.setTextSize(26);
             btn.setId(i + 1);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 150);
             params.setMargins(10, 10, 10, 10);

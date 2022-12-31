@@ -24,7 +24,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="6dp"
-        android:text="Tìm từ nối cho sẵn từ bắt đầu" />
+        android:text="Tìm từ nối cho sẵn từ bắt đầu"
+        android:textSize="16dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orange_background"
     android:orientation="vertical"
     tools:context=".levelmenu.FlashCardLevelMenuActivity">
 
@@ -12,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/orange_background"
+        android:gravity="center"
         android:text="Chọn Mức Chơi"
         android:textColor="@color/very_dark_blue"
         android:textSize="40dp" />
@@ -24,8 +26,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
+            android:orientation="vertical">
 
 
             <TextView
