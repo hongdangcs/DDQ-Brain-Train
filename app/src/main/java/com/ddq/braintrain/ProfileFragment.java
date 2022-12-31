@@ -26,7 +26,7 @@ import java.util.List;
 public class ProfileFragment extends Fragment {
     private String user;
     SignInActivity signInActivity;
-    TextView userName, dob, gender, personal_id, password;
+    TextView userName, dob, gender, personal_id, password, progress;
     private BrainTrainDatabase brainTrainDatabase;
     private static List<AccountModel> accountModels;
     // TODO: Rename parameter arguments, choose names that match
@@ -75,6 +75,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        progress = view.findViewById(R.id.progress);
         userName = view.findViewById(R.id.userName);
         password = view.findViewById(R.id.password);
         dob = view.findViewById(R.id.dob);
@@ -96,6 +97,8 @@ public class ProfileFragment extends Fragment {
                 break;
             }
         }
+
+        progress.setText(""+HomeFragment.getTotalProgress() + "%");
         // Inflate the layout for this fragment
         return view;
     }

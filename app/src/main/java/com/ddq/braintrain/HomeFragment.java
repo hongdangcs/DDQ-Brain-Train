@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private static int memory, attention, language, math;
 
     private static CardView attentionCardView, memoryCardView, mathCardView, languageCardView;
     private ProgressBar memoryProgress, attentionProgress, mathProgress, languageProgress;
@@ -96,7 +97,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 12)).getMaxScore() +
                 (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 13)).getMaxScore() ;
         memoryProgress.setProgress((100*memoryUserScore)/memoryMaxScore);
-
+        memory = memoryProgress.getProgress();
 
         int attentionUserScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 21)).getUserScore()
                 + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 221)).getUserScore() +
@@ -109,7 +110,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                  (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 223)).getMaxScore() +
                 (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 23)).getMaxScore() ;
         attentionProgress.setProgress((100*attentionUserScore)/attentionMaxScore);
-
+        attention = attentionProgress.getProgress();
 
         int languageUserScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 31)).getUserScore()
                 + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 32)).getUserScore() +
@@ -120,7 +121,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 33)).getMaxScore() +
                 (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 34)).getMaxScore() ;
         languageProgress.setProgress((100*languageUserScore)/languageMaxScore);
-
+        language = languageProgress.getProgress();
 
         int mathUserScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 41)).getUserScore()
                 + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 421)).getUserScore() +
@@ -131,7 +132,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 422)).getMaxScore() +
                 (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 423)).getMaxScore() ;
         mathProgress.setProgress((100*mathUserScore)/mathMaxScore);
-
+        math = mathProgress.getProgress();
 /*
 
 /*
@@ -192,5 +193,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public CreationExtras getDefaultViewModelCreationExtras() {
         return super.getDefaultViewModelCreationExtras();
+    }
+
+    public static int getTotalProgress(){
+        return (memory + attention + language + math) / 4;
     }
 }
