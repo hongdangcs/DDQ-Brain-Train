@@ -1,7 +1,10 @@
 package com.ddq.braintrain;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,15 +115,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         attentionProgress.setProgress((100*attentionUserScore)/attentionMaxScore);
         attention = attentionProgress.getProgress();
 
-        int languageUserScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 31)).getUserScore()
-                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 32)).getUserScore() +
-                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 33)).getUserScore() +
-                (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 34)).getUserScore() ;
-        int languageMaxScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 31)).getMaxScore()
-                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 32)).getMaxScore() +
-                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 33)).getMaxScore() +
-                (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 34)).getMaxScore() ;
-        languageProgress.setProgress((100*languageUserScore)/languageMaxScore);
+        int languageUserScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 31)).getUserScore() > 0 ? 1:0
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 32)).getUserScore() > 0 ? 1:0+
+                + (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 33)).getUserScore() > 0 ? 1:0+
+                (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 34)).getUserScore() > 0 ? 1:0;
+        Log.d(TAG, "onCreateView: language user score: "+ languageUserScore);
+        languageProgress.setProgress((100*languageUserScore)/4);
         language = languageProgress.getProgress();
 
         int mathUserScore = (new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 41)).getUserScore()

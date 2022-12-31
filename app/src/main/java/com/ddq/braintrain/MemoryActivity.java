@@ -127,6 +127,7 @@ public class MemoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MemoryActivity.this, GridsHighlightGameActivity.class);
                 intent.putExtra("level", gridHighlightLevelToPlay);
+                intent.putExtra("trial", 0);
                 startActivity(intent);
                 finish();
             }
