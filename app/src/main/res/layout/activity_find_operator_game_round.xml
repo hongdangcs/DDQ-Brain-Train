@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orange_background"
+    android:orientation="vertical"
+    tools:context=".gameactivity.FindOperatorGameRoundActivity">
+
+    <TextView
+        android:id="@+id/findOperatorRoundLevelTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="level"
+        android:textColor="@color/very_dark_blue"
+        android:textSize="24dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/FindOperatorRoundTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="Thời gian: "
+            android:textSize="20dp" />
+
+
+        <TextView
+            android:id="@+id/FindOperatorRoundScoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="Điểm: "
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/findOperatorRoundGameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        app:columnCount="3" />
+
+    <TextView
+        android:id="@+id/FindOperatorRoundCompleteNoticeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@color/golden_yellow_laminate_color"
+        android:gravity="center"
+        android:padding="10dp"
+        android:paddingTop="20dp"
+        android:text="Hết Thời Gian!"
+        android:textColor="@color/very_dark_blue"
+        android:textSize="12dp" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/findOperatorRoundNextLevelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/navy_blue_color"
+        android:text="Màn tiếp theo"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/findOperatorRoundResultButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/navy_blue_color"
+        android:text="Xem kết quả"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
+
+</LinearLayout>

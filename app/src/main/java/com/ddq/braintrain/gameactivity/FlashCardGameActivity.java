@@ -341,14 +341,12 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     cardView.removeAllViews();
                     image = new ImageView(FlashCardGameActivity.this);
                     image.setImageResource(getResources().getIdentifier(itemName + cardView.getTag(), "drawable", getPackageName()));
                     image.setScaleType(ImageView.ScaleType.FIT_CENTER);
                     cardView.addView(image);
                     Log.d(TAG, cardView.getId() + "card view clicked");
-
                     if (isOpen) {
                         isOpen = false;
                         if (openCard == (int) cardView.getTag()) {
@@ -362,7 +360,6 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
                                 }
                             }, 700);
                             Log.d(TAG, "Con lai: " + remainingPair);
-
                         } else {
                             for (CardView cardView1 : cardViewList) {
                                 cardView1.setClickable(false);

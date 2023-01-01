@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange_background"
     android:orientation="vertical"
     tools:context=".gameactivity.FindOperatorGameActivity">
 
@@ -68,11 +67,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="6dp"
-            android:text="1"
+            android:text=""
             android:gravity="center"
             android:padding="6dp"
             android:textSize="24dp"
-            android:background="@drawable/oparator_button"
             android:onClick="ClickOption1"/>
 
         <Button
@@ -84,8 +82,7 @@
             android:gravity="center"
             android:padding="6dp"
             android:textSize="24dp"
-            android:text="Button"
-            android:background="@drawable/oparator_button"
+            android:text=""
             android:onClick="ClickOption2"/>
 
         <Button
@@ -97,8 +94,7 @@
             android:gravity="center"
             android:textSize="24dp"
             android:padding="6dp"
-            android:text="Button"
-            android:background="@drawable/oparator_button"
+            android:text=""
             android:onClick="ClickOption3"/>
 
     </LinearLayout>
@@ -116,10 +112,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="6dp"
-            android:text="Button"
+            android:text=""
             android:textSize="24dp"
             android:gravity="center"
-            android:background="@drawable/oparator_button"
             android:padding="6dp"
             android:onClick="ClickOption4"/>
 
@@ -132,8 +127,7 @@
             android:gravity="center"
             android:textSize="24dp"
             android:padding="6dp"
-            android:background="@drawable/oparator_button"
-            android:text="Button"
+            android:text=""
             android:onClick="ClickOption5"/>
 
         <Button
@@ -143,10 +137,9 @@
             android:layout_weight="1"
             android:layout_margin="6dp"
             android:gravity="center"
-            android:background="@drawable/oparator_button"
             android:textSize="24dp"
             android:padding="6dp"
-            android:text="Button"
+            android:text=""
             android:onClick="ClickOption6"/>
 
     </LinearLayout>

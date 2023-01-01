@@ -13,10 +13,24 @@
         android:theme="@style/Theme.BrainTrain"
         tools:targetApi="31">
         <activity
+            android:name=".gameactivity.FindOperatorGameRoundActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".levelmenu.FindOperatorLevelSelectActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".SharkBoatGameOverActivity"
             android:exported="false"
-            android:screenOrientation="landscape"
-            android:parentActivityName=".levelmenu.SharkBoatLevelMenuActivity">
+            android:parentActivityName=".levelmenu.SharkBoatLevelMenuActivity"
+            android:screenOrientation="landscape">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

@@ -66,7 +66,8 @@ public class DifferentGameActivity extends AppCompatActivity {
                     x = event.getX();
                     y = event.getY();
 
-                    if ((x > models.get(level - 1).getxCoordinate() - 75 && x < models.get(level - 1).getxCoordinate() + 75) && (y > models.get(level - 1).getyCoordinate() - 75 && y < models.get(level - 1).getyCoordinate() + 75)) {
+                    if ((x > models.get(level - 1).getxCoordinate() - 75 && x < models.get(level - 1).getxCoordinate() + 75)
+                            && (y > models.get(level - 1).getyCoordinate() - 75 && y < models.get(level - 1).getyCoordinate() + 75)) {
                         Log.d(TAG, "cau tra loi dung " + x + " " + y);
                         timer.cancel();
                         resultTextView.setVisibility(View.VISIBLE);

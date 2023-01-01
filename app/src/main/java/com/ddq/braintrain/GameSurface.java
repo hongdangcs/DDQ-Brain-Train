@@ -193,11 +193,8 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
         int touchX = (int) event.getX();
         int touchY = (int) event.getY();
-        //if (waves.size() < boatNumber) {
         Wave wave = new Wave(getContext(), touchX - 75, touchY - 75);
-
         waves.add(wave);
-        //}
         return true;
     }
 

@@ -12,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 
+import com.ddq.braintrain.gameactivity.FindOperatorGameRoundActivity;
 import com.ddq.braintrain.levelmenu.CompareLevelMenuActivity;
 import com.ddq.braintrain.levelmenu.FindOperatorLevelMenuActivity;
+import com.ddq.braintrain.levelmenu.FindOperatorLevelSelectActivity;
 import com.ddq.braintrain.models.ProgressModel;
 
 public class MathActivity extends AppCompatActivity {
@@ -71,7 +73,7 @@ public class MathActivity extends AppCompatActivity {
         findOperatorCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MathActivity.this, FindOperatorLevelMenuActivity.class);
+                Intent intent = new Intent(MathActivity.this, FindOperatorLevelSelectActivity.class);
                 startActivity(intent);
             }
         });

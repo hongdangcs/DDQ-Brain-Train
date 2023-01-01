@@ -169,9 +169,7 @@ public class BrainTrainDAO {
 
     public List<FindOperatorModel> findOperatorOfTenModels(BrainTrainDatabase db) {
         List<FindOperatorModel> returnList = new ArrayList<>();
-
         int level, option, time, point, completeStatus;
-
         SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
         String query = "select * from math_game_two_multiple_of_ten";
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
@@ -182,9 +180,28 @@ public class BrainTrainDAO {
                 time = cursor.getInt(2);
                 point = cursor.getInt(3);
                 completeStatus = cursor.getInt(4);
-
                 returnList.add(new FindOperatorModel(level, option, time, point, completeStatus));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return returnList;
+    }
 
+    public List<FindOperatorModel> findOperatorModels(BrainTrainDatabase db, String table_name) {
+        List<FindOperatorModel> returnList = new ArrayList<>();
+        int level, option, time, point, completeStatus;
+        SQLiteDatabase sqLiteDatabase = db.getReadableDatabase();
+        String query = "select * from "+table_name;
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                level = cursor.getInt(0);
+                option = cursor.getInt(1);
+                time = cursor.getInt(2);
+                point = cursor.getInt(3);
+                completeStatus = cursor.getInt(4);
+                returnList.add(new FindOperatorModel(level, option, time, point, completeStatus));
             } while (cursor.moveToNext());
         }
         cursor.close();

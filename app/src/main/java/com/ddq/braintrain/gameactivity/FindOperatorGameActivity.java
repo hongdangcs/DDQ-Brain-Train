@@ -65,11 +65,19 @@ public class FindOperatorGameActivity extends AppCompatActivity {
         if (level < 100) {
             level = level - 10;
             text = "ten";
+            if(level <9){
+                Option6.setVisibility(View.GONE);
+            }
+
         } else if (level < 1000 && level >= 100) {
             level = level - 100;
-            text = "hundred";
+            text = "hundred";if(level <11){
+                Option6.setVisibility(View.GONE);
+            }
         } else if (level < 10000 && level >= 1000) {
-            level = level - 1000;
+            level = level - 1000;if(level <7){
+                Option6.setVisibility(View.GONE);
+            }
             text = "thousand";
         }
         this.level = level;

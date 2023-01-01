@@ -94,13 +94,10 @@ public class Shark {
             this.movingVectorY = -this.movingVectorY;
             isCollision = false;
         } else {
-
             this.oldX = x;
             this.oldY = y;
-
             this.x = x + movingVectorX;
             this.y = y + movingVectorY;
-
             if (this.x < 0) {
                 this.x = 0;
                 this.movingVectorX = -this.movingVectorX;
