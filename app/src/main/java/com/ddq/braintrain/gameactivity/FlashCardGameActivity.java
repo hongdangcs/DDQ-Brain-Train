@@ -47,6 +47,7 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
     List<CardView> cardViewList;
     boolean isOpen = false;
     int openCard;
+    int limit;
 
 
     @Override
@@ -136,24 +137,38 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
         level = intent.getIntExtra("level", 0);
         levelTextView.setText("Level: " + level);
 
-        int library = (new Random()).nextInt(2);
+        int library = (new Random()).nextInt(3);
 
         if (library == 0) {
 
             itemName = "animal_image_";
-        } else {
+        } else if (library == 1) {
             itemName = "fruit_";
+        } else {
+            itemName = "household_";
         }
-        if (level > 100 && level < 200) {
-            level = level - 100;
-            itemName = "transportation_item_";
 
+        if (level > 100 && level < 200) {
+            library = (new Random()).nextInt(2);
+            level = level - 100;
+
+            if (library == 0) {
+
+                itemName = "transportation_item_";
+            } else {
+                itemName = "logo_";
+            }
         }
 
         if (level > 1000) {
             level = level - 1000;
-            itemName = "household_";
+            itemName = "shape_";
+        }
 
+        if (itemName.equals("logo_") || itemName.equals("shape_")) {
+            limit = 29;
+        } else {
+            limit = 51;
         }
 
         pair = flashCardModels.get(level - 1).getPair();
@@ -189,7 +204,7 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
 
 
         ID = new ArrayList<>();
-        for (int i = 1; i < 51; i++) {
+        for (int i = 1; i < limit; i++) {
             ID.add(i);
         }
         Collections.shuffle(ID);
@@ -324,7 +339,6 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
 
 //        cardView.setOnClickListener(FlashCardGameActivity.this);
         cardViewList.add(cardView);
-        Log.d(TAG, " card tag " + cardView.getTag() + " card id(thu tu) " + cardView.getId());
         imageIndex++;
     }
 
@@ -332,7 +346,6 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
         Collections.shuffle(cardViewList);
         for (CardView cardView : cardViewList) {
             flashCardGameLayout.addView(cardView);
-            Log.d(TAG, " card tag " + cardView.getTag() + " card id(thu tu) " + cardView.getId());
         }
     }
 

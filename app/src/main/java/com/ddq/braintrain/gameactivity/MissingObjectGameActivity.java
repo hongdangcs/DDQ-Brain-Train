@@ -37,7 +37,7 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
     CardView cardView;
     ImageView image;
     CountDownTimer timer;
-    int level, realLevel, numberOfCard, hideCard, time, correctAnswer = 0, userScore;
+    int level, realLevel, numberOfCard, hideCard, time, correctAnswer = 0, userScore, limit;
     List<Integer> ID;
     List<CardView> forRememberList, questionList, answerList;
 
@@ -71,26 +71,41 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         }
 
 */
-        int library = (new Random()).nextInt(2);
-        row = "complete_status_easy";
+
+        int library = (new Random()).nextInt(3);
+
         if (library == 0) {
 
             itemName = "animal_image_";
-        } else {
+        } else if (library == 1) {
             itemName = "fruit_";
+        } else {
+            itemName = "household_";
         }
-        if (level > 100 && level < 200) {
-            level = level - 100;
-            itemName = "transportation_item_";
-            row = "complete_status_medium";
 
+        if (level > 100 && level < 200) {
+            library = (new Random()).nextInt(2);
+            level = level - 100;
+
+            if (library == 0) {
+
+                itemName = "transportation_item_";
+            } else {
+                itemName = "logo_";
+            }
         }
 
         if (level > 1000) {
             level = level - 1000;
-            itemName = "household_";
-            row = "complete_status_hard";
+            itemName = "shape_";
         }
+
+        if (itemName.equals("logo_") || itemName.equals("shape_")) {
+            limit = 29;
+        } else {
+            limit = 51;
+        }
+
 
 
         userScore = MemoryActivity.getMissingObjectCurrentScore();
@@ -124,7 +139,7 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         missingObjectLevelTextView.setText("Cấp độ: " + level);
 
         ID = new ArrayList<>();
-        for (int i = 1; i < 51; i++) {
+        for (int i = 1; i < limit; i++) {
             ID.add(i);
         }
         Collections.shuffle(ID);

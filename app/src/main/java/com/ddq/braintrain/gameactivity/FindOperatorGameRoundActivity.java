@@ -17,6 +17,7 @@ import androidx.gridlayout.widget.GridLayout;
 
 import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
+import com.ddq.braintrain.FindOperatorGameResultActivity;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.models.FindOperatorModel;
 
@@ -33,16 +34,17 @@ public class FindOperatorGameRoundActivity extends AppCompatActivity implements 
 
     Button btn, clickedBtn;
 
-    int level, gameLevel = 0, ansOne, score = 0;
+    int level, gameLevel = 0, ansOne, score = 0, timeLeft;
     boolean isSelected = false;
 
-    List<Integer> ansList;
+    List<Integer> timeLeftList;
     String databaseTable = "";
 
     BrainTrainDatabase brainTrainDatabase;
     List<FindOperatorModel> findOperatorModels;
     List<Button> buttons;
     List<Button> correctButtons;
+    Intent intent;
 
     CountDownTimer timer;
     Random random = new Random();
@@ -61,8 +63,8 @@ public class FindOperatorGameRoundActivity extends AppCompatActivity implements 
         findOperatorRoundResultButton = findViewById(R.id.findOperatorRoundResultButton);
 
         findOperatorRoundNextLevelButton.setVisibility(View.VISIBLE);
-        Intent intent = getIntent();
-        level = intent.getIntExtra("level", 0);
+        Intent intentGet = getIntent();
+        level = intentGet.getIntExtra("level", 0);
 
         if (level == 10) {
             databaseTable = "math_game_two_multiple_of_ten";
@@ -73,6 +75,8 @@ public class FindOperatorGameRoundActivity extends AppCompatActivity implements 
         if (level == 1000) {
             databaseTable = "math_game_two_multiple_of_thousand";
         }
+
+        timeLeftList = new ArrayList<>();
 
         brainTrainDatabase = new BrainTrainDatabase(FindOperatorGameRoundActivity.this);
         findOperatorModels = new BrainTrainDAO().findOperatorModels(brainTrainDatabase, databaseTable);
@@ -85,6 +89,14 @@ public class FindOperatorGameRoundActivity extends AppCompatActivity implements 
             @Override
             public void onClick(View v) {
                 gameContinue();
+            }
+        });
+
+        findOperatorRoundResultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -155,7 +167,8 @@ public class FindOperatorGameRoundActivity extends AppCompatActivity implements 
         timer = new CountDownTimer(time * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                FindOperatorRoundTimeTextView.setText("Thời gian: " + millisUntilFinished / 1000);
+                timeLeft = (int)millisUntilFinished / 1000;
+                FindOperatorRoundTimeTextView.setText("Thời gian: " + timeLeft);
             }
 
             @Override
@@ -194,11 +207,24 @@ public class FindOperatorGameRoundActivity extends AppCompatActivity implements 
     public void nextButton() {
         Log.d(TAG, "nextButton: " + gameLevel);
         if (gameLevel == findOperatorModels.size()) {
-            findOperatorRoundNextLevelButton.setVisibility(View.INVISIBLE);
-            findOperatorRoundResultButton.setVisibility(View.VISIBLE);
+            gameEnd();
         } else {
             findOperatorRoundNextLevelButton.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void gameEnd(){
+        findOperatorRoundNextLevelButton.setVisibility(View.INVISIBLE);
+        findOperatorRoundResultButton.setVisibility(View.VISIBLE);
+        int avgTime = 0;
+        for(int time: timeLeftList){
+            avgTime += time;
+        }
+        avgTime = avgTime / findOperatorModels.size();
+         intent = new Intent(FindOperatorGameRoundActivity.this, FindOperatorGameResultActivity.class);
+        intent.putExtra("score", score);
+        intent.putExtra("avgTime", avgTime);
+
     }
 
     @Override
@@ -214,6 +240,7 @@ public class FindOperatorGameRoundActivity extends AppCompatActivity implements 
                 clickedBtn = null;
             } else {
                 timer.cancel();
+                timeLeftList.add(findOperatorModels.get(gameLevel-1).getTime() - timeLeft);
                 v.setBackgroundDrawable(ContextCompat.getDrawable(FindOperatorGameRoundActivity.this, R.drawable.round_button_clicked));
                 if (ansOne + (int) v.getTag() == level) {
                     correctAns();
