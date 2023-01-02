@@ -28,7 +28,7 @@ import java.util.Random;
 
 public class FindOperatorGameRoundActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView findOperatorRoundLevelTextView, FindOperatorRoundTimeTextView, FindOperatorRoundScoreTextView, FindOperatorRoundCompleteNoticeTextView;
+    TextView findOperatorRoundLevelTextView, FindOperatorRoundCompleteMultipleOfTextView, FindOperatorRoundTimeTextView, FindOperatorRoundScoreTextView, FindOperatorRoundCompleteNoticeTextView;
     GridLayout findOperatorRoundGameLayout;
     Button findOperatorRoundNextLevelButton, findOperatorRoundResultButton;
 
@@ -61,6 +61,7 @@ public class FindOperatorGameRoundActivity extends AppCompatActivity implements 
         findOperatorRoundGameLayout = findViewById(R.id.findOperatorRoundGameLayout);
         findOperatorRoundNextLevelButton = findViewById(R.id.findOperatorRoundNextLevelButton);
         findOperatorRoundResultButton = findViewById(R.id.findOperatorRoundResultButton);
+        FindOperatorRoundCompleteMultipleOfTextView = findViewById(R.id.FindOperatorRoundCompleteMultipleOfTextView);
 
         findOperatorRoundNextLevelButton.setVisibility(View.VISIBLE);
         Intent intentGet = getIntent();
@@ -68,12 +69,15 @@ public class FindOperatorGameRoundActivity extends AppCompatActivity implements 
 
         if (level == 10) {
             databaseTable = "math_game_two_multiple_of_ten";
+            FindOperatorRoundCompleteMultipleOfTextView.setText("Tìm hai số có tổng bằng 10");
         }
         if (level == 100) {
             databaseTable = "math_game_two_multiple_of_hundred";
+            FindOperatorRoundCompleteMultipleOfTextView.setText("Tìm hai số có tổng bằng 100");
         }
         if (level == 1000) {
             databaseTable = "math_game_two_multiple_of_thousand";
+            FindOperatorRoundCompleteMultipleOfTextView.setText("Tìm hai số có tổng bằng 1000");
         }
 
         timeLeftList = new ArrayList<>();
@@ -214,7 +218,7 @@ public class FindOperatorGameRoundActivity extends AppCompatActivity implements 
     }
 
     public void gameEnd(){
-        findOperatorRoundNextLevelButton.setVisibility(View.INVISIBLE);
+        findOperatorRoundNextLevelButton.setVisibility(View.GONE);
         findOperatorRoundResultButton.setVisibility(View.VISIBLE);
         int avgTime = 0;
         for(int time: timeLeftList){

@@ -82,11 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Thử thách tiếp theo" />
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/replayButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Chơi lại màn này!" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/resultButton"
         android:layout_width="match_parent"

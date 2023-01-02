@@ -26,13 +26,14 @@ import java.util.List;
 public class GridsHighlightGameActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView textView, gridsHighlightTimeTextView, gridHighlightInforTextView, gridsHighlightCompleteNotiTextView, gridsHighlightScoreTextView;
-    AppCompatButton btn, nextLevelButton, resultButton, replayButton;
+    AppCompatButton btn, nextLevelButton, resultButton;
     GridLayout gridsHighlightGameLayout;
 
     private static final int TRIALS = 5, START_TIMER = 16000;
     CountDownTimer timer;
     long timeLeft = START_TIMER;
     int trials = TRIALS, level = 0, trueAns = 0, score = 0;
+    int wrong;
 
     List<AppCompatButton> list;
     int currentTotalScore = MemoryActivity.getGridHighlightTotalScore();
@@ -49,13 +50,13 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
         gridsHighlightScoreTextView = findViewById(R.id.gridsHighlightScoreTextView);
         nextLevelButton = findViewById(R.id.nextLevelButton);
         resultButton = findViewById(R.id.resultButton);
-        replayButton = findViewById(R.id.replayButton);
         gridsHighlightTimeTextView = findViewById(R.id.gridsHighlightTimeTextView);
 
         Intent intent = getIntent();
         level = intent.getIntExtra("level", 0);
+        trials = intent.getIntExtra("trial", 0);
+        wrong = 0;
 
-        replayButton.setVisibility(View.GONE);
         nextLevelButton.setVisibility(View.GONE);
         resultButton.setVisibility(View.GONE);
         gridsHighlightCompleteNotiTextView.setVisibility(View.GONE);
@@ -70,14 +71,8 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
             public void onClick(View v) {
                 Intent intent = getIntent();
                 intent.putExtra("level", ++level);
+                intent.putExtra("trial", trials);
                 startActivity(intent);
-                finish();
-            }
-        });
-        replayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(getIntent());
                 finish();
             }
         });
@@ -126,7 +121,7 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
     }
 
     public void rememberTimer() {
-        timer = new CountDownTimer(10000, 1000) {
+        timer = new CountDownTimer(8000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeft = millisUntilFinished / 1000;
@@ -170,15 +165,14 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
 
     public void updateTrials() {
         trials--;
+        if(wrong == 1) level--;
+        if(wrong> 1)level-=2;
         if (trials == 0) {
-            gameStop();
-        } else {
-            gameContinue();
-        }
+            gameFinish();
+        } else nextLevel();
     }
 
     public void gameStop() {
-        disableGridButton();
         enableStopNoti();
     }
 
@@ -188,16 +182,16 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
         }
     }
 
+    public void gameContinue(){
+        enableNextLevelButton();
+    }
+
     public void enableStopNoti() {
         resultButton.setVisibility(View.VISIBLE);
-        replayButton.setVisibility(View.VISIBLE);
         gridsHighlightCompleteNotiTextView.setText("Hết lượt chơi!");
         gridsHighlightCompleteNotiTextView.setVisibility(View.VISIBLE);
     }
 
-    public void gameContinue() {
-        startTimer();
-    }
 
     public void pauseTimer() {
         timer.cancel();
@@ -215,16 +209,14 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
         disableGridButton();
         enableNextLevelButton();
         updateLevelStatus();
-
         updateScore();
-
         brainTrainDatabase.updateCompletedStatus("memory_game_one", level);
 
     }
 
     public void enableNextLevelButton() {
-        resultButton.setVisibility(View.VISIBLE);
         nextLevelButton.setVisibility(View.VISIBLE);
+        resultButton.setVisibility(View.GONE);
         gridsHighlightCompleteNotiTextView.setText("Hoàn Thành Màn Chơi!");
         gridsHighlightCompleteNotiTextView.setVisibility(View.VISIBLE);
     }
@@ -233,8 +225,9 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
         score += level * 100;
         gridsHighlightScoreTextView.setText("Điểm: " + score);
         disableGridButton();
+        nextLevelButton.setVisibility(View.GONE);
         resultButton.setVisibility(View.VISIBLE);
-        gridsHighlightCompleteNotiTextView.setText("Hoàn Thành Trò Chơi!");
+        gridsHighlightCompleteNotiTextView.setText("Hoàn Thành Lượt Chơi!");
         gridsHighlightCompleteNotiTextView.setVisibility(View.VISIBLE);
     }
 
@@ -252,20 +245,17 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
         pauseTimer();
         String btnTag = v.getTag().toString();
         if (btnTag.equals("true")) {
-            Toast.makeText(GridsHighlightGameActivity.this, "Câu trả lời Đúng!", Toast.LENGTH_SHORT).show();
             v.setBackgroundDrawable(ContextCompat.getDrawable(GridsHighlightGameActivity.this, R.drawable.grid_tile_highlight));
             updateScore();
             trueAns++;
-            if (trueAns < level) {
-                gameContinue();
-            } else {
-                if (level < 40)
-                    nextLevel();
-                else gameFinish();
+            if(trueAns == level){
+                disableGridButton();
+                updateTrials();
             }
         } else {
             Toast.makeText(GridsHighlightGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_SHORT).show();
-            updateTrials();
+            v.setBackgroundDrawable(ContextCompat.getDrawable(GridsHighlightGameActivity.this, R.drawable.grid_tile_highlight_wrong));
+            wrong++;
         }
     }
 
