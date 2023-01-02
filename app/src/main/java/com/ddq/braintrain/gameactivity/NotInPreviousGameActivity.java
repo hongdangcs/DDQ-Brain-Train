@@ -83,10 +83,10 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
     public void generateImage(int ID) {
         cardView = new CardView(NotInPreviousGameActivity.this);
         image = new ImageView(NotInPreviousGameActivity.this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 170);
-        params.setMargins(5, 5, 5, 5);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(230, 280);
+        params.setMargins(10, 10, 10, 10);
         cardView.setLayoutParams(params);
-        cardView.setRadius(30);
+        cardView.setRadius(70);
         cardView.setTag("picture" + ID + "generate");
         image.setImageResource(getResources().getIdentifier("animal_image_" + ID, "drawable", getPackageName()));
         cardView.addView(image);
