@@ -4,6 +4,7 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,6 +47,9 @@ public class MemoryActivity extends AppCompatActivity {
     public static List<HighlightGridsModel> getHighlightGridsModels() {
         return highlightGridsModels;
     }
+
+    SharedPreferences sharedPreferences;
+    String gameOneGuide, gameTwoGuide, gameThreeGuide;
 
     int gridHighlightLevelToPlay = 2;
 
@@ -91,6 +95,17 @@ public class MemoryActivity extends AppCompatActivity {
             gridsHighlightProgress.setVisibility(View.GONE);
             gridsHighlightComplete.setVisibility(View.VISIBLE);
         }
+
+        sharedPreferences = getSharedPreferences("guideButton", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        gameOneGuide = sharedPreferences.getString("gameOneGuide", "");
+        gameTwoGuide = sharedPreferences.getString("gameTwoGuide", "");
+        gameThreeGuide = sharedPreferences.getString("gameThreeGuide", "");
+
+
+        gridsHighlightGuideButton.setVisibility( gameOneGuide.isEmpty() ? View.VISIBLE: View.INVISIBLE);
+        notInPreviousGuideButton.setVisibility( gameTwoGuide.isEmpty() ? View.VISIBLE: View.INVISIBLE);
+        missingObjectGuideButton.setVisibility( gameThreeGuide.isEmpty() ? View.VISIBLE: View.INVISIBLE);
 
         highlightGridsModels = new BrainTrainDAO().highlightGridsModels(brainTrainDatabase);
         for(HighlightGridsModel model : highlightGridsModels){
@@ -153,6 +168,8 @@ public class MemoryActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 gridsHighlightGuideButton.setVisibility(View.VISIBLE);
+                editor.putString("gameOneGuide", "");
+                editor.apply();
                 return false;
             }
         });
@@ -161,6 +178,8 @@ public class MemoryActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 notInPreviousGuideButton.setVisibility(View.VISIBLE);
+                editor.putString("gameTwoGuide", "");
+                editor.apply();
                 return false;
             }
         });
@@ -169,6 +188,7 @@ public class MemoryActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 missingObjectGuideButton.setVisibility(View.VISIBLE);
+                editor.putString("gameThreeGuide", "");editor.apply();
                 return false;
             }
         });
@@ -187,6 +207,8 @@ public class MemoryActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         gridsHighlightGuideButton.setVisibility(View.GONE);
+                        editor.putString("gameOneGuide", "notAppear");
+                        editor.apply();
                     }
                 });
                 alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
@@ -213,6 +235,8 @@ public class MemoryActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         missingObjectGuideButton.setVisibility(View.GONE);
+                        editor.putString("gameThreeGuide", "notAppear");
+                        editor.apply();
                     }
                 });
                 alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
@@ -243,6 +267,8 @@ public class MemoryActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         notInPreviousGuideButton.setVisibility(View.GONE);
+                        editor.putString("gameTwoGuide", "notAppear");
+                        editor.apply();
                     }
                 });
                 alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {

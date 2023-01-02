@@ -2,6 +2,7 @@ package com.ddq.braintrain;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,6 +27,9 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
     private BrainTrainDatabase brainTrainDatabase;
     private ProgressModel differentModel, flashCardModel, sharkBoatModel;
 
+    SharedPreferences sharedPreferences;
+    String gameOneGuide, gameTwoGuide, gameThreeGuide;
+
     AppCompatButton differentGuideButton, flashCardGuideButton, sharkBoatGuideButton;
 
     @Override
@@ -49,6 +53,19 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
         differentGuideButton = findViewById(R.id.differentGuideButton);
         flashCardGuideButton = findViewById(R.id.flashCardGuideButton);
         sharkBoatGuideButton = findViewById(R.id.sharkBoatGuideButton);
+
+
+        sharedPreferences = getSharedPreferences("guideButton", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        gameOneGuide = sharedPreferences.getString("gameOneGuideAttention", "");
+        gameTwoGuide = sharedPreferences.getString("gameTwoGuideAttention", "");
+        gameThreeGuide = sharedPreferences.getString("gameThreeGuideAttention", "");
+
+
+        differentGuideButton.setVisibility( gameOneGuide.isEmpty() ? View.VISIBLE: View.INVISIBLE);
+        flashCardGuideButton.setVisibility( gameTwoGuide.isEmpty() ? View.VISIBLE: View.INVISIBLE);
+        sharkBoatGuideButton.setVisibility( gameThreeGuide.isEmpty() ? View.VISIBLE: View.INVISIBLE);
+
 
         brainTrainDatabase = new BrainTrainDatabase(AttentionActivity.this);
         differentModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 21);
@@ -83,6 +100,8 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
             @Override
             public boolean onLongClick(View v) {
                 differentGuideButton.setVisibility(View.VISIBLE);
+                editor.putString("gameOneGuideAttention", "");
+                editor.apply();
                 return false;
             }
         });
@@ -91,6 +110,8 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
             @Override
             public boolean onLongClick(View v) {
                 flashCardGuideButton.setVisibility(View.VISIBLE);
+                editor.putString("gameTwoGuideAttention", "");
+                editor.apply();
                 return false;
             }
         });
@@ -99,6 +120,7 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
             @Override
             public boolean onLongClick(View v) {
                 sharkBoatGuideButton.setVisibility(View.VISIBLE);
+                editor.putString("gameThreeGuideAttention", "");editor.apply();
                 return false;
             }
         });
@@ -116,6 +138,8 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         differentGuideButton.setVisibility(View.GONE);
+                        editor.putString("gameOneGuideAttention", "notAppear");
+                        editor.apply();
                     }
                 });
                 alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
@@ -145,6 +169,8 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         flashCardGuideButton.setVisibility(View.GONE);
+                        editor.putString("gameTwoGuideAttention", "notAppear");
+                        editor.apply();
                     }
                 });
                 alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
@@ -179,6 +205,8 @@ public class AttentionActivity extends AppCompatActivity implements View.OnClick
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         sharkBoatGuideButton.setVisibility(View.GONE);
+                        editor.putString("gameThreeGuideAttention", "notAppear");
+                        editor.apply();
                     }
                 });
                 alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {

@@ -1,6 +1,7 @@
 package com.ddq.braintrain;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -39,6 +40,12 @@ public class SignInActivity extends AppCompatActivity {
                 }else {
                     boolean checkUserPass = brainTrainDatabase.checkUserNamePassword(user, pass);
                     if (checkUserPass == true) {
+
+                        SharedPreferences sharedPreferences = getSharedPreferences("loginState", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", user);
+                        editor.apply();
+
                         Toast.makeText(SignInActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                         startActivity(intent);

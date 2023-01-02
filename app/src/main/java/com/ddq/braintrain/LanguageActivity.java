@@ -2,6 +2,7 @@ package com.ddq.braintrain;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,6 +28,10 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
     private BrainTrainDatabase brainTrainDatabase;
     private ProgressModel completeWordModel, findWordModel, conjunctionModel, sortingCharModel;
 
+
+    SharedPreferences sharedPreferences;
+    String gameOneGuide, gameTwoGuide, gameThreeGuide, gameFourGuide;
+
     AppCompatButton completeWordGuideButton, findWordGuideButton, conjunctionGuideButton, sortingCharGuideButton;
 
     @Override
@@ -51,6 +56,21 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         findWordGuideButton = findViewById(R.id.findWordGuideButton);
         conjunctionGuideButton = findViewById(R.id.conjunctionGuideButton);
         sortingCharGuideButton = findViewById(R.id.sortingCharGuideButton);
+
+
+        sharedPreferences = getSharedPreferences("guideButton", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        gameOneGuide = sharedPreferences.getString("gameOneGuideLanguage", "");
+        gameTwoGuide = sharedPreferences.getString("gameTwoGuideLanguage", "");
+        gameThreeGuide = sharedPreferences.getString("gameThreeGuideLanguage", "");
+        gameFourGuide = sharedPreferences.getString("gameFourGuideLanguage", "");
+
+
+        completeWordGuideButton.setVisibility( gameOneGuide.isEmpty() ? View.VISIBLE: View.INVISIBLE);
+        findWordGuideButton.setVisibility( gameTwoGuide.isEmpty() ? View.VISIBLE: View.INVISIBLE);
+        conjunctionGuideButton.setVisibility( gameThreeGuide.isEmpty() ? View.VISIBLE: View.INVISIBLE);
+        sortingCharGuideButton.setVisibility( gameFourGuide.isEmpty() ? View.VISIBLE: View.INVISIBLE);
+
 
 
         brainTrainDatabase = new BrainTrainDatabase(LanguageActivity.this);
@@ -86,6 +106,8 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public boolean onLongClick(View v) {
                 completeWordGuideButton.setVisibility(View.VISIBLE);
+                editor.putString("gameOneGuideLanguage", "");
+                editor.apply();
                 return false;
             }
         });
@@ -94,6 +116,8 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public boolean onLongClick(View v) {
                 findWordGuideButton.setVisibility(View.VISIBLE);
+                editor.putString("gameTwoGuideLanguage", "");
+                editor.apply();
                 return false;
             }
         });
@@ -102,6 +126,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public boolean onLongClick(View v) {
                 conjunctionGuideButton.setVisibility(View.VISIBLE);
+                editor.putString("gameThreeGuideLanguage", "");editor.apply();
                 return false;
             }
         });
@@ -110,6 +135,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public boolean onLongClick(View v) {
                 sortingCharGuideButton.setVisibility(View.VISIBLE);
+                editor.putString("gameFourGuideLanguage", "");editor.apply();
                 return false;
             }
         });
@@ -131,6 +157,8 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         completeWordGuideButton.setVisibility(View.GONE);
+                        editor.putString("gameOneGuideLanguage", "notAppear");
+                        editor.apply();
                     }
                 });
                 alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
@@ -159,6 +187,8 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         findWordGuideButton.setVisibility(View.GONE);
+                        editor.putString("gameTwoGuideLanguage", "notAppear");
+                        editor.apply();
                     }
                 });
                 alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
@@ -189,6 +219,8 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         conjunctionGuideButton.setVisibility(View.GONE);
+                        editor.putString("gameThreeGuideLanguage", "notAppear");
+                        editor.apply();
                     }
                 });
                 alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
@@ -219,6 +251,8 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         sortingCharGuideButton.setVisibility(View.GONE);
+                        editor.putString("gameFourGuideLanguage", "notAppear");
+                        editor.apply();
                     }
                 });
                 alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {

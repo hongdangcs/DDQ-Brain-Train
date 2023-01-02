@@ -31,12 +31,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new HomeFragment());
                     break;
                 case R.id.profile:
-                    userName = signInActivity.getUser();
-                    if (userName != null) {
                         replaceFragment(new ProfileFragment());
-                    } else {
-                        replaceFragment(new SignInRequestFragment());
-                    }
                     break;
                 case R.id.setting:
                     replaceFragment(new SettingFragment());

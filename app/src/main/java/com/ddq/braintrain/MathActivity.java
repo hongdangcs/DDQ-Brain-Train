@@ -2,6 +2,7 @@ package com.ddq.braintrain;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,6 +30,9 @@ public class MathActivity extends AppCompatActivity {
 
     AppCompatButton findOperatorGuideButton, compareGuideButton;
 
+    SharedPreferences sharedPreferences;
+    String gameOneGuide, gameTwoGuide;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,16 @@ public class MathActivity extends AppCompatActivity {
 
         findOperatorGuideButton = findViewById(R.id.findOperatorGuideButton);
         compareGuideButton = findViewById(R.id.compareGuideButton);
+
+
+        sharedPreferences = getSharedPreferences("guideButton", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        gameOneGuide = sharedPreferences.getString("gameOneGuideMath", "");
+        gameTwoGuide = sharedPreferences.getString("gameTwoGuideMath", "");
+
+        findOperatorGuideButton.setVisibility( gameOneGuide.isEmpty() ? View.VISIBLE: View.INVISIBLE);
+        compareGuideButton.setVisibility( gameTwoGuide.isEmpty() ? View.VISIBLE: View.INVISIBLE);
+
 
         brainTrainDatabase = new BrainTrainDatabase(MathActivity.this);
         findOperatorModel = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 41);
@@ -83,6 +97,8 @@ public class MathActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 compareGuideButton.setVisibility(View.VISIBLE);
+                editor.putString("gameOneGuideMath", "");
+                editor.apply();
                 return false;
             }
         });
@@ -91,6 +107,8 @@ public class MathActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 findOperatorGuideButton.setVisibility(View.VISIBLE);
+                editor.putString("gameTwoGuideMath", "");
+                editor.apply();
                 return false;
             }
         });
@@ -112,6 +130,8 @@ public class MathActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         compareGuideButton.setVisibility(View.GONE);
+                        editor.putString("gameOneGuideMath", "notAppear");
+                        editor.apply();
                     }
                 });
                 alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
@@ -140,6 +160,8 @@ public class MathActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         findOperatorGuideButton.setVisibility(View.GONE);
+                        editor.putString("gameThreeGuideMath", "notAppear");
+                        editor.apply();
                     }
                 });
                 alert.setPositiveButton("Đã Hiểu", new DialogInterface.OnClickListener() {
