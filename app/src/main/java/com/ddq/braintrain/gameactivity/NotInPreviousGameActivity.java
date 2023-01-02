@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.gridlayout.widget.GridLayout;
 
 import com.ddq.braintrain.BrainTrainDatabase;
+import com.ddq.braintrain.GameResultActivity;
 import com.ddq.braintrain.R;
 
 import java.util.ArrayList;
@@ -76,6 +77,16 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
         }
 
         generateView();
+
+        notInPreviousResultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(NotInPreviousGameActivity.this, GameResultActivity.class);
+                intent1.putExtra("score", score);
+                startActivity(intent1);
+                finish();
+            }
+        });
 
 
     }

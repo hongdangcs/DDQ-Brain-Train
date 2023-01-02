@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ddq.braintrain.GameResultActivity;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.levelmenu.DifferentLevelMenuActivity;
 import com.ddq.braintrain.models.DifferentModel;
@@ -29,6 +30,8 @@ public class DifferentGameActivity extends AppCompatActivity {
 
     float x, y;
     long timeLeft;
+
+    int score;
 
     private List<DifferentModel> models;
     CountDownTimer timer, innerTimer;
@@ -55,6 +58,8 @@ public class DifferentGameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         level = intent.getIntExtra("level", 0);
 
+        score = 0;
+
         gameStart();
 
         //generateImage(level);
@@ -68,8 +73,8 @@ public class DifferentGameActivity extends AppCompatActivity {
 
                     if ((x > models.get(level - 1).getxCoordinate() - 75 && x < models.get(level - 1).getxCoordinate() + 75)
                             && (y > models.get(level - 1).getyCoordinate() - 75 && y < models.get(level - 1).getyCoordinate() + 75)) {
-                        Log.d(TAG, "cau tra loi dung " + x + " " + y);
                         timer.cancel();
+                        score+= 200;
                         resultTextView.setVisibility(View.VISIBLE);
                         resultTextView.setText("Câu trả lời đúng!");
                         nextImageButton.setVisibility(View.VISIBLE);
@@ -92,6 +97,16 @@ public class DifferentGameActivity extends AppCompatActivity {
                 gameContinue();
                 nextImageButton.setVisibility(View.INVISIBLE);
                 resultTextView.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        resultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(DifferentGameActivity.this, GameResultActivity.class);
+                intent1.putExtra("score", score);
+                startActivity(intent1);
+                finish();
             }
         });
     }

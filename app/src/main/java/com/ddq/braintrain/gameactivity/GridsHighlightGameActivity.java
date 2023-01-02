@@ -1,8 +1,11 @@
 package com.ddq.braintrain.gameactivity;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.gridlayout.widget.GridLayout;
 
 import com.ddq.braintrain.BrainTrainDatabase;
+import com.ddq.braintrain.GameResultActivity;
 import com.ddq.braintrain.MemoryActivity;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.levelmenu.GridsHighlightLevelMenuActivity;
@@ -32,7 +36,7 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
     private static final int TRIALS = 5, START_TIMER = 16000;
     CountDownTimer timer;
     long timeLeft = START_TIMER;
-    int trials = TRIALS, level = 0, trueAns = 0, score = 0;
+    int trials = TRIALS, level = 0, trueAns = 0, score;
     int wrong;
 
     List<AppCompatButton> list;
@@ -55,6 +59,8 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
         Intent intent = getIntent();
         level = intent.getIntExtra("level", 0);
         trials = intent.getIntExtra("trial", 0);
+        score = intent.getIntExtra("score", 0);
+
         wrong = 0;
 
         nextLevelButton.setVisibility(View.GONE);
@@ -72,7 +78,18 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
                 Intent intent = getIntent();
                 intent.putExtra("level", ++level);
                 intent.putExtra("trial", trials);
+                intent.putExtra("score", score);
                 startActivity(intent);
+                finish();
+            }
+        });
+
+        resultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(GridsHighlightGameActivity.this, GameResultActivity.class);
+                intent1.putExtra("score", score);
+                startActivity(intent1);
                 finish();
             }
         });

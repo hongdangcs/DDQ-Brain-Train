@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 
+import com.ddq.braintrain.gameactivity.CompareGameActivity;
 import com.ddq.braintrain.gameactivity.FindOperatorGameRoundActivity;
 import com.ddq.braintrain.levelmenu.CompareLevelMenuActivity;
 import com.ddq.braintrain.levelmenu.FindOperatorLevelMenuActivity;
@@ -80,7 +81,7 @@ public class MathActivity extends AppCompatActivity {
         compareCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MathActivity.this, CompareLevelMenuActivity.class);
+                Intent intent = new Intent(MathActivity.this, CompareGameActivity.class);
                 startActivity(intent);
             }
         });

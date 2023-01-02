@@ -63,25 +63,50 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="2">
-        <Button
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/expressionOne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="expression1"
             android:layout_margin="10dp"
-            android:backgroundTint="@color/orange_background"
-            android:layout_weight="1"/>
-        <Button
+            android:layout_weight="1"
+            android:background="@drawable/expression"
+            android:text="expression1" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/expressionTwo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="expression1"
             android:layout_margin="10dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/expression"
+            android:text="expression2" />
 
     </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/gameCompareNoticeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grass_green_color"
+        android:gravity="center"
+        android:padding="5dp"
+        android:paddingTop="20dp"
+
+        android:text="Câu trả lời đúng"
+        android:textColor="@color/very_dark_blue"
+        android:textSize="20dp" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:text="Xem kết quả"
+        android:id="@+id/gameCompareResultButton"
+        android:textSize="20dp"></Button>
 
 
 </LinearLayout>

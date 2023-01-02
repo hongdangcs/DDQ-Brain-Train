@@ -20,6 +20,7 @@ import androidx.cardview.widget.CardView;
 import androidx.gridlayout.widget.GridLayout;
 
 import com.ddq.braintrain.BrainTrainDatabase;
+import com.ddq.braintrain.GameResultActivity;
 import com.ddq.braintrain.MemoryActivity;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.levelmenu.MissingObjectLevelMenuActivity;
@@ -40,6 +41,7 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
     int level, realLevel, numberOfCard, hideCard, time, correctAnswer = 0, userScore, limit;
     List<Integer> ID;
     List<CardView> forRememberList, questionList, answerList;
+    int score = 0;
 
     String itemName, row;
 
@@ -128,6 +130,8 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         missingObjectNextLevelButton.setVisibility(View.GONE);
         missingObjectPlayAgainButton.setVisibility(View.GONE);
 
+        missingObjectScoreTextView.setText("Điểm: "+ score);
+
         forRememberList = new ArrayList<>();
         questionList = new ArrayList<>();
         answerList = new ArrayList<>();
@@ -135,6 +139,7 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         numberOfCard = MissingObjectLevelMenuActivity.getMissingObjectModels().get(level - 1).getNumberOfCards();
         hideCard = MissingObjectLevelMenuActivity.getMissingObjectModels().get(level - 1).getHideCard();
         time = MissingObjectLevelMenuActivity.getMissingObjectModels().get(level - 1).getTime();
+        score = MissingObjectLevelMenuActivity.getMissingObjectModels().get(level - 1).getScore();
 
         missingObjectLevelTextView.setText("Cấp độ: " + level);
 
@@ -177,7 +182,10 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         missingObjectResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent1 = new Intent(MissingObjectGameActivity.this, GameResultActivity.class);
+                intent1.putExtra("score", score);
+                startActivity(intent1);
+                finish();
             }
         });
     }

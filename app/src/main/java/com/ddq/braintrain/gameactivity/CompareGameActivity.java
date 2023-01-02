@@ -1,18 +1,27 @@
 package com.ddq.braintrain.gameactivity;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 
+import com.ddq.braintrain.BrainTrainDAO;
 import com.ddq.braintrain.BrainTrainDatabase;
+import com.ddq.braintrain.GameResultActivity;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.levelmenu.CompareLevelMenuActivity;
+import com.ddq.braintrain.models.CompareModel;
+
+import java.util.List;
 
 public class CompareGameActivity extends AppCompatActivity {
 
@@ -28,10 +37,19 @@ public class CompareGameActivity extends AppCompatActivity {
     private int level;
     private int score = 0;
 
+
+    private BrainTrainDatabase brainTrainDatabase;
+    private static List<CompareModel> compareModels;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compare_game);
+
+
+        brainTrainDatabase = new BrainTrainDatabase(CompareGameActivity.this);
+        compareModels = new BrainTrainDAO().compareModels(brainTrainDatabase);
+
 
         textView = findViewById(R.id.CompareLevelTextView);
         CompareTimeTextView = findViewById(R.id.CompareTimeTextView);
@@ -41,9 +59,19 @@ public class CompareGameActivity extends AppCompatActivity {
         CompareScoreTextView = findViewById(R.id.CompareScoreTextView);
         resultButton = findViewById(R.id.resultButton);
         Intent intent = getIntent();
-        level = intent.getIntExtra("level", 0);
+        level = 1;
         textView.setText("Level: " + level);
         gameStart(level - 1);
+
+        resultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(CompareGameActivity.this, GameResultActivity.class);
+                intent1.putExtra("score", score);
+                startActivity(intent1);
+                finish();
+            }
+        });
 
     }
 
@@ -51,20 +79,20 @@ public class CompareGameActivity extends AppCompatActivity {
         int temp = level + 1;
         textView.setText("Cấp độ: " + temp);
         updateScore(score);
-        String ExpressionText1 = CompareLevelMenuActivity.getCompareModels().get(level).getExpression1();
+        String ExpressionText1 = compareModels.get(level).getExpression1();
         Expression1.setText(ExpressionText1);
-        String ExpressionText2 = CompareLevelMenuActivity.getCompareModels().get(level).getExpression2();
+        String ExpressionText2 = compareModels.get(level).getExpression2();
         Expression2.setText(ExpressionText2);
-        ExpressionResult1 = CompareLevelMenuActivity.getCompareModels().get(level).getExpressionResult1();
-        ExpressionResult2 = CompareLevelMenuActivity.getCompareModels().get(level).getExpressionResult2();
-        point = CompareLevelMenuActivity.getCompareModels().get(level).getScore();
-        Expression1.setBackgroundColor(0xFF3a378e);
-        Expression2.setBackgroundColor(0xFF3a378e);
+        ExpressionResult1 = compareModels.get(level).getExpressionResult1();
+        ExpressionResult2 = compareModels.get(level).getExpressionResult2();
+        point = compareModels.get(level).getScore();
+        Expression1.setBackgroundDrawable(ContextCompat.getDrawable(CompareGameActivity.this, R.drawable.expression));
+        Expression2.setBackgroundDrawable(ContextCompat.getDrawable(CompareGameActivity.this, R.drawable.expression));
     }
 
     public void ClickExpresion1(View view) {
         if (ExpressionResult1 < ExpressionResult2) {
-            Expression1.setBackgroundColor(0xFF00FF00);
+            Expression1.setBackgroundDrawable(ContextCompat.getDrawable(CompareGameActivity.this, R.drawable.expression_correct));
             count++;
             if (count == 5) {
                 pauseTimer();
@@ -84,16 +112,17 @@ public class CompareGameActivity extends AppCompatActivity {
                 generate(level - 1);
             }
         } else {
-            Expression1.setBackgroundColor(0xFFFF0000);
             pauseTimer();
             timeLeft = timeLeft - 2;
+            level = level + 1;
+            generate(level - 1);
             UpdateTimer();
         }
     }
 
     public void ClickExpresion2(View view) {
         if (ExpressionResult1 > ExpressionResult2) {
-            Expression2.setBackgroundColor(0xFF00FF00);
+            Expression2.setBackgroundDrawable(ContextCompat.getDrawable(CompareGameActivity.this, R.drawable.expression_correct));
             count++;
             if (count == 5) {
                 pauseTimer();
@@ -113,17 +142,17 @@ public class CompareGameActivity extends AppCompatActivity {
                 generate(level - 1);
             }
         } else {
-            Expression2.setBackgroundColor(0xFFFF0000);
             pauseTimer();
-            timeLeft = timeLeft - 2;
+            timeLeft = timeLeft - 2;level = level + 1;
+            generate(level - 1);
             UpdateTimer();
         }
     }
 
     public void gameStart(int level1) {
-        CompareCompleteNotiTextView.setVisibility(View.INVISIBLE);
+        CompareCompleteNotiTextView.setVisibility(View.GONE);
 //        nextLevelButton.setVisibility(View.INVISIBLE);
-        resultButton.setVisibility(View.INVISIBLE);
+        resultButton.setVisibility(View.GONE);
         generate(level1);
         startTimer();
     }

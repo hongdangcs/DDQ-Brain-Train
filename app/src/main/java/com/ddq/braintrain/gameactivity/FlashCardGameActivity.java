@@ -17,6 +17,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import androidx.gridlayout.widget.GridLayout;
 
+import com.ddq.braintrain.GameResultActivity;
 import com.ddq.braintrain.R;
 import com.ddq.braintrain.levelmenu.FlashCardLevelMenuActivity;
 import com.ddq.braintrain.models.FlashCardModel;
@@ -35,6 +36,7 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
     GridLayout flashCardGameLayout;
     CardView cardView;
     ImageView image;
+
 /*
     CardView imageCardView1, imageCardView2, imageCardView3, imageCardView4, imageCardView5, imageCardView6,
             imageCardView7, imageCardView8, imageCardView9, imageCardView10,
@@ -218,6 +220,16 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
         generateGameLayout();
 
         setCardViewOnClickListener(cardViewList);
+
+        resultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(FlashCardGameActivity.this, GameResultActivity.class);
+                intent1.putExtra("score", score);
+                startActivity(intent1);
+                finish();
+            }
+        });
 
         // Collections.shuffle(cardViewList);
 /*

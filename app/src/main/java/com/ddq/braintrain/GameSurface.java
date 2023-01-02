@@ -110,7 +110,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         levelPaint.setTextSize(40);
         levelPaint.setTextAlign(Paint.Align.LEFT);
 
-        timer = new CountDownTimer(12000, 1000) {
+        timer = new CountDownTimer(120000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeft = millisUntilFinished / 1000;
