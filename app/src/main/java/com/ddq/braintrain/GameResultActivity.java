@@ -28,7 +28,7 @@ public class GameResultActivity extends AppCompatActivity {
         int bonusScore = intent.getIntExtra("bonusScore", 0);
         resultScoreTextView.setText("Điểm của bạn: "+ score);
         resultBonusScoreTextView.setText("Điểm thưởng: "+ bonusScore);
-        resultTotalScoreTextView.setText("Điểm thưởng: "+ (score + bonusScore));
+        resultTotalScoreTextView.setText("Tổng điểm: "+ (score + bonusScore));
 
         backToHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
