@@ -20,18 +20,18 @@ public class BrainTrainDatabase extends SQLiteOpenHelper {
     public  static final String COL_4= "personal_id";
 
     public BrainTrainDatabase(@Nullable Context context) {
-        super(context, "ddqbraintrain.db", null, 1);
+        super(context, "ddqbraintrain.db", null, 2);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS \"account\" (\n" +
+  /*      db.execSQL("CREATE TABLE IF NOT EXISTS \"account\" (\n" +
                 "\t\"userName\"\tTEXT Primary Key,\n" +
                 "\t\"password\"\tTEXT,\n" +
                 "\t\"gender\"\tTEXT,\n" +
                 "\t\"dob\"\tTEXT,\n" +
-                "\t\"personal_id\"\tTEXT Primary Key\n" +
-                ")");
+                "\t\"personal_id\"\tTEXT\n" +
+                ")");*/
         db.execSQL("CREATE TABLE if not exists \"attention_game_one\" (\n" +
                 "\t\"image_id\"\tINTEGER,\n" +
                 "\t\"image_name\"\tTEXT,\n" +

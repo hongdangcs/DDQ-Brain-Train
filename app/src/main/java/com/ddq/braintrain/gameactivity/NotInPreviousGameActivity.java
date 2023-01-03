@@ -34,7 +34,7 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
     String selected;
     int imageIndex;
     List<CardView> imageList;
-    int score = 0;
+    int score = 0, correctAns = 0;
     int level;
 
     BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(NotInPreviousGameActivity.this);
@@ -56,6 +56,7 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
 
         Intent intent = getIntent();
         level = intent.getIntExtra("level", 0);
+
         notInPreviousLevelTextView.setText("Cấp độ: " + level);
         notInPreviousInforTextView.setText("Chọn và ghi nhớ một con vật!");
         notInPreviousCompleteNotiTextView.setVisibility(View.INVISIBLE);
@@ -83,6 +84,7 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
             public void onClick(View v) {
                 Intent intent1 = new Intent(NotInPreviousGameActivity.this, GameResultActivity.class);
                 intent1.putExtra("score", score);
+                intent1.putExtra("bonusScore", correctAns*level*100);
                 startActivity(intent1);
                 finish();
             }
@@ -97,7 +99,7 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(110, 125);
         params.setMargins(5, 5, 5, 5);
         cardView.setLayoutParams(params);
-        cardView.setRadius(30);
+        cardView.setRadius(20);
         cardView.setTag("picture" + ID + "generate");
         image.setImageResource(getResources().getIdentifier("animal_image_" + ID, "drawable", getPackageName()));
         cardView.addView(image);
@@ -136,12 +138,12 @@ public class NotInPreviousGameActivity extends AppCompatActivity implements View
 
     public void updateScore() {
         score += 500;
+        correctAns++;
         notInPreviousScoreTextView.setText("Điểm của bạn: " + score);
     }
 
     public void gameFinish() {
         disableCardView();
-        score += level * 100 * (imageIndex - 3);
         notInPreviousScoreTextView.setText("Điểm của bạn: " + score);
         notInPreviousResultButton.setVisibility(View.VISIBLE);
 

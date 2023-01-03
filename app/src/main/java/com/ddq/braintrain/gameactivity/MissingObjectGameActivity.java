@@ -41,7 +41,8 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
     int level, realLevel, numberOfCard, hideCard, time, correctAnswer = 0, userScore, limit;
     List<Integer> ID;
     List<CardView> forRememberList, questionList, answerList;
-    int score = 0;
+    int score = 0, displayScore = 0, playcount, playtime;
+    long timeLeft;
 
     String itemName, row;
 
@@ -52,6 +53,11 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
 
         Intent intent = getIntent();
         realLevel = intent.getIntExtra("level", 0);
+        displayScore = intent.getIntExtra("displayScore", 0);
+        playtime = intent.getIntExtra("playtime", 0);
+        playcount = intent.getIntExtra("playcount", 0);
+
+        Log.d(TAG, "onCreate: "+playcount + " and "+playtime);
 
         level = realLevel;
 /*
@@ -133,7 +139,7 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         missingObjectNextLevelButton.setVisibility(View.GONE);
         missingObjectPlayAgainButton.setVisibility(View.GONE);
 
-        missingObjectScoreTextView.setText("Điểm: "+ score);
+        missingObjectScoreTextView.setText("Điểm: "+ displayScore);
 
         forRememberList = new ArrayList<>();
         questionList = new ArrayList<>();
@@ -171,6 +177,9 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
                 else if (realLevel == 100) realLevel = 1000;
                 Intent intent = getIntent();
                 intent.putExtra("level", ++realLevel);
+                intent.putExtra("displayScore", displayScore);
+                intent.putExtra("playtime", playtime+=(time - timeLeft) );
+                intent.putExtra("playcount", playcount);
                 startActivity(intent);
                 finish();
             }
@@ -179,6 +188,7 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
             @Override
             public void onClick(View v) {
                 startActivity(getIntent());
+                intent.putExtra("displayScore", displayScore);
                 finish();
             }
         });
@@ -186,7 +196,14 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(MissingObjectGameActivity.this, GameResultActivity.class);
-                intent1.putExtra("score", score);
+                intent1.putExtra("score", displayScore);
+                if(playcount == 0){
+                    playcount =1;
+                }if(playtime == 0){
+                    playtime =1;
+                }
+                intent1.putExtra("bonusScore", displayScore/(playtime/playcount));
+
                 startActivity(intent1);
                 finish();
             }
@@ -246,8 +263,8 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         timer = new CountDownTimer((long) time * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                long timeLeft = millisUntilFinished / 1000;
-                updateTimeLeft(timeLeft);
+                long starttimeLeft = millisUntilFinished / 1000;
+                updateTimeLeft(starttimeLeft);
             }
 
             @Override
@@ -275,10 +292,10 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
     }
 
     public void gamePlayTimer() {
-        timer = new CountDownTimer(60000, 1000) {
+        timer = new CountDownTimer((long) time * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                long timeLeft = millisUntilFinished / 1000;
+                timeLeft = millisUntilFinished / 1000;
                 updateTimeLeft(timeLeft);
             }
 
@@ -300,11 +317,11 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         }
         missingObjectCompleteNotiTextView.setVisibility(View.VISIBLE);
         missingObjectPlayAgainButton.setVisibility(View.VISIBLE);
-        missingObjectResultButton.setVisibility(View.VISIBLE);
     }
 
     public void gameCompleted() {
         timer.cancel();
+        playcount++;
         for (int i = 0; i < answerList.size(); i++) {
             for (CardView cardView : answerList) {
                 cardView.setClickable(false);
@@ -312,10 +329,16 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         }
         missingObjectCompleteNotiTextView.setText("Hoàn thành màn chơi!");
         missingObjectCompleteNotiTextView.setVisibility(View.VISIBLE);
-        missingObjectResultButton.setVisibility(View.VISIBLE);
         missingObjectNextLevelButton.setVisibility(View.VISIBLE);
 
-        missingObjectScoreTextView.setText("Điểm: "+ score);
+        if(level == 10){
+            missingObjectNextLevelButton.setVisibility(View.GONE);
+            missingObjectResultButton.setVisibility(View.VISIBLE);
+        }
+
+        displayScore += score;
+
+        missingObjectScoreTextView.setText("Điểm: "+ displayScore);
 
         if (realLevel == 1010) {
             missingObjectNextLevelButton.setVisibility(View.GONE);

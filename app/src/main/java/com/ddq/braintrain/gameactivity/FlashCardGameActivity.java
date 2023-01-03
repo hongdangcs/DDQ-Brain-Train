@@ -4,6 +4,7 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -43,13 +44,13 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
             imageCardView11, imageCardView12, imageCardView13, imageCardView14, imageCardView15,
             imageCardView16, imageCardView17, imageCardView18, imageCardView19, imageCardView20;*/
 
-    int level, pair, time, score =0, remainingPair, imageIndex;
+    int level, pair, time, score =0, remainingPair, imageIndex, gameLevel;
     List<Integer> ID;
     String itemName;
     List<CardView> cardViewList;
     boolean isOpen = false;
-    int openCard;
-    int limit;
+    int openCard, userScore;
+    int limit;CountDownTimer timer;
 
 
     @Override
@@ -115,7 +116,6 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
         resultButton.setVisibility(View.GONE);
         playAgainButton.setVisibility(View.GONE);
 
-        scoreTextView.setText("Điểm: "+score);
    /*     imageCardView2.setVisibility(View.GONE);
         imageCardView1.setVisibility(View.GONE);
         imageCardView3.setVisibility(View.GONE);
@@ -138,8 +138,10 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
         imageCardView20.setVisibility(View.GONE);*/
 
         Intent intent = getIntent();
-        level = intent.getIntExtra("level", 0);
-        levelTextView.setText("Level: " + level);
+        gameLevel = intent.getIntExtra("level", 0);
+        userScore = intent.getIntExtra("score", 0);
+        scoreTextView.setText("Điểm: "+userScore);
+        level = gameLevel;
 
         int library = (new Random()).nextInt(3);
 
@@ -152,9 +154,9 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
             itemName = "household_";
         }
 
-        if (level > 100 && level < 200) {
+        if (gameLevel > 100 && gameLevel < 200) {
             library = (new Random()).nextInt(2);
-            level = level - 100;
+            level = gameLevel - 100;
 
             if (library == 0) {
 
@@ -164,10 +166,11 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
             }
         }
 
-        if (level > 1000) {
-            level = level - 1000;
+        if (gameLevel > 1000) {
+            level = gameLevel - 1000;
             itemName = "shape_";
         }
+        levelTextView.setText("Level: " + level);
 
         if (itemName.equals("logo_") || itemName.equals("shape_")) {
             limit = 29;
@@ -223,15 +226,37 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
 
         setCardViewOnClickListener(cardViewList);
 
+        nextLevelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = getIntent();
+                intent2.putExtra("level", ++gameLevel);
+                intent2.putExtra("score", userScore);
+                startActivity(intent2);
+                finish();
+            }
+        });
+
+        playAgainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
+                finish();
+            }
+        });
+
         resultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(FlashCardGameActivity.this, GameResultActivity.class);
-                intent1.putExtra("score", score);
+                intent1.putExtra("score", userScore);
+                intent1.putExtra("bonusScore", userScore/11);
                 startActivity(intent1);
                 finish();
             }
         });
+
+        startTimer();
 
         // Collections.shuffle(cardViewList);
 /*
@@ -337,6 +362,20 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
 */
 //    }
 
+    public void startTimer(){
+         timer = new CountDownTimer(time*1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeTextView.setText("Thời gian: "+ millisUntilFinished/1000);
+            }
+
+            @Override
+            public void onFinish() {
+                gameOver();
+            }
+        }.start();
+    }
+
     public void generateCardView(int ID) {
         cardView = new CardView(FlashCardGameActivity.this);
         image = new ImageView(FlashCardGameActivity.this);
@@ -385,7 +424,7 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
                                     closeCardView((int) cardView.getTag());
                                     if (remainingPair == 0) gameFinish();
                                 }
-                            }, 700);
+                            }, 250);
                             Log.d(TAG, "Con lai: " + remainingPair);
                         } else {
                             for (CardView cardView1 : cardViewList) {
@@ -407,7 +446,7 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
                                         cardView2.setClickable(true);
                                     }
                                 }
-                            }, 350);
+                            }, 300);
                         }
 
                     } else {
@@ -449,13 +488,36 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
             cardView.setVisibility(View.GONE);
 
         }
+        timer.cancel();
 
         resultTextView.setVisibility(View.VISIBLE);
+        resultTextView.setText("Đã hoàn thành màn chơi");
         nextLevelButton.setVisibility(View.VISIBLE);
-        resultButton.setVisibility(View.VISIBLE);
-        playAgainButton.setVisibility(View.VISIBLE);
 
-        scoreTextView.setText("Điểm: "+score);
+        if (level == 8){
+            nextLevelButton.setVisibility(View.GONE);
+            resultButton.setVisibility(View.VISIBLE);
+        }
+        userScore+= score;
+        scoreTextView.setText("Điểm: "+userScore);
+
+    }
+
+    public void gameOver(){
+
+        for (CardView cardView : cardViewList) {
+            cardView.setVisibility(View.GONE);
+        }
+        timer.cancel();
+
+        resultTextView.setVisibility(View.VISIBLE);
+        resultTextView.setText("Chưa hoàn thành màn chơi");
+playAgainButton.setVisibility(View.VISIBLE);
+
+        if (level == 8){
+            nextLevelButton.setVisibility(View.GONE);
+            resultButton.setVisibility(View.VISIBLE);
+        }
 
     }
 

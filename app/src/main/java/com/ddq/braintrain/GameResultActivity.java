@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class GameResultActivity extends AppCompatActivity {
 
-    TextView resultScoreTextView;
+    TextView resultScoreTextView, resultBonusScoreTextView, resultTotalScoreTextView;
     Button backToHomeButton;
 
     @Override
@@ -20,10 +20,15 @@ public class GameResultActivity extends AppCompatActivity {
 
         resultScoreTextView = findViewById(R.id.resultScoreTextView);
         backToHomeButton = findViewById(R.id.backToHomeButton);
+        resultBonusScoreTextView = findViewById(R.id.resultBonusScoreTextView);
+        resultTotalScoreTextView = findViewById(R.id.resultTotalScoreTextView);
 
         Intent intent = getIntent();
         int score = intent.getIntExtra("score", 0);
+        int bonusScore = intent.getIntExtra("bonusScore", 0);
         resultScoreTextView.setText("Điểm của bạn: "+ score);
+        resultBonusScoreTextView.setText("Điểm thưởng: "+ bonusScore);
+        resultTotalScoreTextView.setText("Điểm thưởng: "+ (score + bonusScore));
 
         backToHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override

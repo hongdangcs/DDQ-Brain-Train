@@ -224,9 +224,7 @@ public class BrainTrainDAO {
                 time = cursor.getInt(2);
                 point = cursor.getInt(3);
                 completeStatus = cursor.getInt(4);
-
                 returnList.add(new FindOperatorModel(level, option, time, point, completeStatus));
-
             } while (cursor.moveToNext());
         }
         cursor.close();

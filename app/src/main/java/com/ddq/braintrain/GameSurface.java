@@ -110,7 +110,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         levelPaint.setTextSize(40);
         levelPaint.setTextAlign(Paint.Align.LEFT);
 
-        timer = new CountDownTimer(120000, 1000) {
+        timer = new CountDownTimer(12000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeft = millisUntilFinished / 1000;
@@ -193,13 +193,11 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
         int touchX = (int) event.getX();
         int touchY = (int) event.getY();
+        //if (waves.size() < boatNumber) {
         Wave wave = new Wave(getContext(), touchX - 75, touchY - 75);
+
         waves.add(wave);
-        try {
-            Thread.sleep(700);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //}
         return true;
     }
 

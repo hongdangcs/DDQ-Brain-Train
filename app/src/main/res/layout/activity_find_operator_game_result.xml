@@ -10,15 +10,18 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:scaleType="centerCrop"
         app:srcCompat="@drawable/result_image" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:gravity="center"
         android:text="Chúc mừng bạn đã hoàn thành lượt chơi!"
         android:textSize="20dp" />
@@ -36,6 +39,7 @@
         android:id="@+id/findOperatorResultAvgTimeTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:gravity="center"
         android:padding="10dp"
         android:text="TextView"
