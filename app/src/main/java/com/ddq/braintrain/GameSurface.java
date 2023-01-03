@@ -195,6 +195,11 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         int touchY = (int) event.getY();
         Wave wave = new Wave(getContext(), touchX - 75, touchY - 75);
         waves.add(wave);
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 

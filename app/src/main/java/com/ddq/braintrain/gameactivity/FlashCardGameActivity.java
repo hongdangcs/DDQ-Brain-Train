@@ -43,7 +43,7 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
             imageCardView11, imageCardView12, imageCardView13, imageCardView14, imageCardView15,
             imageCardView16, imageCardView17, imageCardView18, imageCardView19, imageCardView20;*/
 
-    int level, pair, time, score, remainingPair, imageIndex;
+    int level, pair, time, score =0, remainingPair, imageIndex;
     List<Integer> ID;
     String itemName;
     List<CardView> cardViewList;
@@ -114,6 +114,8 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
         nextLevelButton.setVisibility(View.GONE);
         resultButton.setVisibility(View.GONE);
         playAgainButton.setVisibility(View.GONE);
+
+        scoreTextView.setText("Điểm: "+score);
    /*     imageCardView2.setVisibility(View.GONE);
         imageCardView1.setVisibility(View.GONE);
         imageCardView3.setVisibility(View.GONE);
@@ -452,6 +454,9 @@ public class FlashCardGameActivity extends AppCompatActivity implements View.OnC
         nextLevelButton.setVisibility(View.VISIBLE);
         resultButton.setVisibility(View.VISIBLE);
         playAgainButton.setVisibility(View.VISIBLE);
+
+        scoreTextView.setText("Điểm: "+score);
+
     }
 
     @Override

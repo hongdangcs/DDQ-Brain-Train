@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:text="TextView"
                 android:textColor="@color/very_dark_blue"
                 android:textSize="24dp" />
@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="6dp"
+                android:padding="2dp"
                 android:text="Ghi nhớ các ô màu vàng"
                 android:textSize="16dp" />
 
@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="6dp"
+                    android:padding="2dp"
                     android:text="Điểm: "
                     android:textSize="20dp" />
 
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="5dp"
-                app:columnCount="4"/>
+                app:columnCount="8"/>
 
             <TextView
                 android:id="@+id/notInPreviousCompleteNotiTextView"

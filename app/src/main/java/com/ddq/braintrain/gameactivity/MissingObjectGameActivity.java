@@ -85,10 +85,12 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
             itemName = "household_";
         }
 
+        row = "complete_status_easy";
+
         if (level > 100 && level < 200) {
             library = (new Random()).nextInt(2);
             level = level - 100;
-
+            row = "complete_status_medium";
             if (library == 0) {
 
                 itemName = "transportation_item_";
@@ -100,6 +102,7 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         if (level > 1000) {
             level = level - 1000;
             itemName = "shape_";
+            row = "complete_status_hard";
         }
 
         if (itemName.equals("logo_") || itemName.equals("shape_")) {
@@ -311,6 +314,8 @@ public class MissingObjectGameActivity extends AppCompatActivity implements View
         missingObjectCompleteNotiTextView.setVisibility(View.VISIBLE);
         missingObjectResultButton.setVisibility(View.VISIBLE);
         missingObjectNextLevelButton.setVisibility(View.VISIBLE);
+
+        missingObjectScoreTextView.setText("Điểm: "+ score);
 
         if (realLevel == 1010) {
             missingObjectNextLevelButton.setVisibility(View.GONE);

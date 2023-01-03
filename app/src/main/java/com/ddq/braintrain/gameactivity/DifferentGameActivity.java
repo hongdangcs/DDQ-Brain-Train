@@ -59,6 +59,7 @@ public class DifferentGameActivity extends AppCompatActivity {
         level = intent.getIntExtra("level", 0);
 
         score = 0;
+        scoreTextView.setText("Điểm: "+score);
 
         gameStart();
 
@@ -75,6 +76,7 @@ public class DifferentGameActivity extends AppCompatActivity {
                             && (y > models.get(level - 1).getyCoordinate() - 75 && y < models.get(level - 1).getyCoordinate() + 75)) {
                         timer.cancel();
                         score+= 200;
+                        scoreTextView.setText("Điểm: "+score);
                         resultTextView.setVisibility(View.VISIBLE);
                         resultTextView.setText("Câu trả lời đúng!");
                         nextImageButton.setVisibility(View.VISIBLE);
