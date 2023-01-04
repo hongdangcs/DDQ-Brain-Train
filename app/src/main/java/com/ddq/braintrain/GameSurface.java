@@ -110,7 +110,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         levelPaint.setTextSize(40);
         levelPaint.setTextAlign(Paint.Align.LEFT);
 
-        timer = new CountDownTimer(12000, 1000) {
+        timer = new CountDownTimer(120000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeft = millisUntilFinished / 1000;
@@ -184,7 +184,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         canvas.drawText("Mạng: " + (bitcount - bitten), screenWidth / 2, 44, scorePaint);
-        canvas.drawText("Time: " + timeLeft, screenWidth - 14, 44, timePaint);
+        canvas.drawText("Thời gian: " + timeLeft, screenWidth - 14, 44, timePaint);
         canvas.drawText("Màn: " + level, 14, 44, levelPaint);
 
     }
@@ -198,6 +198,11 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
         waves.add(wave);
         //}
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 
