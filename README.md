@@ -3,8 +3,8 @@ This is a straightforward brain game. Allow people to let people play memory gam
 
 ## Installation
 
-Download:
-`git clone git@github.com:hongdangcseiu/DDQ-Brain-Train.git`
+Download:</br>
+`git clone git@github.com:hongdangcseiu/DDQ-Brain-Train.git`</br>
 Import Project by Android Studio Menu > File > Import Project...
 
 Run YourApp by Android Studio Menu > Run > Run YourApp.
