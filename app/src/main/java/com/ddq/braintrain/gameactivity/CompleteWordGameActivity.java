@@ -21,6 +21,7 @@ import com.ddq.braintrain.models.ProgressModel;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class CompleteWordGameActivity extends AppCompatActivity {
     AppCompatButton tryAgainButton, submitCompleteWordButton;
     private BrainTrainDatabase brainTrainDatabase;
     private EditText editCompleteWordAnswer;
+    String wordFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class CompleteWordGameActivity extends AppCompatActivity {
         brainTrainDatabase = new BrainTrainDatabase(CompleteWordGameActivity.this);
         maxScore = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 31);
 
+        wordFound = "";
         gameStart();
     }
 
@@ -127,18 +130,23 @@ public class CompleteWordGameActivity extends AppCompatActivity {
     public boolean spellingCheck(String sb) throws IOException {
         sb = sb.replaceAll(" ", "");
         sb = sb.toLowerCase();
+
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("output.txt")));
+            //BufferedReader br = new BufferedReader(new FileReader("dict" + sb.length() + ".txt"));
+            BufferedReader reader = new BufferedReader(   new InputStreamReader(getAssets().open("dict" + sb.length() + ".txt")));
+
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 if (line.matches(".*\\b" + sb + "\\b.*")) {
                     return true;
                 }
+
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return false;
+
 
     }
 
@@ -209,7 +217,7 @@ public class CompleteWordGameActivity extends AppCompatActivity {
     public void Submit(View view) throws IOException {
         userInput = editCompleteWordAnswer.getText().toString();
         char firstChar = userInput.charAt(0);
-        if (Character.toUpperCase(firstChar) == correctLetter && spellingCheck(userInput) == true) {
+        if (Character.toUpperCase(firstChar) == correctLetter && spellingCheck(userInput) == true && !wordFound.contains(userInput)) {
             for (char c : userInput.toCharArray()) {
                 txtCompleteWordError.setVisibility(View.GONE);
                 editCompleteWordAnswer.getText().clear();
@@ -222,6 +230,7 @@ public class CompleteWordGameActivity extends AppCompatActivity {
             countWord = countWord + 1;
             txtCompleteWordCount.setText("Số câu đúng: " + countWord);
             editCompleteWordAnswer.getText().clear();
+            wordFound+= userInput;
         } else {
             Toast.makeText(CompleteWordGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_LONG).show();
         }

@@ -1,10 +1,13 @@
 package com.ddq.braintrain.gameactivity;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,6 +25,7 @@ import com.ddq.braintrain.models.ProgressModel;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Collections;
@@ -39,6 +43,7 @@ public class FindWordGameActivity extends AppCompatActivity {
     private BrainTrainDatabase brainTrainDatabase;
     private ProgressModel maxScore;
     private static List<FindWordGameModel> findWordGameModels;
+    String wordFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,8 @@ public class FindWordGameActivity extends AppCompatActivity {
         txtFindWordError = findViewById(R.id.txtFindWordError);
         brainTrainDatabase = new BrainTrainDatabase(FindWordGameActivity.this);
         findWordGameModels = new BrainTrainDAO().findWordGameModels(brainTrainDatabase);
+
+        wordFound = "";
 
         Collections.shuffle(findWordGameModels);
         maxScore = new BrainTrainDAO().getProgressStatus(brainTrainDatabase, 32);
@@ -115,6 +122,7 @@ public class FindWordGameActivity extends AppCompatActivity {
     public boolean spellingCheck(String sb) throws IOException {
         sb = sb.replaceAll(" ", "");
         sb = sb.toLowerCase();
+/*
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("output.txt")));
             String line;
@@ -125,9 +133,26 @@ public class FindWordGameActivity extends AppCompatActivity {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+
         }
         return false;
+*/
 
+        try {
+       //     BufferedReader br = new BufferedReader(new FileReader("dict" + sb.length() + ".txt"));
+            BufferedReader reader = new BufferedReader(   new InputStreamReader(getAssets().open("dict" + sb.length() + ".txt")));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.matches(".*\\b" + sb + "\\b.*")) {
+                    return true;
+                }
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Log.d(TAG, "spellingCheck: file not found" );
+        }
+        return false;
     }
 
     // Time section:
@@ -174,13 +199,14 @@ public class FindWordGameActivity extends AppCompatActivity {
     // Submit button handle:
     public void Submit(View view) throws IOException {
         userInput = editFindWordAnswer.getText().toString();
-        if (spellingCheck(userInput) == true) {
+        if (spellingCheck(userInput) == true && !wordFound.contains(userInput)) {
             updateScore();
             countWord = countWord + 1;
             txtFindWordCount.setText("Số câu đúng: " + countWord);
             editFindWordAnswer.getText().clear();
             editFindWordAnswer.setText(topicWord + " ");
             editFindWordAnswer.setSelection(editFindWordAnswer.getText().length());
+            wordFound+= userInput;
         } else {
             Toast.makeText(FindWordGameActivity.this, "Câu trả lời Sai!", Toast.LENGTH_LONG).show();
         }

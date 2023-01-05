@@ -12,6 +12,8 @@
         android:id="@+id/imageView2"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,6 +23,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="Chúc mừng bạn đã hoàn thành màn chơi!"
         android:textColor="@color/very_dark_blue"
         android:textSize="20dp"
@@ -32,7 +35,7 @@
         android:id="@+id/resultScoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="Điểm của bạn: "
         android:textColor="@color/very_dark_blue"
         android:textSize="30dp"
@@ -44,8 +47,33 @@
         android:id="@+id/backToHomeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:text="trở về trang chủ"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/resultBonusScoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Điểm thưởng:"
+        android:textColor="@color/very_dark_blue"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultScoreTextView" />
+
+    <TextView
+        android:id="@+id/resultTotalScoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Tổng Điểm: "
+        android:textColor="@color/very_dark_blue"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultBonusScoreTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

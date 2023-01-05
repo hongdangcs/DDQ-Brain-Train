@@ -109,7 +109,7 @@ public class ProfileFragment extends Fragment {
         }
 
         progress.setText(""+HomeFragment.getTotalProgress() + "%");
-
+/*
         signOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +122,7 @@ public class ProfileFragment extends Fragment {
                 getActivity().finish();
             }
         });
-
+*/
         // Inflate the layout for this fragment
         return view;
     }

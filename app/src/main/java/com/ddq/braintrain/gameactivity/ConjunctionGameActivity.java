@@ -23,6 +23,7 @@ import com.ddq.braintrain.models.ProgressModel;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Collections;
@@ -113,18 +114,23 @@ public class ConjunctionGameActivity extends AppCompatActivity {
     public boolean spellingCheck(String sb) throws IOException {
         sb = sb.replaceAll(" ", "");
         sb = sb.toLowerCase();
+
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("output.txt")));
+           // BufferedReader br = new BufferedReader(new FileReader("dict" + sb.length() + ".txt"));
+            BufferedReader reader = new BufferedReader(   new InputStreamReader(getAssets().open("dict" + sb.length() + ".txt")));
+
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 if (line.matches(".*\\b" + sb + "\\b.*")) {
                     return true;
                 }
+
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return false;
+
 
     }
 

@@ -31,7 +31,7 @@ public class DifferentGameActivity extends AppCompatActivity {
     float x, y;
     long timeLeft;
 
-    int score;
+    int score, correctAns;
 
     private List<DifferentModel> models;
     CountDownTimer timer, innerTimer;
@@ -59,6 +59,7 @@ public class DifferentGameActivity extends AppCompatActivity {
         level = intent.getIntExtra("level", 0);
 
         score = 0;
+        correctAns = 0;
         scoreTextView.setText("Điểm: "+score);
 
         gameStart();
@@ -80,6 +81,12 @@ public class DifferentGameActivity extends AppCompatActivity {
                         resultTextView.setVisibility(View.VISIBLE);
                         resultTextView.setText("Câu trả lời đúng!");
                         nextImageButton.setVisibility(View.VISIBLE);
+
+                        if(level == 40){
+                            gameFinish();
+                        }
+
+                        correctAns++;
 
                     } else {
 
@@ -107,6 +114,11 @@ public class DifferentGameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent1 = new Intent(DifferentGameActivity.this, GameResultActivity.class);
                 intent1.putExtra("score", score);
+                if(correctAns ==0){
+                    correctAns =1;
+                }
+                intent1.putExtra("bonusScore", score/(120/correctAns));
+
                 startActivity(intent1);
                 finish();
             }
@@ -151,6 +163,9 @@ public class DifferentGameActivity extends AppCompatActivity {
 
     public void gameFinish() {
         imageViewSample.setClickable(false);
+        resultButton.setVisibility(View.VISIBLE);
+        resultTextView.setVisibility(View.GONE);
+        nextImageButton.setVisibility(View.GONE);
     }
 
 

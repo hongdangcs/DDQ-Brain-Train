@@ -37,7 +37,7 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
     CountDownTimer timer;
     long timeLeft = START_TIMER;
     int trials = TRIALS, level = 0, trueAns = 0, score;
-    int wrong;
+    int wrong, bonusScore;
 
     List<AppCompatButton> list;
     int currentTotalScore = MemoryActivity.getGridHighlightTotalScore();
@@ -60,6 +60,7 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
         level = intent.getIntExtra("level", 0);
         trials = intent.getIntExtra("trial", 0);
         score = intent.getIntExtra("score", 0);
+        bonusScore = intent.getIntExtra("bonusScore", 0);
 
         wrong = 0;
 
@@ -79,6 +80,7 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
                 intent.putExtra("level", ++level);
                 intent.putExtra("trial", trials);
                 intent.putExtra("score", score);
+                intent.putExtra("bonusScore", (bonusScore + level*100));
                 startActivity(intent);
                 finish();
             }
@@ -89,6 +91,7 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
             public void onClick(View v) {
                 Intent intent1 = new Intent(GridsHighlightGameActivity.this, GameResultActivity.class);
                 intent1.putExtra("score", score);
+                intent1.putExtra("bonusScore", (bonusScore + level*100));
                 startActivity(intent1);
                 finish();
             }
@@ -183,7 +186,10 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
     public void updateTrials() {
         trials--;
         if(wrong == 1) level--;
-        if(wrong> 1)level-=2;
+        if(wrong >= 2){
+            level -= (wrong / 2 + 1);
+            if(level < 0){ level = 0;}
+        }
         if (trials == 0) {
             gameFinish();
         } else nextLevel();
@@ -216,8 +222,7 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
 
     public void nextLevel() {
         BrainTrainDatabase brainTrainDatabase = new BrainTrainDatabase(GridsHighlightGameActivity.this);
-        score += level * 100;
-        if(MemoryActivity.getHighlightGridsModels().get(level -1).getCompleteStatus() == 0){
+        if(level > 0) if(MemoryActivity.getHighlightGridsModels().get(level -1).getCompleteStatus() == 0){
             currentTotalScore+= score;
             brainTrainDatabase.updateUserScore(11, currentTotalScore);
 
@@ -226,7 +231,6 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
         disableGridButton();
         enableNextLevelButton();
         updateLevelStatus();
-        updateScore();
         brainTrainDatabase.updateCompletedStatus("memory_game_one", level);
 
     }
@@ -239,7 +243,6 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
     }
 
     public void gameFinish() {
-        score += level * 100;
         gridsHighlightScoreTextView.setText("Điểm: " + score);
         disableGridButton();
         nextLevelButton.setVisibility(View.GONE);
@@ -250,6 +253,7 @@ public class GridsHighlightGameActivity extends AppCompatActivity implements Vie
 
     public void updateScore() {
         score += 200;
+        Log.d(TAG, "updateScore: update score" + score);
         gridsHighlightScoreTextView.setText("Điểm: " + score);
     }
 

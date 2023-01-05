@@ -107,10 +107,11 @@
                 android:id="@+id/level_column"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="2dp"
                 android:background="#008577"
                 android:fontFamily="sans-serif-medium"
                 android:padding="8dp"
-                android:text="Level"
+                android:text="Màn chơi"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
 
@@ -118,10 +119,11 @@
                 android:id="@+id/score_column"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="2dp"
                 android:background="#008577"
                 android:fontFamily="sans-serif-medium"
                 android:padding="8dp"
-                android:text="Score"
+                android:text="Điểm đã đạt được"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
         </TableRow>
