@@ -34,6 +34,11 @@ public class DatabaseCopyHelper extends SQLiteOpenHelper {
 
     public void createDataBase() throws IOException {
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        if (db.isOpen()){
+            db.close();
+        }
+
         boolean dbExist = checkDataBase();
 
         if (dbExist) {

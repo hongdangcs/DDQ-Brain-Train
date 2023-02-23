@@ -115,7 +115,6 @@ public class FindOperatorGameRoundActivity extends AppCompatActivity implements 
         buttons = new ArrayList<>();
         correctButtons = new ArrayList<>();
         FindOperatorRoundScoreTextView.setText("Điểm: " + score);
-
         findOperatorRoundLevelTextView.setText("Màn: " + findOperatorModels.get(gameLevel).getLevel());
         generateAnsList(findOperatorModels.get(gameLevel).getOption(), level);
         Collections.shuffle(buttons);
