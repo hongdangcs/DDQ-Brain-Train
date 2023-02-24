@@ -44,7 +44,7 @@
             android:background="@color/white"
             android:drawableStart="@drawable/ic_user"
             android:drawablePadding="@dimen/size_10dp"
-            android:hint="Tên Đăng Nhập"
+            android:hint="Email"
             android:inputType="textShortMessage"
             android:minHeight="48dp"
             android:padding="@dimen/size_10dp"
@@ -66,6 +66,25 @@
             android:padding="@dimen/size_10dp"
             android:password="true"
             android:textColorHint="@color/Gray" />
+
+
+        <EditText
+            android:id="@+id/repeatpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_10dp"
+            android:autofillHints=""
+
+            android:background="@color/white"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="@dimen/size_10dp"
+            android:hint="Nhập lại mật khẩu"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:padding="@dimen/size_10dp"
+            android:password="true"
+            android:textColorHint="@color/Gray" />
+
 
         <RadioGroup
             android:id="@+id/gender"
@@ -104,7 +123,6 @@
 
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

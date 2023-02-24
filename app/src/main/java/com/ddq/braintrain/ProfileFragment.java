@@ -83,31 +83,14 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         progress = view.findViewById(R.id.progress);
         userName = view.findViewById(R.id.userName);
-        password = view.findViewById(R.id.password);
-        dob = view.findViewById(R.id.dob);
-        personal_id = view.findViewById(R.id.personal_id);
-        gender = view.findViewById(R.id.gender);
         signOutBtn = view.findViewById(R.id.signOutBtn);
-        brainTrainDatabase = new BrainTrainDatabase(getActivity());
-        accountModels = new BrainTrainDAO().accountModels(brainTrainDatabase);
 
 
 
         sharedPreferences = getActivity().getSharedPreferences("loginState", Context.MODE_PRIVATE);
         String user = sharedPreferences.getString("username", "");
 
-        for (AccountModel accountModel: accountModels) {
-            String temp = accountModel.getUserName();
-            if (user.equals(temp)){
-                userName.setText("" + temp);
-                password.setText("" + accountModel.getPassword());
-                gender.setText("" + accountModel.getGender());
-                dob.setText("" + accountModel.getDob());
-                personal_id.setText("" + accountModel.getPersonal_id());
-                break;
-            }
-        }
-
+        userName.setText(user);
         progress.setText(""+HomeFragment.getTotalProgress() + "%");
 /*
         signOutBtn.setOnClickListener(new View.OnClickListener() {
