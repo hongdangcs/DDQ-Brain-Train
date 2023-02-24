@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
 }
-
+apply plugin: 'realm-android'
 android {
     namespace 'com.ddq.braintrain'
     compileSdk 32
@@ -31,7 +31,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-
+realm {
+    syncEnabled = true
+}
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.5.1'

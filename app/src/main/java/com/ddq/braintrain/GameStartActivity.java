@@ -21,15 +21,15 @@ public class GameStartActivity extends AppCompatActivity {
 
         Log.d(TAG, "onCreate: " + username);
 
-   /*     if(username.isEmpty()){
+        if(username.isEmpty()){
             startActivity(new Intent(GameStartActivity.this, SignInActivity.class));
             finish();
         } else{
             startActivity(new Intent(GameStartActivity.this, MainActivity.class));
             finish();
-        }*/
-
+        }
+/*
         startActivity(new Intent(GameStartActivity.this, MainActivity.class));
-        finish();
+        finish();*/
     }
 }
